@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PCB Quote - E-CUBE ELECTROSOLUTIONS</title>
+
+    <link rel="stylesheet" href="quote.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+<!-- =====================================================
+     REGISTER POPUP
+===================================================== -->
+
+<div class="register-overlay" id="registerOverlay">
+
+    <div class="register-box">
+
+        <div class="register-icon">
+            📝
+        </div>
+
+        <h2>Register for PCB Quote</h2>
+
+        <p class="register-subtitle">
+            Please register to continue with PCB quotation
+        </p>
+
+        <form id="registerForm">
+
+            <div class="register-field">
+
+                <label for="registerEmail">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="registerEmail"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+            <div class="register-field">
+
+                <label for="registerPhone">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="registerPhone"
+                    placeholder="Enter 10 digit phone number"
+                    maxlength="10"
+                    inputmode="numeric"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="register-btn"
+                id="registerSubmitBtn"
+            >
+                Register & Continue
+            </button>
+
+            <p
+                id="registerMessage"
+                class="register-message"
+            ></p>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN PAGE
+===================================================== -->
+
+<div class="page-container">
+
+    <!-- =================================================
+         LEFT
+    ================================================== -->
+
+    <main class="left-section">
+
+        <!-- PCB FORM -->
+
+        <section class="quote-card">
+
+            <div class="pcb-name-row">
+
+                <label>
+                    PCB Name <span>*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="pcbName"
+                    placeholder="ENTER PCB NAME"
+                    required
+                >
+
+            </div>
+
+
+            <div class="options-grid">
+
+                <!-- DISPATCH -->
+
+                <div class="form-group">
+
+                    <label>Dispatch Unit</label>
+
+                    <div class="button-group">
+
+                        <button
+                            type="button"
+                            class="option-btn active"
+                            data-group="dispatch"
+                        >
+                            PCB
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MATERIAL -->
+
+                <div class="form-group">
+
+                    <label>Base Material</label>
+
+                    <div class="button-group">
+
+                        <button
+                            type="button"
+                            class="option-btn active"
+                            data-group="material"
+                        >
+                            FR-4
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SIZE -->
+
+                <div class="form-group size-group">
+
+                    <label>PCB Size (in mm)</label>
+
+                    <div class="size-inputs">
+
+                        <input
+                            type="number"
+                            id="pcbWidth"
+                            value="20"
+                            min="20"
+                            max="370"
+                            step="1"
+                        >
+
+                        <span>×</span>
+
+                        <input
+                            type="number"
+                            id="pcbHeight"
+                            value="20"
+                            min="20"
+                            max="370"
+                            step="1"
+                        >
+
+                    </div>
+
+                    <small>
+                        Min 20 × 20 mm |
+                        Max 370 × 370 mm
+                    </small>
+
+                </div>
+
+
+                <!-- LAYER -->
+
+                <div class="form-group">
+
+                    <label>Layer</label>
+
+                    <div class="button-group">
+
+                        <button
+                            type="button"
+                            class="option-btn active"
+                            data-group="layers"
+                        >
+                            1 Layer
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUANTITY -->
+
+                <div class="form-group">
+
+                    <label>Quantity</label>
+
+                    <select id="quantity">
+
+                        <option value="3">3</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="35">35</option>
+                        <option value="40">40</option>
+                        <option value="45">45</option>
+                        <option value="50">50</option>
+                        <option value="60">60</option>
+                        <option value="70">70</option>
+                        <option value="80">80</option>
+                        <option value="90">90</option>
+                        <option value="100">100</option>
+                        <option value="125">125</option>
+                        <option value="150">150</option>
+                        <option value="175">175</option>
+                        <option value="200">200</option>
+                        <option value="225">225</option>
+                        <option value="250">250</option>
+                        <option value="275">275</option>
+                        <option value="300">300</option>
+                        <option value="325">325</option>
+                        <option value="350">350</option>
+                        <option value="375">375</option>
+                        <option value="400">400</option>
+                        <option value="425">425</option>
+                        <option value="450">450</option>
+                        <option value="475">475</option>
+                        <option value="500">500</option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- THICKNESS -->
+
+                <div class="form-group">
+
+                    <label>Thickness</label>
+
+                    <div class="button-group">
+
+                        <button
+                            type="button"
+                            class="option-btn active"
+                            data-group="thickness"
+                        >
+                            1.6 mm
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COPPER -->
+
+                <div class="form-group">
+
+                    <label>Copper Finish</label>
+
+                    <div class="button-group">
+
+                        <button
+                            type="button"
+                            class="option-btn active"
+                            data-group="copper"
+                        >
+                            35 Micron
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MASK -->
+
+                <div class="form-group">
+
+                    <label>Mask Color</label>
+
+                    <div class="button-group">
+
+                        <button
+                            type="button"
+                            class="color-btn active"
+                            data-group="mask"
+                        >
+                            <span class="green-dot"></span>
+                            Green
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SURFACE -->
+
+                <div class="form-group">
+
+                    <label>Surface Finish</label>
+
+                    <div class="button-group">
+
+                        <button
+                            type="button"
+                            class="option-btn active"
+                            data-group="surface"
+                        >
+                            HAL
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SILK -->
+
+                <div class="form-group">
+
+                    <label>Silk Screen</label>
+
+                    <div class="button-group">
+
+                        <button
+                            type="button"
+                            class="option-btn active"
+                            data-group="silk"
+                        >
+                            White
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- GERBER -->
+
+            <div class="gerber-section">
+
+                <input
+                    type="file"
+                    id="gerberFile"
+                    accept=".zip,.rar"
+                    hidden
+                >
+
+                <button
+                    type="button"
+                    class="gerber-btn"
+                    id="gerberButton"
+                >
+                    ↑ &nbsp; Add Gerber File
+                </button>
+
+                <div class="gerber-info">
+
+                    <span id="gerberName">
+                        Only .zip or .rar files
+                    </span>
+
+                    <span>
+                        Max size: 25MB
+                    </span>
+
+                    <span>
+                        🔒 Secure & confidential
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CALENDAR
+        ================================================== -->
+
+        <section class="calendar-card">
+
+            <div class="calendar-header">
+
+                <button
+                    type="button"
+                    id="prevMonth"
+                >
+                    ‹
+                </button>
+
+                <h2 id="calendarMonth">
+                    Calendar
+                </h2>
+
+                <button
+                    type="button"
+                    id="nextMonth"
+                >
+                    ›
+                </button>
+
+            </div>
+
+
+            <div class="delivery-note">
+
+                ⚠️ Delivery requires minimum
+                <b>6 working days</b>.
+
+                <br>
+
+                Tuesday is a weekly holiday and is
+                <b>not counted</b>.
+
+            </div>
+
+
+            <div class="calendar-week">
+
+                <span>S</span>
+                <span>M</span>
+                <span class="holiday-heading">T</span>
+                <span>W</span>
+                <span>T</span>
+                <span>F</span>
+                <span>S</span>
+
+            </div>
+
+
+            <div
+                class="calendar-days"
+                id="calendarDays"
+            ></div>
+
+
+            <div class="delivery-options">
+
+                <h3>Available Delivery Dates</h3>
+
+                <p>
+                    Select any one available date
+                </p>
+
+                <div id="deliveryOptionsList"></div>
+
+            </div>
+
+
+            <div class="selected-date">
+
+                Selected Delivery Date:
+
+                <strong id="selectedDate">
+                    Not Selected
+                </strong>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =================================================
+         RIGHT
+    ================================================== -->
+
+    <aside class="right-section">
+
+        <section class="price-card">
+
+            <h2>Price Summary</h2>
+
+            <div class="price-row">
+
+                <span>Basic Price:</span>
+
+                <strong id="basicPrice">
+                    ₹0.00
+                </strong>
+
+            </div>
+
+            <div class="price-row">
+
+                <span>Setup Cost:</span>
+
+                <strong id="setupCost">
+                    ₹800.00
+                </strong>
+
+            </div>
+
+            <div class="price-row">
+
+                <span>FPT Cost:</span>
+
+                <strong>Free</strong>
+
+            </div>
+
+            <div class="price-row">
+
+                <span>GST:</span>
+
+                <strong id="gst">
+                    ₹0.00
+                </strong>
+
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="price-row">
+
+                <span>PCB Size:</span>
+
+                <strong id="summarySize">
+                    20 × 20
+                </strong>
+
+            </div>
+
+            <div class="price-row">
+
+                <span>Quantity:</span>
+
+                <strong id="summaryQuantity">
+                    3 PCB
+                </strong>
+
+            </div>
+
+            <div class="price-row">
+
+                <span>Delivery:</span>
+
+                <strong id="summaryDelivery">
+                    Not Selected
+                </strong>
+
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="final-row">
+
+                <span>Final Total:</span>
+
+                <strong id="finalTotal">
+                    ₹0.00
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <button
+            type="button"
+            class="submit-quote"
+            id="submitQuote"
+        >
+            Request Quote
+        </button>
+
+    </aside>
+
+</div>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =====================================================
+       BACKEND
+    ===================================================== */
+
+    const API_URL = "http://localhost:5000";
+
+
+    /* =====================================================
+       REGISTER
+       IMPORTANT:
+       NO localStorage CHECK.
+       Popup ALWAYS opens.
+    ===================================================== */
+
+    const registerOverlay =
+        document.getElementById("registerOverlay");
+
+    const registerForm =
+        document.getElementById("registerForm");
+
+    const registerEmail =
+        document.getElementById("registerEmail");
+
+    const registerPhone =
+        document.getElementById("registerPhone");
+
+    const registerSubmitBtn =
+        document.getElementById("registerSubmitBtn");
+
+    const registerMessage =
+        document.getElementById("registerMessage");
+
+
+    let currentCustomerId = null;
+
+
+    // ALWAYS SHOW REGISTER POPUP
+    registerOverlay.classList.add("show");
+
+
+    /* =====================================================
+       GERBER
+    ===================================================== */
+
+    const gerberButton =
+        document.getElementById("gerberButton");
+
+    const gerberFile =
+        document.getElementById("gerberFile");
+
+    const gerberName =
+        document.getElementById("gerberName");
+
+    let selectedGerberFile = null;
+
+
+    gerberButton.addEventListener("click", function () {
+
+        gerberFile.click();
+
+    });
+
+
+    gerberFile.addEventListener("change", function () {
+
+        if (!this.files.length) {
+
+            selectedGerberFile = null;
+
+            return;
+
+        }
+
+
+        const file = this.files[0];
+
+        const extension =
+            file.name
+                .split(".")
+                .pop()
+                .toLowerCase();
+
+
+        if (
+            extension !== "zip" &&
+            extension !== "rar"
+        ) {
+
+            alert(
+                "Only .zip or .rar files are allowed."
+            );
+
+            this.value = "";
+
+            selectedGerberFile = null;
+
+            gerberName.textContent =
+                "Only .zip or .rar files";
+
+            return;
+
+        }
+
+
+        if (file.size > 25 * 1024 * 1024) {
+
+            alert(
+                "Maximum file size is 25MB."
+            );
+
+            this.value = "";
+
+            selectedGerberFile = null;
+
+            gerberName.textContent =
+                "Only .zip or .rar files";
+
+            return;
+
+        }
+
+
+        selectedGerberFile = file;
+
+        gerberName.textContent =
+            "Selected: " + file.name;
+
+    });
+
+
+    /* =====================================================
+       OPTION BUTTONS
+    ===================================================== */
+
+    document
+        .querySelectorAll(".button-group")
+        .forEach(group => {
+
+            group
+                .querySelectorAll(
+                    ".option-btn, .color-btn"
+                )
+                .forEach(button => {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            group
+                                .querySelectorAll(
+                                    ".option-btn, .color-btn"
+                                )
+                                .forEach(btn => {
+
+                                    btn.classList.remove(
+                                        "active"
+                                    );
+
+                                });
+
+                            this.classList.add("active");
+
+                            updatePrice();
+
+                        }
+                    );
+
+                });
+
+        });
+
+
+    /* =====================================================
+       QUANTITY
+    ===================================================== */
+
+    const quantity =
+        document.getElementById("quantity");
+
+
+    quantity.addEventListener(
+        "change",
+        updatePrice
+    );
+
+
+    /* =====================================================
+       SIZE
+    ===================================================== */
+
+    const pcbWidth =
+        document.getElementById("pcbWidth");
+
+    const pcbHeight =
+        document.getElementById("pcbHeight");
+
+
+    pcbWidth.addEventListener(
+        "input",
+        updatePrice
+    );
+
+
+    pcbHeight.addEventListener(
+        "input",
+        updatePrice
+    );
+
+
+    /* =====================================================
+       PRICE
+    ===================================================== */
+
+    function updatePrice() {
+
+        let qty =
+            parseInt(quantity.value) || 3;
+
+        let width =
+            parseFloat(pcbWidth.value) || 20;
+
+        let height =
+            parseFloat(pcbHeight.value) || 20;
+
+
+        const calculationWidth =
+            Math.min(
+                370,
+                Math.max(20, width)
+            );
+
+
+        const calculationHeight =
+            Math.min(
+                370,
+                Math.max(20, height)
+            );
+
+
+        const areaPerPCB =
+            (
+                calculationWidth *
+                calculationHeight
+            ) / 100;
+
+
+        const totalArea =
+            areaPerPCB * qty;
+
+
+        let rate = 0.60;
+
+
+        if (totalArea > 5000) {
+            rate = 0.58;
+        }
+
+
+        if (totalArea > 10000) {
+            rate = 0.55;
+        }
+
+
+        let basicPrice =
+            totalArea * rate;
+
+
+        let discount = 0;
+
+
+        if (qty >= 20) {
+
+            discount = 0.20;
+
+        }
+        else if (qty >= 15) {
+
+            discount = 0.15;
+
+        }
+        else if (qty >= 10) {
+
+            discount = 0.10;
+
+        }
+        else if (qty >= 6) {
+
+            discount = 0.05;
+
+        }
+
+
+        basicPrice =
+            basicPrice -
+            basicPrice * discount;
+
+
+        let deliveryPremium = 0;
+
+
+        if (selectedDeliveryOptionIndex === 1) {
+
+            deliveryPremium = 0.03;
+
+        }
+
+
+        if (selectedDeliveryOptionIndex === 2) {
+
+            deliveryPremium = 0.06;
+
+        }
+
+
+        basicPrice =
+            basicPrice +
+            basicPrice * deliveryPremium;
+
+
+        const setupCost = 800;
+
+        const subtotal =
+            basicPrice + setupCost;
+
+        const gst =
+            subtotal * 0.18;
+
+        const finalTotal =
+            subtotal + gst;
+
+
+        document.getElementById("basicPrice")
+            .textContent =
+            "₹" + basicPrice.toFixed(2);
+
+
+        document.getElementById("setupCost")
+            .textContent =
+            "₹" + setupCost.toFixed(2);
+
+
+        document.getElementById("gst")
+            .textContent =
+            "₹" + gst.toFixed(2);
+
+
+        document.getElementById("finalTotal")
+            .textContent =
+            "₹" + finalTotal.toFixed(2);
+
+
+        document.getElementById("summarySize")
+            .textContent =
+            width + " × " + height;
+
+
+        document.getElementById("summaryQuantity")
+            .textContent =
+            qty + " PCB";
+
+    }
+
+
+    /* =====================================================
+       CALENDAR
+    ===================================================== */
+
+    const calendarDays =
+        document.getElementById("calendarDays");
+
+    const calendarMonth =
+        document.getElementById("calendarMonth");
+
+    const selectedDate =
+        document.getElementById("selectedDate");
+
+    const summaryDelivery =
+        document.getElementById("summaryDelivery");
+
+    const deliveryOptionsList =
+        document.getElementById(
+            "deliveryOptionsList"
+        );
+
+    const prevMonth =
+        document.getElementById("prevMonth");
+
+    const nextMonth =
+        document.getElementById("nextMonth");
+
+
+    let selectedDeliveryDate = null;
+
+    let deliveryDates = [];
+
+    let selectedDeliveryOptionIndex = 0;
+
+
+    function isTuesday(date) {
+
+        return date.getDay() === 2;
+
+    }
+
+
+    function addWorkingDays(startDate, days) {
+
+        const date =
+            new Date(startDate);
+
+        date.setHours(0, 0, 0, 0);
+
+        let count = 0;
+
+
+        while (count < days) {
+
+            date.setDate(
+                date.getDate() + 1
+            );
+
+
+            if (isTuesday(date)) {
+
+                continue;
+
+            }
+
+
+            count++;
+
+        }
+
+
+        return date;
+
+    }
+
+
+    const minimumDate =
+        addWorkingDays(
+            new Date(),
+            6
+        );
+
+
+    let displayedMonth =
+        new Date(
+            minimumDate.getFullYear(),
+            minimumDate.getMonth(),
+            1
+        );
+
+
+    function generateDeliveryDates() {
+
+        deliveryDates = [];
+
+        let current =
+            new Date(minimumDate);
+
+
+        while (deliveryDates.length < 3) {
+
+            if (!isTuesday(current)) {
+
+                deliveryDates.push(
+                    new Date(current)
+                );
+
+            }
+
+            current.setDate(
+                current.getDate() + 1
+            );
+
+        }
+
+    }
+
+
+    function formatDate(date) {
+
+        return date.toLocaleDateString(
+            "en-IN",
+            {
+                weekday: "short",
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+    function renderDeliveryOptions() {
+
+        deliveryOptionsList.innerHTML = "";
+
+
+        deliveryDates.forEach(
+            (date, index) => {
+
+                const option =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                option.type = "button";
+
+                option.className =
+                    "delivery-option";
+
+
+                if (
+                    index ===
+                    selectedDeliveryOptionIndex
+                ) {
+
+                    option.classList.add(
+                        "active"
+                    );
+
+                }
+
+
+                const label =
+                    index === 0
+                        ? "Minimum Delivery"
+                        : index === 1
+                            ? "Next Available"
+                            : "Third Available";
+
+
+                const premium =
+                    index === 0
+                        ? "Standard Price"
+                        : index === 1
+                            ? "+3% Delivery Premium"
+                            : "+6% Delivery Premium";
+
+
+                option.innerHTML = `
+
+                    <span>
+                        <strong>
+                            ${formatDate(date)}
+                        </strong>
+
+                        <small>
+                            ${label}
+                        </small>
+                    </span>
+
+                    <b>
+                        ${premium}
+                    </b>
+
+                `;
+
+
+                option.addEventListener(
+                    "click",
+                    function () {
+
+                        selectedDeliveryOptionIndex =
+                            index;
+
+                        selectedDeliveryDate =
+                            new Date(date);
+
+                        selectedDate.textContent =
+                            formatDate(date);
+
+                        summaryDelivery.textContent =
+                            formatDate(date);
+
+                        renderDeliveryOptions();
+
+                        renderCalendar();
+
+                        updatePrice();
+
+                    }
+                );
+
+
+                deliveryOptionsList.appendChild(
+                    option
+                );
+
+            }
+        );
+
+    }
+
+
+    function renderCalendar() {
+
+        calendarDays.innerHTML = "";
+
+
+        const year =
+            displayedMonth.getFullYear();
+
+        const month =
+            displayedMonth.getMonth();
+
+
+        const firstDay =
+            new Date(
+                year,
+                month,
+                1
+            ).getDay();
+
+
+        const totalDays =
+            new Date(
+                year,
+                month + 1,
+                0
+            ).getDate();
+
+
+        calendarMonth.textContent =
+            displayedMonth.toLocaleString(
+                "en-US",
+                {
+                    month: "long",
+                    year: "numeric"
+                }
+            );
+
+
+        for (
+            let i = 0;
+            i < firstDay;
+            i++
+        ) {
+
+            const empty =
+                document.createElement(
+                    "div"
+                );
+
+            empty.className =
+                "calendar-empty";
+
+            calendarDays.appendChild(
+                empty
+            );
+
+        }
+
+
+        for (
+            let day = 1;
+            day <= totalDays;
+            day++
+        ) {
+
+            const date =
+                new Date(
+                    year,
+                    month,
+                    day
+                );
+
+            date.setHours(0, 0, 0, 0);
+
+
+            const dayButton =
+                document.createElement(
+                    "button"
+                );
+
+
+            dayButton.type = "button";
+
+            dayButton.className =
+                "calendar-day";
+
+            dayButton.textContent =
+                day;
+
+
+            if (isTuesday(date)) {
+
+                dayButton.classList.add(
+                    "holiday"
+                );
+
+                dayButton.disabled = true;
+
+            }
+
+
+            if (date < minimumDate) {
+
+                dayButton.disabled = true;
+
+                dayButton.classList.add(
+                    "disabled"
+                );
+
+            }
+
+
+            deliveryDates.forEach(
+                (deliveryDate, index) => {
+
+                    if (
+                        date.getTime() ===
+                        deliveryDate.getTime()
+                    ) {
+
+                        dayButton.classList.add(
+                            "delivery-date"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            if (
+                selectedDeliveryDate &&
+                date.getTime() ===
+                selectedDeliveryDate.getTime()
+            ) {
+
+                dayButton.classList.add(
+                    "selected"
+                );
+
+            }
+
+
+            dayButton.addEventListener(
+                "click",
+                function () {
+
+                    const index =
+                        deliveryDates.findIndex(
+                            deliveryDate =>
+                                deliveryDate.getTime() ===
+                                date.getTime()
+                        );
+
+
+                    if (index === -1) {
+
+                        alert(
+                            "Please select one of the available delivery dates."
+                        );
+
+                        return;
+
+                    }
+
+
+                    selectedDeliveryOptionIndex =
+                        index;
+
+                    selectedDeliveryDate =
+                        new Date(date);
+
+                    selectedDate.textContent =
+                        formatDate(date);
+
+                    summaryDelivery.textContent =
+                        formatDate(date);
+
+                    renderDeliveryOptions();
+
+                    renderCalendar();
+
+                    updatePrice();
+
+                }
+            );
+
+
+            calendarDays.appendChild(
+                dayButton
+            );
+
+        }
+
+    }
+
+
+    prevMonth.addEventListener(
+        "click",
+        function () {
+
+            const minimumMonth =
+                new Date(
+                    minimumDate.getFullYear(),
+                    minimumDate.getMonth(),
+                    1
+                );
+
+
+            if (
+                displayedMonth <=
+                minimumMonth
+            ) {
+
+                return;
+
+            }
+
+
+            displayedMonth.setMonth(
+                displayedMonth.getMonth() - 1
+            );
+
+            renderCalendar();
+
+        }
+    );
+
+
+    nextMonth.addEventListener(
+        "click",
+        function () {
+
+            displayedMonth.setMonth(
+                displayedMonth.getMonth() + 1
+            );
+
+            renderCalendar();
+
+        }
+    );
+
+
+    /* =====================================================
+       GET ACTIVE OPTION
+    ===================================================== */
+
+    function getActiveOption(groupName) {
+
+        const active =
+            document.querySelector(
+                `[data-group="${groupName}"].active`
+            );
+
+
+        return active
+            ? active.textContent.trim()
+            : "";
+
+    }
+
+
+    /* =====================================================
+       REGISTER CUSTOMER
+    ===================================================== */
+
+    registerForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            const email =
+                registerEmail.value.trim();
+
+            const phone =
+                registerPhone.value.trim();
+
+
+            if (!email) {
+
+                alert(
+                    "Please enter email."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !/^[0-9]{10}$/.test(phone)
+            ) {
+
+                alert(
+                    "Please enter valid 10 digit phone number."
+                );
+
+                return;
+
+            }
+
+
+            registerSubmitBtn.disabled = true;
+
+            registerSubmitBtn.textContent =
+                "Registering...";
+
+            registerMessage.textContent =
+                "";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/customers`,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                email: email,
+
+                                phone: phone
+
+                            })
+
+                        }
+                    );
+
+
+                const text =
+                    await response.text();
+
+
+                let data;
+
+
+                try {
+
+                    data =
+                        JSON.parse(text);
+
+                }
+                catch {
+
+                    throw new Error(
+                        "Backend returned invalid response. Check customer route/controller."
+                    );
+
+                }
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Customer registration failed."
+                    );
+
+                }
+
+
+                currentCustomerId =
+                    data.customer?.id ||
+                    data.customer?.customer_id ||
+                    data.id ||
+                    data.customer_id;
+
+
+                if (!currentCustomerId) {
+
+                    throw new Error(
+                        "Customer ID was not returned by backend."
+                    );
+
+                }
+
+
+                registerMessage.textContent =
+                    "Registration successful!";
+
+                registerMessage.className =
+                    "register-message success";
+
+
+                setTimeout(
+                    function () {
+
+                        registerOverlay.classList.remove(
+                            "show"
+                        );
+
+                    },
+                    500
+                );
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Registration Error:",
+                    error
+                );
+
+
+                registerMessage.textContent =
+                    error.message;
+
+                registerMessage.className =
+                    "register-message error";
+
+            }
+            finally {
+
+                registerSubmitBtn.disabled =
+                    false;
+
+                registerSubmitBtn.textContent =
+                    "Register & Continue";
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       REQUEST QUOTE
+    ===================================================== */
+
+    document
+        .getElementById("submitQuote")
+        .addEventListener(
+            "click",
+            async function () {
+
+
+                // Registration is compulsory
+                if (!currentCustomerId) {
+
+                    registerOverlay.classList.add(
+                        "show"
+                    );
+
+                    return;
+
+                }
+
+
+                const pcbName =
+                    document
+                        .getElementById("pcbName")
+                        .value
+                        .trim();
+
+
+                if (!pcbName) {
+
+                    alert(
+                        "Please enter PCB Name."
+                    );
+
+                    return;
+
+                }
+
+
+                const width =
+                    parseFloat(
+                        pcbWidth.value
+                    );
+
+
+                const height =
+                    parseFloat(
+                        pcbHeight.value
+                    );
+
+
+                if (
+                    isNaN(width) ||
+                    isNaN(height)
+                ) {
+
+                    alert(
+                        "Please enter PCB width and height."
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    width < 20 ||
+                    width > 370 ||
+                    height < 20 ||
+                    height > 370
+                ) {
+
+                    alert(
+                        "PCB size must be between 20 mm and 370 mm."
+                    );
+
+                    return;
+
+                }
+
+
+                if (!selectedGerberFile) {
+
+                    alert(
+                        "Please upload Gerber file."
+                    );
+
+                    return;
+
+                }
+
+
+                if (!selectedDeliveryDate) {
+
+                    alert(
+                        "Please select delivery date."
+                    );
+
+                    return;
+
+                }
+
+
+                const basicPrice =
+                    parseFloat(
+                        document
+                            .getElementById("basicPrice")
+                            .textContent
+                            .replace("₹", "")
+                    );
+
+
+                const setupCost =
+                    parseFloat(
+                        document
+                            .getElementById("setupCost")
+                            .textContent
+                            .replace("₹", "")
+                    );
+
+
+                const gst =
+                    parseFloat(
+                        document
+                            .getElementById("gst")
+                            .textContent
+                            .replace("₹", "")
+                    );
+
+
+                const finalTotal =
+                    parseFloat(
+                        document
+                            .getElementById("finalTotal")
+                            .textContent
+                            .replace("₹", "")
+                    );
+
+
+                const year =
+                    selectedDeliveryDate
+                        .getFullYear();
+
+                const month =
+                    String(
+                        selectedDeliveryDate.getMonth() + 1
+                    ).padStart(2, "0");
+
+                const day =
+                    String(
+                        selectedDeliveryDate.getDate()
+                    ).padStart(2, "0");
+
+
+                const deliveryDate =
+                    `${year}-${month}-${day}`;
+
+
+                const formData =
+                    new FormData();
+
+
+                formData.append(
+                    "customer_id",
+                    currentCustomerId
+                );
+
+
+                formData.append(
+                    "pcb_name",
+                    pcbName
+                );
+
+
+                formData.append(
+                    "dispatch_unit",
+                    getActiveOption("dispatch")
+                );
+
+
+                formData.append(
+                    "base_material",
+                    getActiveOption("material")
+                );
+
+
+                formData.append(
+                    "width",
+                    width
+                );
+
+
+                formData.append(
+                    "height",
+                    height
+                );
+
+
+                formData.append(
+                    "quantity",
+                    quantity.value
+                );
+
+
+                formData.append(
+                    "layers",
+                    getActiveOption("layers")
+                );
+
+
+                formData.append(
+                    "thickness",
+                    getActiveOption("thickness")
+                );
+
+
+                formData.append(
+                    "copper_finish",
+                    getActiveOption("copper")
+                );
+
+
+                formData.append(
+                    "mask_color",
+                    getActiveOption("mask")
+                );
+
+
+                formData.append(
+                    "surface_finish",
+                    getActiveOption("surface")
+                );
+
+
+                formData.append(
+                    "silk_screen",
+                    getActiveOption("silk")
+                );
+
+
+                formData.append(
+                    "delivery_date",
+                    deliveryDate
+                );
+
+
+                formData.append(
+                    "basic_price",
+                    basicPrice
+                );
+
+
+                formData.append(
+                    "setup_cost",
+                    setupCost
+                );
+
+
+                formData.append(
+                    "gst",
+                    gst
+                );
+
+
+                formData.append(
+                    "final_total",
+                    finalTotal
+                );
+
+
+                formData.append(
+                    "status",
+                    "Pending"
+                );
+
+
+                formData.append(
+                    "gerber_file",
+                    selectedGerberFile
+                );
+
+
+                const submitButton =
+                    document.getElementById(
+                        "submitQuote"
+                    );
+
+
+                submitButton.disabled = true;
+
+                submitButton.textContent =
+                    "Submitting...";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            `${API_URL}/api/quotes`,
+                            {
+                                method: "POST",
+
+                                body: formData
+                            }
+                        );
+
+
+                    const text =
+                        await response.text();
+
+
+                    let data;
+
+
+                    try {
+
+                        data =
+                            JSON.parse(text);
+
+                    }
+                    catch {
+
+                        throw new Error(
+                            "Backend returned HTML instead of JSON. Check quote route."
+                        );
+
+                    }
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.message ||
+                            "Quote submission failed."
+                        );
+
+                    }
+
+
+                    alert(
+                        "Quote request submitted successfully!"
+                    );
+
+
+                    console.log(
+                        "Quote Response:",
+                        data
+                    );
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "Quote Error:",
+                        error
+                    );
+
+
+                    alert(
+                        error.message
+                    );
+
+                }
+                finally {
+
+                    submitButton.disabled =
+                        false;
+
+                    submitButton.textContent =
+                        "Request Quote";
+
+                }
+
+            }
+        );
+
+
+    /* =====================================================
+       INITIAL
+    ===================================================== */
+
+    generateDeliveryDates();
+
+    renderDeliveryOptions();
+
+    renderCalendar();
+
+    updatePrice();
+
+});
+
+</script>
+
+</body>
+</html>

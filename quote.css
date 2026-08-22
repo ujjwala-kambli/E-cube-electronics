@@ -1,0 +1,1112 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background: #f2f7f7;
+    color: #173b3d;
+}
+
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+
+/* =====================================================
+   REGISTER OVERLAY
+===================================================== */
+
+.register-overlay {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(9, 38, 40, 0.78);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    z-index: 999999;
+}
+
+.register-overlay:not(.show) {
+    display: none;
+}
+
+
+/* =====================================================
+   REGISTER BOX
+===================================================== */
+
+.register-box {
+    width: 100%;
+    max-width: 470px;
+
+    background: #ffffff;
+
+    border-radius: 22px;
+
+    padding: 34px;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.30);
+
+    animation:
+        popupIn 0.35s ease;
+
+    position: relative;
+
+    z-index: 1000000;
+}
+
+
+@keyframes popupIn {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(25px)
+            scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* =====================================================
+   REGISTER ICON
+===================================================== */
+
+.register-icon {
+    width: 62px;
+    height: 62px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    background: #edf8f7;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 31px;
+}
+
+
+/* =====================================================
+   REGISTER TITLE
+===================================================== */
+
+.register-box h2 {
+    margin: 0;
+
+    text-align: center;
+
+    color: #116d70;
+
+    font-size: 27px;
+}
+
+
+.register-subtitle {
+    text-align: center;
+
+    color: #718487;
+
+    font-size: 14px;
+
+    margin:
+        10px 0 28px;
+}
+
+
+/* =====================================================
+   REGISTER FORM
+===================================================== */
+
+#registerForm {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+
+.register-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.register-field label {
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #385b5e;
+}
+
+
+.register-field input {
+    width: 100%;
+
+    height: 50px;
+
+    border:
+        1px solid #c9d9da;
+
+    border-radius: 10px;
+
+    padding:
+        0 15px;
+
+    outline: none;
+
+    background: #f9fcfc;
+
+    font-size: 14px;
+
+    color: #173b3d;
+}
+
+
+.register-field input:focus {
+    border-color: #116d70;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(17, 109, 112, 0.10);
+}
+
+
+/* =====================================================
+   REGISTER BUTTON
+===================================================== */
+
+.register-btn {
+    width: 100%;
+
+    min-height: 52px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #116d70;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    z-index: 1000001;
+
+    transition: 0.2s ease;
+}
+
+
+.register-btn:hover {
+    background: #0d5a5d;
+
+    transform:
+        translateY(-1px);
+}
+
+
+.register-btn:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+.register-message {
+    text-align: center;
+
+    font-size: 13px;
+
+    min-height: 18px;
+
+    margin: 0;
+}
+
+
+.register-message.success {
+    color: #16844c;
+}
+
+
+.register-message.error {
+    color: #d93025;
+}
+
+
+/* =====================================================
+   MAIN PAGE
+===================================================== */
+
+.page-container {
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 35px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 2fr)
+        minmax(300px, 0.85fr);
+
+    gap: 28px;
+}
+
+
+.left-section {
+    min-width: 0;
+}
+
+
+.quote-card,
+.calendar-card,
+.price-card {
+    background: white;
+
+    border:
+        1px solid #dce8e8;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 35px
+        rgba(23, 59, 61, 0.07);
+}
+
+
+/* =====================================================
+   QUOTE CARD
+===================================================== */
+
+.quote-card {
+    padding: 28px;
+}
+
+
+.pcb-name-row {
+    display: grid;
+
+    grid-template-columns:
+        130px 1fr;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-bottom: 28px;
+}
+
+
+.pcb-name-row label,
+.form-group label {
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #234e51;
+}
+
+
+.pcb-name-row label span {
+    color: #e53935;
+}
+
+
+.pcb-name-row input {
+    height: 48px;
+
+    border:
+        1px solid #cbdcdd;
+
+    border-radius: 9px;
+
+    padding: 0 14px;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+
+.pcb-name-row input:focus {
+    border-color: #116d70;
+}
+
+
+/* =====================================================
+   OPTIONS GRID
+===================================================== */
+
+.options-grid {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 26px 35px;
+}
+
+
+.form-group {
+    min-width: 0;
+}
+
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 10px;
+}
+
+
+.button-group {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+
+.option-btn,
+.color-btn {
+    min-height: 40px;
+
+    padding:
+        8px 17px;
+
+    border:
+        1px solid #c5d9da;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #116d70;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.option-btn.active,
+.color-btn.active {
+    background: #edf8f7;
+
+    border-color: #116d70;
+}
+
+
+.option-btn:hover,
+.color-btn:hover {
+    border-color: #116d70;
+}
+
+
+/* =====================================================
+   GREEN DOT
+===================================================== */
+
+.green-dot {
+    display: inline-block;
+
+    width: 13px;
+    height: 13px;
+
+    margin-right: 6px;
+
+    border-radius: 3px;
+
+    background: #13a657;
+
+    vertical-align: middle;
+}
+
+
+/* =====================================================
+   SIZE
+===================================================== */
+
+.size-inputs {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+.size-inputs input {
+    width: 120px;
+
+    height: 42px;
+
+    border:
+        1px solid #cbdcdd;
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    outline: none;
+}
+
+
+.size-inputs input:focus {
+    border-color: #116d70;
+}
+
+
+.size-inputs span {
+    font-weight: 700;
+
+    color: #547477;
+}
+
+
+.form-group small {
+    display: block;
+
+    margin-top: 7px;
+
+    color: #829496;
+
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   SELECT
+===================================================== */
+
+select {
+    width: 120px;
+
+    height: 42px;
+
+    border:
+        1px solid #cbdcdd;
+
+    border-radius: 8px;
+
+    padding: 0 10px;
+
+    background: white;
+
+    outline: none;
+}
+
+
+/* =====================================================
+   GERBER
+===================================================== */
+
+.gerber-section {
+    margin-top: 30px;
+
+    padding-top: 25px;
+
+    border-top:
+        1px solid #e1ebeb;
+
+    text-align: center;
+}
+
+
+.gerber-btn {
+    border: none;
+
+    border-radius: 8px;
+
+    padding:
+        12px 25px;
+
+    background: #116d70;
+
+    color: white;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.gerber-btn:hover {
+    background: #0d5b5e;
+}
+
+
+.gerber-info {
+    margin-top: 10px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+
+    font-size: 11px;
+
+    color: #718486;
+}
+
+
+/* =====================================================
+   CALENDAR
+===================================================== */
+
+.calendar-card {
+    margin-top: 25px;
+
+    padding: 25px;
+}
+
+
+.calendar-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+.calendar-header h2 {
+    margin: 0;
+
+    color: #116d70;
+
+    font-size: 21px;
+}
+
+
+.calendar-header button {
+    width: 40px;
+    height: 40px;
+
+    border:
+        1px solid #d0dfe0;
+
+    border-radius: 50%;
+
+    background: white;
+
+    color: #116d70;
+
+    font-size: 27px;
+
+    cursor: pointer;
+}
+
+
+.delivery-note {
+    margin-top: 20px;
+
+    padding: 14px;
+
+    border:
+        1px solid #d5e8e5;
+
+    border-radius: 9px;
+
+    background: #f0f8f7;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+.calendar-week,
+.calendar-days {
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, 1fr);
+
+    gap: 8px;
+}
+
+
+.calendar-week {
+    margin-top: 25px;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    color: #607779;
+}
+
+
+.holiday-heading {
+    color: #e53935;
+}
+
+
+.calendar-days {
+    margin-top: 8px;
+}
+
+
+.calendar-empty {
+    min-height: 43px;
+}
+
+
+.calendar-day {
+    min-height: 43px;
+
+    border:
+        1px solid #dce6e6;
+
+    border-radius: 9px;
+
+    background: white;
+
+    color: #294c4f;
+
+    cursor: pointer;
+
+    transition: 0.15s ease;
+}
+
+
+.calendar-day:hover:not(:disabled) {
+    border-color: #116d70;
+
+    background: #edf8f7;
+}
+
+
+.calendar-day.disabled,
+.calendar-day:disabled {
+    background: #f1f4f4;
+
+    color: #aab7b8;
+
+    cursor: not-allowed;
+}
+
+
+.calendar-day.holiday {
+    background: #fff0f0;
+
+    color: #e53935;
+
+    border-color: #ffcaca;
+}
+
+
+.calendar-day.delivery-date {
+    border:
+        1px solid #20a86b;
+
+    background: #eaf8f1;
+
+    color: #087443;
+
+    font-weight: 700;
+}
+
+
+.calendar-day.selected {
+    background: #116d70;
+
+    color: white;
+
+    border-color: #116d70;
+}
+
+
+/* =====================================================
+   DELIVERY OPTIONS
+===================================================== */
+
+.delivery-options {
+    margin-top: 30px;
+}
+
+
+.delivery-options h3 {
+    margin: 0;
+
+    font-size: 17px;
+
+    color: #116d70;
+}
+
+
+.delivery-options > p {
+    margin:
+        5px 0 15px;
+
+    font-size: 12px;
+
+    color: #7a8c8e;
+}
+
+
+#deliveryOptionsList {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+}
+
+
+.delivery-option {
+    text-align: left;
+
+    padding: 14px;
+
+    border:
+        1px solid #d4e2e2;
+
+    border-radius: 10px;
+
+    background: white;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.delivery-option.active {
+    border-color: #116d70;
+
+    background: #f0f8f7;
+
+    box-shadow:
+        0 5px 15px
+        rgba(17, 109, 112, 0.08);
+}
+
+
+.delivery-option span {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.delivery-option strong {
+    color: #234e51;
+
+    font-size: 12px;
+}
+
+
+.delivery-option small {
+    color: #7b8d8f;
+
+    font-size: 10px;
+}
+
+
+.delivery-option b {
+    display: block;
+
+    margin-top: 10px;
+
+    color: #16844c;
+
+    font-size: 10px;
+}
+
+
+.selected-date {
+    margin-top: 15px;
+
+    padding: 13px;
+
+    background: #f3f8f8;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+}
+
+
+.selected-date strong {
+    color: #116d70;
+
+    margin-left: 5px;
+}
+
+
+/* =====================================================
+   RIGHT SIDE
+===================================================== */
+
+.right-section {
+    position: sticky;
+
+    top: 25px;
+
+    align-self: start;
+}
+
+
+.price-card {
+    padding: 27px;
+}
+
+
+.price-card h2 {
+    margin-top: 0;
+
+    color: #116d70;
+
+    font-size: 21px;
+}
+
+
+.price-row {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 11px 0;
+
+    font-size: 13px;
+
+    color: #637a7c;
+}
+
+
+.price-row strong {
+    color: #355a5d;
+}
+
+
+.summary-divider {
+    height: 1px;
+
+    background: #dce7e7;
+
+    margin: 10px 0;
+}
+
+
+.final-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding-top: 15px;
+
+    font-weight: 700;
+}
+
+
+.final-row strong {
+    font-size: 21px;
+
+    color: #116d70;
+}
+
+
+.submit-quote {
+    width: 100%;
+
+    margin-top: 17px;
+
+    min-height: 53px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #116d70;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px
+        rgba(17, 109, 112, 0.18);
+
+    transition: 0.2s ease;
+}
+
+
+.submit-quote:hover {
+    background: #0d5b5e;
+
+    transform:
+        translateY(-1px);
+}
+
+
+.submit-quote:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .page-container {
+        grid-template-columns: 1fr;
+
+        padding: 18px;
+    }
+
+
+    .right-section {
+        position: static;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .pcb-name-row {
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+    }
+
+
+    #deliveryOptionsList {
+        grid-template-columns: 1fr;
+    }
+
+
+    .calendar-week,
+    .calendar-days {
+        gap: 4px;
+    }
+
+
+    .calendar-day {
+        min-height: 38px;
+    }
+
+
+    .gerber-info {
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+
+    .register-box {
+        padding: 25px 20px;
+    }
+
+
+    .register-box h2 {
+        font-size: 23px;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .page-container {
+        padding: 10px;
+    }
+
+
+    .quote-card,
+    .calendar-card,
+    .price-card {
+        padding: 18px;
+    }
+
+
+    .size-inputs input {
+        width: 100px;
+    }
+
+}

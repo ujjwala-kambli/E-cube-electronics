@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PCB Admin Dashboard</title>
+
+    <link rel="stylesheet" href="admin.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="admin-logo">
+        <div class="logo-icon">
+            <i class="fa-solid fa-microchip"></i>
+        </div>
+
+        <div>
+            <h2>E-CUBE</h2>
+            <span>ADMIN PANEL</span>
+        </div>
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+        <a href="#" class="menu-item active">
+            <i class="fa-solid fa-chart-line"></i>
+            Dashboard
+        </a>
+
+        <a href="#quotes" class="menu-item">
+            <i class="fa-solid fa-file-invoice"></i>
+            PCB Quotes
+        </a>
+
+        <a href="#customers" class="menu-item">
+            <i class="fa-solid fa-users"></i>
+            Customers
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <button
+            class="clear-all-btn"
+            onclick="deleteAllQuotes()"
+        >
+            <i class="fa-solid fa-trash"></i>
+            Delete All Quotes
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>PCB Quote Dashboard</h1>
+
+            <p>
+                Manage customer PCB quotations
+            </p>
+
+        </div>
+
+
+        <div class="admin-profile">
+
+            <div class="profile-icon">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div>
+                <strong>Administrator</strong>
+                <small>Admin</small>
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         STAT CARDS
+    ================================================== -->
+
+    <section class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon blue">
+                <i class="fa-solid fa-file-invoice"></i>
+            </div>
+
+            <div>
+                <span>Total Quotes</span>
+                <strong id="totalQuotes">0</strong>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon green">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <div>
+                <span>Customers</span>
+                <strong id="totalCustomers">0</strong>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon orange">
+                <i class="fa-solid fa-clock"></i>
+            </div>
+
+            <div>
+                <span>Pending</span>
+                <strong id="pendingQuotes">0</strong>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon purple">
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+            </div>
+
+            <div>
+                <span>Total Value</span>
+                <strong id="totalValue">₹0</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         QUOTE SECTION
+    ================================================== -->
+
+    <section class="quotes-section" id="quotes">
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>Customer PCB Quotes</h2>
+
+                <p>
+                    View and manage all submitted quotations
+                </p>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search customer / PCB..."
+                    oninput="renderQuotes()"
+                >
+
+                <select
+                    id="statusFilter"
+                    onchange="renderQuotes()"
+                >
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="Pending">
+                        Pending
+                    </option>
+
+                    <option value="Processing">
+                        Processing
+                    </option>
+
+                    <option value="Completed">
+                        Completed
+                    </option>
+
+                    <option value="Cancelled">
+                        Cancelled
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TABLE -->
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>Customer</th>
+
+                        <th>PCB Details</th>
+
+                        <th>Quantity</th>
+
+                        <th>Delivery</th>
+
+                        <th>Gerber File</th>
+
+                        <th>Final Total</th>
+
+                        <th>Status</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="quotesTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div
+            id="emptyState"
+            class="empty-state"
+        >
+
+            <i class="fa-solid fa-folder-open"></i>
+
+            <h3>No Quotes Found</h3>
+
+            <p>
+                Customer quotations will appear here.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         CUSTOMER SECTION
+    ================================================== -->
+
+    <section
+        class="customer-section"
+        id="customers"
+    >
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>Customer Information</h2>
+
+                <p>
+                    Registered customer details
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="customer-grid"
+            id="customerGrid"
+        ></div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     VIEW / EDIT MODAL
+===================================================== -->
+
+<div
+    class="modal-overlay"
+    id="editModal"
+>
+
+    <div class="edit-modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2>Edit PCB Quote</h2>
+
+                <p>
+                    Update customer quotation
+                </p>
+
+            </div>
+
+            <button
+                class="close-modal"
+                onclick="closeEditModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <form id="editForm">
+
+
+            <input
+                type="hidden"
+                id="editId"
+            >
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Customer Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="editEmail"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editPhone"
+                        maxlength="10"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        PCB Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editPcbName"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Dispatch Unit
+                    </label>
+
+                    <select id="editDispatch">
+
+                        <option value="PCB">
+                            PCB
+                        </option>
+
+                        <option value="Panel">
+                            Panel
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        PCB Size
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editSize"
+                        placeholder="20 × 20 mm"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Quantity
+                    </label>
+
+                    <input
+                        type="number"
+                        id="editQuantity"
+                        min="1"
+                        max="500"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Delivery Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="editDeliveryDate"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Basic Price
+                    </label>
+
+                    <input
+                        type="number"
+                        id="editBasicPrice"
+                        step="0.01"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Setup Cost
+                    </label>
+
+                    <input
+                        type="number"
+                        id="editSetupCost"
+                        step="0.01"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        GST
+                    </label>
+
+                    <input
+                        type="number"
+                        id="editGST"
+                        step="0.01"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Final Total
+                    </label>
+
+                    <input
+                        type="number"
+                        id="editFinalTotal"
+                        step="0.01"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Status
+                    </label>
+
+                    <select id="editStatus">
+
+                        <option value="Pending">
+                            Pending
+                        </option>
+
+                        <option value="Processing">
+                            Processing
+                        </option>
+
+                        <option value="Completed">
+                            Completed
+                        </option>
+
+                        <option value="Cancelled">
+                            Cancelled
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FIXED PCB OPTIONS -->
+
+            <div class="fixed-options">
+
+                <span>
+                    <b>Material:</b> FR-4
+                </span>
+
+                <span>
+                    <b>Layers:</b> 2 Layers
+                </span>
+
+                <span>
+                    <b>Thickness:</b> 1.6 mm
+                </span>
+
+                <span>
+                    <b>Copper:</b> 35 Micron
+                </span>
+
+                <span>
+                    <b>Mask:</b> Green
+                </span>
+
+                <span>
+                    <b>Surface:</b> HAL
+                </span>
+
+                <span>
+                    <b>Silk:</b> White
+                </span>
+
+            </div>
+
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                    onclick="closeEditModal()"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                >
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Save Changes
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<script src="admin.js"></script>
+
+</body>
+</html>
