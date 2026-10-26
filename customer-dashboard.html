@@ -7,38 +7,32 @@
     <title>My Orders - E-CUBE ELECTROSOLUTIONS</title>
 
     <link rel="stylesheet" href="customer-dashboard.css">
+    <link rel="stylesheet" href="navbar.css">
 </head>
 
 <body>
 
-    <header class="dashboard-header">
-
-        <div class="brand">
-            <img src="logo.jpg" alt="E-CUBE ELECTROSOLUTIONS">
-            <div>
-                <h2>E-CUBE</h2>
-                <span>ELECTROSOLUTIONS</span>
+    <header class="header">
+        <a href="index.html" class="brand">
+            <div class="logo">
+                <img src="logo.jpg" alt="E-CUBE ELECTROSOLUTIONS Logo">
             </div>
+            <div class="brand-name">E-CUBE ELECTROSOLUTIONS</div>
+        </a>
+
+        <button id="menu-toggle" class="menu-toggle" aria-label="Toggle Navigation Menu">☰</button>
+
+        <div class="opt">
+            <nav id="options" class="options">
+                <a href="index.html#home">Home</a>
+                <a href="index.html#why-us">Why Us</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#about-us">About Us</a>
+                <a href="quote.html">Request Quote</a>
+                <a href="customer-dashboard.html" class="active">My Orders</a>
+                <a href="index.html#contact-us">Contact Us</a>
+            </nav>
         </div>
-
-        <div class="header-actions">
-            <button
-                type="button"
-                class="new-order-btn"
-                onclick="createNewOrder()"
-            >
-                New Order
-            </button>
-
-            <button
-                type="button"
-                class="back-home-btn"
-                onclick="goHome()"
-            >
-                ← Back to Home
-            </button>
-        </div>
-
     </header>
 
 
@@ -674,6 +668,27 @@ function escapeHTML(value) {
 // =====================================================
 
 loadOrders();
+
+(function () {
+    const toggle = document.getElementById('menu-toggle');
+    const opts = document.getElementById('options');
+    if (toggle && opts) {
+        toggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            opts.classList.toggle('active');
+        });
+        document.querySelectorAll('#options a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                opts.classList.remove('active');
+            });
+        });
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.header')) {
+                opts.classList.remove('active');
+            }
+        });
+    }
+})();
 
 </script>
 

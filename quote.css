@@ -2018,3 +2018,156 @@
     button.locked-field {
       pointer-events: none !important;
     }
+
+    /* =====================================================
+       MOBILE & TABLET RESPONSIVENESS (quote.html)
+    ===================================================== */
+    @media (max-width: 1024px) {
+      .page-container {
+        height: auto !important;
+        min-height: auto !important;
+        grid-template-columns: 1fr !important;
+        padding: 12px 14px !important;
+        gap: 16px !important;
+      }
+
+      .left-section,
+      .right-section {
+        width: 100% !important;
+      }
+
+      .right-section {
+        margin-top: 4px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        font-size: 13px !important;
+      }
+
+      .page-container {
+        padding: 10px 8px !important;
+      }
+
+      .quote-card {
+        padding: 14px 12px !important;
+      }
+
+      .pcb-name-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 6px !important;
+      }
+
+      .pcb-name-row input {
+        width: 100% !important;
+        padding: 10px 12px !important;
+        font-size: 13px !important;
+      }
+
+      .top-spec-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+      }
+
+      .size-inputs {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        width: 100% !important;
+      }
+
+      .size-inputs input {
+        flex: 1 !important;
+        min-width: 0 !important;
+        padding: 8px 10px !important;
+        font-size: 14px !important;
+        text-align: center;
+      }
+
+      .quantity-trigger {
+        width: 100% !important;
+        padding: 8px 12px !important;
+      }
+
+      .spec-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+      }
+
+      .spec-buttons {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+      }
+
+      .option-btn {
+        flex: 1 1 calc(50% - 6px) !important;
+        min-width: 110px !important;
+        text-align: center !important;
+        padding: 8px 6px !important;
+        font-size: 12px !important;
+      }
+
+      .delivery-options-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+      }
+
+      .delivery-option-card {
+        padding: 10px 12px !important;
+      }
+
+      .calendar-container {
+        padding: 8px !important;
+      }
+
+      .calendar-days {
+        gap: 4px !important;
+      }
+
+      .calendar-day {
+        min-height: 36px !important;
+        font-size: 12px !important;
+      }
+
+      .price-card,
+      .process-card {
+        padding: 14px 12px !important;
+      }
+
+      .submit-btn {
+        padding: 14px !important;
+        font-size: 15px !important;
+      }
+
+      .register-box,
+      .success-box {
+        width: 92% !important;
+        max-width: 380px !important;
+        max-height: 90vh !important;
+        overflow-y: auto !important;
+        padding: 20px 16px !important;
+        border-radius: 12px !important;
+      }
+
+      .register-field input {
+        padding: 10px 12px !important;
+        font-size: 14px !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .option-btn {
+        flex: 1 1 100% !important;
+      }
+
+      .price-row {
+        font-size: 12px !important;
+      }
+
+      .final-row strong {
+        font-size: 18px !important;
+      }
+    }
