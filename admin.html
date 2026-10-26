@@ -1,561 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PCB Admin Dashboard</title>
+    <title>E-CUBE | PCB Admin Dashboard</title>
 
     <link rel="stylesheet" href="admin.css">
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 </head>
+
 
 <body>
 
-<!-- =====================================================
+    <!-- =====================================================
+         ADMIN AUTHENTICATION / LOGIN OVERLAY
+    ===================================================== -->
+    <div id="adminLoginOverlay" class="login-overlay" style="display: none;">
+        <div class="login-modal-card">
+            <div class="login-icon-badge">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h2>Admin Portal Access</h2>
+            <p>Please enter your administrator credentials to access the dashboard.</p>
+
+            <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+                <div class="form-group" style="text-align: left; margin-bottom: 14px;">
+                    <label
+                        style="font-size: 11px; font-weight: 700; color: #486567; text-transform: uppercase; margin-bottom: 6px; display: block;">Username</label>
+                    <div style="position: relative;">
+                        <i class="fa-solid fa-user"
+                            style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #8fa7a6;"></i>
+                        <input type="text" id="adminAuthUsername" required placeholder="Enter username" value="admin"
+                            style="width: 100%; padding: 10px 12px 10px 36px; border: 1px solid #d1dedc; border-radius: 8px; font-size: 13px; font-weight: 600; box-sizing: border-box;">
+                    </div>
+                </div>
+
+                <div class="form-group" style="text-align: left; margin-bottom: 16px;">
+                    <label
+                        style="font-size: 11px; font-weight: 700; color: #486567; text-transform: uppercase; margin-bottom: 6px; display: block;">Password</label>
+                    <div style="position: relative;">
+                        <i class="fa-solid fa-lock"
+                            style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #8fa7a6;"></i>
+                        <input type="password" id="adminAuthPassword" required placeholder="Enter password"
+                            style="width: 100%; padding: 10px 36px 10px 36px; border: 1px solid #d1dedc; border-radius: 8px; font-size: 13px; font-weight: 600; box-sizing: border-box;">
+                        <i class="fa-solid fa-eye" id="toggleAdminPassBtn" onclick="toggleAdminPasswordVisibility()"
+                            style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #8fa7a6; cursor: pointer;"></i>
+                    </div>
+                </div>
+
+                <div id="adminLoginError"
+                    style="display: none; color: #dc2626; font-size: 12px; font-weight: 600; margin-bottom: 12px; background: #fef2f2; padding: 8px 12px; border-radius: 6px; border: 1px solid #fecaca;">
+                </div>
+
+                <button type="submit" class="admin-login-submit-btn">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login to Dashboard
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- =====================================================
      SIDEBAR
 ===================================================== -->
 
-<aside class="sidebar">
+    <aside class="sidebar">
 
-    <div class="admin-logo">
-        <div class="logo-icon">
-            <i class="fa-solid fa-microchip"></i>
-        </div>
+        <div class="admin-logo">
 
-        <div>
-            <h2>E-CUBE</h2>
-            <span>ADMIN PANEL</span>
-        </div>
-    </div>
+            <div class="logo-icon">
 
+                <i class="fa-solid fa-microchip"></i>
 
-    <nav class="sidebar-menu">
-
-        <a href="#" class="menu-item active">
-            <i class="fa-solid fa-chart-line"></i>
-            Dashboard
-        </a>
-
-        <a href="#quotes" class="menu-item">
-            <i class="fa-solid fa-file-invoice"></i>
-            PCB Quotes
-        </a>
-
-        <a href="#customers" class="menu-item">
-            <i class="fa-solid fa-users"></i>
-            Customers
-        </a>
-
-    </nav>
-
-
-    <div class="sidebar-bottom">
-
-        <button
-            class="clear-all-btn"
-            onclick="deleteAllQuotes()"
-        >
-            <i class="fa-solid fa-trash"></i>
-            Delete All Quotes
-        </button>
-
-    </div>
-
-</aside>
-
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
-<main class="main-content">
-
-
-    <!-- TOP BAR -->
-
-    <header class="topbar">
-
-        <div>
-
-            <h1>PCB Quote Dashboard</h1>
-
-            <p>
-                Manage customer PCB quotations
-            </p>
-
-        </div>
-
-
-        <div class="admin-profile">
-
-            <div class="profile-icon">
-                <i class="fa-solid fa-user"></i>
             </div>
 
             <div>
-                <strong>Administrator</strong>
-                <small>Admin</small>
+
+                <h2>E-CUBE</h2>
+
+                <span>ADMIN PANEL</span>
+
             </div>
 
         </div>
 
-    </header>
+
+        <nav class="sidebar-menu">
+
+            <a href="#" class="menu-item active">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                Dashboard
+
+            </a>
 
 
+            <a href="#quotes" class="menu-item">
 
-    <!-- =================================================
-         STAT CARDS
-    ================================================== -->
-
-    <section class="stats-grid">
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon blue">
                 <i class="fa-solid fa-file-invoice"></i>
-            </div>
 
-            <div>
-                <span>Total Quotes</span>
-                <strong id="totalQuotes">0</strong>
-            </div>
+                PCB Quotes
 
-        </div>
+            </a>
 
 
-        <div class="stat-card">
+            <a href="#customers" class="menu-item">
 
-            <div class="stat-icon green">
                 <i class="fa-solid fa-users"></i>
-            </div>
 
-            <div>
-                <span>Customers</span>
-                <strong id="totalCustomers">0</strong>
-            </div>
+                Customers
 
-        </div>
+            </a>
 
 
-        <div class="stat-card">
+            <a href="#edit-quote-page" class="menu-item" id="navEditQuotePage">
 
-            <div class="stat-icon orange">
-                <i class="fa-solid fa-clock"></i>
-            </div>
+                <i class="fa-solid fa-pen-to-square"></i>
 
-            <div>
-                <span>Pending</span>
-                <strong id="pendingQuotes">0</strong>
-            </div>
+                Edit Quote Page
 
-        </div>
+            </a>
 
+        </nav>
 
-        <div class="stat-card">
 
-            <div class="stat-icon purple">
-                <i class="fa-solid fa-indian-rupee-sign"></i>
-            </div>
+        <div class="sidebar-bottom">
 
-            <div>
-                <span>Total Value</span>
-                <strong id="totalValue">₹0</strong>
-            </div>
+            <button class="clear-all-btn" onclick="deleteAllQuotes()">
 
-        </div>
+                <i class="fa-solid fa-trash"></i>
 
-    </section>
+                Delete All Quotes
 
-
-
-    <!-- =================================================
-         QUOTE SECTION
-    ================================================== -->
-
-    <section class="quotes-section" id="quotes">
-
-        <div class="section-header">
-
-            <div>
-
-                <h2>Customer PCB Quotes</h2>
-
-                <p>
-                    View and manage all submitted quotations
-                </p>
-
-            </div>
-
-
-            <div class="header-actions">
-
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search customer / PCB..."
-                    oninput="renderQuotes()"
-                >
-
-                <select
-                    id="statusFilter"
-                    onchange="renderQuotes()"
-                >
-
-                    <option value="all">
-                        All Status
-                    </option>
-
-                    <option value="Pending">
-                        Pending
-                    </option>
-
-                    <option value="Processing">
-                        Processing
-                    </option>
-
-                    <option value="Completed">
-                        Completed
-                    </option>
-
-                    <option value="Cancelled">
-                        Cancelled
-                    </option>
-
-                </select>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- TABLE -->
-
-        <div class="table-wrapper">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>#</th>
-
-                        <th>Customer</th>
-
-                        <th>PCB Details</th>
-
-                        <th>Quantity</th>
-
-                        <th>Delivery</th>
-
-                        <th>Gerber File</th>
-
-                        <th>Final Total</th>
-
-                        <th>Status</th>
-
-                        <th>Actions</th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody id="quotesTable">
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-
-        <div
-            id="emptyState"
-            class="empty-state"
-        >
-
-            <i class="fa-solid fa-folder-open"></i>
-
-            <h3>No Quotes Found</h3>
-
-            <p>
-                Customer quotations will appear here.
-            </p>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =================================================
-         CUSTOMER SECTION
-    ================================================== -->
-
-    <section
-        class="customer-section"
-        id="customers"
-    >
-
-        <div class="section-header">
-
-            <div>
-
-                <h2>Customer Information</h2>
-
-                <p>
-                    Registered customer details
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="customer-grid"
-            id="customerGrid"
-        ></div>
-
-    </section>
-
-
-</main>
-
-
-
-<!-- =====================================================
-     VIEW / EDIT MODAL
-===================================================== -->
-
-<div
-    class="modal-overlay"
-    id="editModal"
->
-
-    <div class="edit-modal">
-
-        <div class="modal-header">
-
-            <div>
-
-                <h2>Edit PCB Quote</h2>
-
-                <p>
-                    Update customer quotation
-                </p>
-
-            </div>
-
-            <button
-                class="close-modal"
-                onclick="closeEditModal()"
-            >
-                ×
             </button>
 
         </div>
 
+    </aside>
 
 
-        <form id="editForm">
+
+    <!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+    <main class="main-content">
 
 
-            <input
-                type="hidden"
-                id="editId"
-            >
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>PCB Quote Dashboard</h1>
+
+                <p>
+                    Manage customer PCB quotations
+                </p>
+
+            </div>
 
 
-            <div class="form-grid">
+            <div style="display: flex; align-items: center; gap: 14px;">
+
+                <div class="admin-profile">
+
+                    <div class="profile-icon">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+                    <div>
+
+                        <strong id="displayAdminUser">Administrator</strong>
+
+                        <small>Admin</small>
+
+                    </div>
+
+                </div>
+
+                <button type="button" onclick="handleAdminLogout()" title="Logout Admin"
+                    style="background: #fff0f0; color: #dc2626; border: 1px solid #fecaca; padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s ease;">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </button>
+
+            </div>
+
+        </header>
 
 
-                <div class="form-group">
 
-                    <label>
-                        Customer Email
-                    </label>
+        <!-- =================================================
+         STATISTICS
+    ================================================== -->
 
-                    <input
-                        type="email"
-                        id="editEmail"
-                        required
-                    >
+        <section class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+
+                    <i class="fa-solid fa-file-invoice"></i>
+
+                </div>
+
+                <div>
+
+                    <span>Total Quotes</span>
+
+                    <strong id="totalQuotes">0</strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+
+                    <i class="fa-solid fa-users"></i>
+
+                </div>
+
+                <div>
+
+                    <span>Customers</span>
+
+                    <strong id="totalCustomers">0</strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+
+                    <i class="fa-solid fa-clock"></i>
+
+                </div>
+
+                <div>
+
+                    <span>Pending</span>
+
+                    <strong id="pendingQuotes">0</strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                </div>
+
+                <div>
+
+                    <span>Total Value</span>
+
+                    <strong id="totalValue">₹0.00</strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+         QUOTES
+    ================================================== -->
+
+        <section class="quotes-section" id="quotes">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>Customer PCB Quotes</h2>
+
+                    <p>
+                        View and manage all submitted quotations
+                    </p>
 
                 </div>
 
 
-                <div class="form-group">
+                <div class="header-actions">
 
-                    <label>
-                        Phone Number
-                    </label>
-
-                    <input
-                        type="text"
-                        id="editPhone"
-                        maxlength="10"
-                        required
-                    >
-
-                </div>
+                    <input type="text" id="searchInput" placeholder="Search customer / PCB..." oninput="renderQuotes()">
 
 
-                <div class="form-group">
+                    <select id="statusFilter" onchange="renderQuotes()">
 
-                    <label>
-                        PCB Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="editPcbName"
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Dispatch Unit
-                    </label>
-
-                    <select id="editDispatch">
-
-                        <option value="PCB">
-                            PCB
+                        <option value="all">
+                            All Status
                         </option>
-
-                        <option value="Panel">
-                            Panel
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        PCB Size
-                    </label>
-
-                    <input
-                        type="text"
-                        id="editSize"
-                        placeholder="20 × 20 mm"
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Quantity
-                    </label>
-
-                    <input
-                        type="number"
-                        id="editQuantity"
-                        min="1"
-                        max="500"
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Delivery Date
-                    </label>
-
-                    <input
-                        type="date"
-                        id="editDeliveryDate"
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Basic Price
-                    </label>
-
-                    <input
-                        type="number"
-                        id="editBasicPrice"
-                        step="0.01"
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Setup Cost
-                    </label>
-
-                    <input
-                        type="number"
-                        id="editSetupCost"
-                        step="0.01"
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        GST
-                    </label>
-
-                    <input
-                        type="number"
-                        id="editGST"
-                        step="0.01"
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Final Total
-                    </label>
-
-                    <input
-                        type="number"
-                        id="editFinalTotal"
-                        step="0.01"
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Status
-                    </label>
-
-                    <select id="editStatus">
 
                         <option value="Pending">
                             Pending
@@ -581,73 +344,1393 @@
 
 
 
-            <!-- FIXED PCB OPTIONS -->
+            <!-- TABLE -->
 
-            <div class="fixed-options">
+            <div class="table-wrapper">
 
-                <span>
-                    <b>Material:</b> FR-4
-                </span>
+                <table>
 
-                <span>
-                    <b>Layers:</b> 2 Layers
-                </span>
+                    <thead>
 
-                <span>
-                    <b>Thickness:</b> 1.6 mm
-                </span>
+                        <tr>
+                            <th>#</th>
+                            <th>Customer</th>
+                            <th>Admin ID</th>
+                            <th>Type</th>
+                            <th>PCB Details</th>
+                            <th>Delivery</th>
+                            <th>Quantity</th>
+                            <th>Gerber File</th>
+                            <th>Final Total</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
 
-                <span>
-                    <b>Copper:</b> 35 Micron
-                </span>
+                    </thead>
 
-                <span>
-                    <b>Mask:</b> Green
-                </span>
 
-                <span>
-                    <b>Surface:</b> HAL
-                </span>
+                    <tbody id="quotesTable"></tbody>
 
-                <span>
-                    <b>Silk:</b> White
-                </span>
+                </table>
 
             </div>
 
 
+            <div id="emptyState" class="empty-state">
 
-            <div class="modal-actions">
+                <i class="fa-solid fa-folder-open"></i>
 
-                <button
-                    type="button"
-                    class="cancel-btn"
-                    onclick="closeEditModal()"
-                >
-                    Cancel
-                </button>
+                <h3>No Quotes Found</h3>
+
+                <p>
+                    Customer quotations will appear here.
+                </p>
+
+            </div>
+
+        </section>
 
 
-                <button
-                    type="submit"
-                    class="save-btn"
-                >
+
+        <!-- =================================================
+         CUSTOMERS
+    ================================================== -->
+
+        <section class="customer-section" id="customers">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>Customer Information</h2>
+
+                    <p>
+                        Registered customer details
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="customer-grid" id="customerGrid"></div>
+
+        </section>
+
+
+
+        <!-- =================================================
+         EDIT QUOTE PAGE MANAGEMENT SECTION
+    ================================================== -->
+
+        <section class="quote-table-section" id="edit-quote-page" style="margin-top: 24px;">
+
+            <div class="section-header"
+                style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 20px;">
+
+                <div>
+
+                    <h2><i class="fa-solid fa-pen-to-square" style="color: var(--teal); margin-right: 8px;"></i> Edit
+                        Quote Page Configuration</h2>
+
+                    <p>
+                        Manage default options, delivery calendar dates, and price summary controls for the customer
+                        Quote Page
+                    </p>
+
+                </div>
+
+                <button type="button" class="save-btn" onclick="saveAdminPricingSettings()"
+                    style="padding: 10px 24px; font-size: 13px; font-weight: 700; box-shadow: 0 4px 12px rgba(23,109,112,0.25);">
+
                     <i class="fa-solid fa-floppy-disk"></i>
-                    Save Changes
+
+                    Save Quote Page Changes
+
                 </button>
 
             </div>
 
 
-        </form>
+            <!-- TWO-COLUMN LAYOUT (MIRRORING QUOTE.HTML) -->
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+
+                <!-- LEFT COLUMN: PCB DEFAULTS & DELIVERY CALENDAR -->
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+
+                    <!-- PCB OPTIONS & SPECIFICATIONS -->
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px;">
+
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; color: var(--teal-dark); border-bottom: 1px solid #f0f4f3; padding-bottom: 10px;">
+
+                            <i class="fa-solid fa-microchip" style="font-size: 16px; color: var(--teal);"></i>
+
+                            <h3 style="font-size: 14px; margin: 0; font-weight: 700;">PCB Specifications & Defaults</h3>
+
+                        </div>
+
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px;">
+
+                            <div class="form-group">
+
+                                <label
+                                    style="font-weight: 700; font-size: 10px; color: var(--muted); text-transform: uppercase;">
+                                    Default Material
+                                </label>
+
+                                <input type="text" id="adminDefaultMaterial" value="FR-4"
+                                    style="padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px;">
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label
+                                    style="font-weight: 700; font-size: 10px; color: var(--muted); text-transform: uppercase;">
+                                    Default Layer
+                                </label>
+
+                                <input type="text" id="adminDefaultLayers" value="1 Layer"
+                                    style="padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px;">
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label
+                                    style="font-weight: 700; font-size: 10px; color: var(--muted); text-transform: uppercase;">
+                                    Default Thickness
+                                </label>
+
+                                <input type="text" id="adminDefaultThickness" value="1.6 mm / 35 µm"
+                                    style="padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px;">
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label
+                                    style="font-weight: 700; font-size: 10px; color: var(--muted); text-transform: uppercase;">
+                                    Default Mask Color
+                                </label>
+
+                                <input type="text" id="adminDefaultMask" value="Green"
+                                    style="padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px;">
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label
+                                    style="font-weight: 700; font-size: 10px; color: var(--muted); text-transform: uppercase;">
+                                    Default Surface Finish
+                                </label>
+
+                                <input type="text" id="adminDefaultSurface" value="Roller Tin"
+                                    style="padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px;">
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label
+                                    style="font-weight: 700; font-size: 10px; color: var(--muted); text-transform: uppercase;">
+                                    Default Silk Screen
+                                </label>
+
+                                <input type="text" id="adminDefaultSilk" value="White"
+                                    style="padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px;">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DELIVERY CALENDAR / DATES -->
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px;">
+
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; color: var(--teal-dark); border-bottom: 1px solid #f0f4f3; padding-bottom: 10px;">
+
+                            <i class="fa-solid fa-calendar-days" style="font-size: 16px; color: var(--teal);"></i>
+
+                            <h3 style="font-size: 14px; margin: 0; font-weight: 700;">Delivery Calendar & Working Rules
+                            </h3>
+
+                        </div>
+
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 16px;">
+
+                            <div class="form-group">
+
+                                <label
+                                    style="font-weight: 700; font-size: 10px; color: var(--muted); text-transform: uppercase;">
+                                    Option 1 (Earliest Delivery)
+                                </label>
+
+                                <div style="display: flex; gap: 6px; align-items: center; margin-top: 4px;">
+                                    <span
+                                        style="font-size: 11px; font-weight: 600; color: var(--muted); width: 45px;">Days:</span>
+                                    <input type="number" id="quotePageDays1" min="1" max="60" value="6" placeholder="6"
+                                        style="flex: 1; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; font-weight: 600;">
+                                </div>
+
+                                <small
+                                    style="font-size: 10px; color: var(--teal); font-weight: 600; margin-top: 6px; display: block;">Compulsory
+                                    6 Working Days (0% Discount)</small>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label
+                                    style="font-weight: 700; font-size: 10px; color: var(--muted); text-transform: uppercase;">
+                                    Option 2 (Next Available)
+                                </label>
+
+                                <div style="display: flex; gap: 6px; align-items: center; margin-top: 4px;">
+                                    <span
+                                        style="font-size: 11px; font-weight: 600; color: var(--muted); width: 45px;">Days:</span>
+                                    <input type="number" id="quotePageDays2" min="1" max="60" value="10"
+                                        placeholder="10 (+4d)"
+                                        style="flex: 1; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; font-weight: 600;">
+                                </div>
+
+                                <div style="margin-top: 6px; display: flex; align-items: center; gap: 6px;">
+                                    <label
+                                        style="font-size: 10px; font-weight: 700; color: var(--muted); white-space: nowrap;">Discount
+                                        (%):</label>
+                                    <input type="number" id="adminDeliveryDiscount2" min="0" max="100" step="0.1"
+                                        value="3" placeholder="3"
+                                        style="padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px; width: 80px; font-weight: 600;">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label
+                                    style="font-weight: 700; font-size: 10px; color: var(--muted); text-transform: uppercase;">
+                                    Option 3 (Third Available)
+                                </label>
+
+                                <div style="display: flex; gap: 6px; align-items: center; margin-top: 4px;">
+                                    <span
+                                        style="font-size: 11px; font-weight: 600; color: var(--muted); width: 45px;">Days:</span>
+                                    <input type="number" id="quotePageDays3" min="1" max="60" value="14"
+                                        placeholder="14 (+4d)"
+                                        style="flex: 1; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; font-weight: 600;">
+                                </div>
+
+                                <div style="margin-top: 6px; display: flex; align-items: center; gap: 6px;">
+                                    <label
+                                        style="font-size: 10px; font-weight: 700; color: var(--muted); white-space: nowrap;">Discount
+                                        (%):</label>
+                                    <input type="number" id="adminDeliveryDiscount3" min="0" max="100" step="0.1"
+                                        value="6" placeholder="6"
+                                        style="padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px; width: 80px; font-weight: 600;">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; background: #fbfdfd; border: 1px solid #edf2f1; padding: 12px; border-radius: 8px;">
+
+                            <div class="form-group">
+
+                                <label
+                                    style="font-weight: 700; font-size: 10px; color: var(--muted); text-transform: uppercase;">
+                                    Minimum Working Days
+                                </label>
+
+                                <input type="number" id="adminMinWorkingDays" min="1" max="30" value="6"
+                                    style="padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px;">
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label
+                                    style="font-weight: 700; font-size: 10px; color: var(--muted); text-transform: uppercase;">
+                                    Tuesday Holiday Rule
+                                </label>
+
+                                <select id="adminTuesdayHoliday"
+                                    style="padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px;">
+
+                                    <option value="true" selected>
+                                        Tuesday = Weekly Holiday (Not Counted)
+                                    </option>
+
+                                    <option value="false">
+                                        Tuesday = Normal Working Day
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- VCUT / ROUTING PRICING TIERS -->
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px;">
+
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid #f0f4f3; padding-bottom: 10px;">
+
+                            <div style="display: flex; align-items: center; gap: 8px; color: var(--teal-dark);">
+
+                                <i class="fa-solid fa-calculator" style="color: var(--teal);"></i>
+
+                                <h3 style="font-size: 14px; margin: 0; font-weight: 700;">VCut & Routing Pricing Tiers
+                                </h3>
+
+                            </div>
+
+                            <button type="button" onclick="addPricingTierRow()"
+                                style="background: #eef8f7; color: var(--teal-dark); border: 1px solid var(--teal); padding: 6px 14px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 11px;">
+
+                                <i class="fa-solid fa-plus"></i>
+
+                                Add Pricing Tier
+
+                            </button>
+
+                        </div>
+
+                        <div style="overflow-x: auto;">
+
+                            <table style="width: 100%; border-collapse: collapse; margin-bottom: 8px; font-size: 11px;">
+
+                                <thead>
+
+                                    <tr style="background: #f4f8f7; text-align: left;">
+
+                                        <th style="padding: 8px; border-bottom: 2px solid var(--border);">Min (₹)</th>
+
+                                        <th style="padding: 8px; border-bottom: 2px solid var(--border);">Max (₹)</th>
+
+                                        <th style="padding: 8px; border-bottom: 2px solid var(--border);">Fixed Charge
+                                            (₹)</th>
+
+                                        <th style="padding: 8px; border-bottom: 2px solid var(--border);">Multiplying
+                                            Factor</th>
+
+                                        <th style="padding: 8px; border-bottom: 2px solid var(--border);">Discount (₹)
+                                        </th>
+
+                                        <th style="padding: 8px; border-bottom: 2px solid var(--border); width: 60px;">
+                                            Action</th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="pricingTiersBody">
+
+                                    <tr class="tier-row" style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><input type="number" class="tier-min" value="0"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-max" value="1000"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-fixed" value="700"
+                                                step="0.01" oninput="updateAdminPricePreview()"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-mult" value="0.70"
+                                                step="0.0001"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-discount" value="0"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><button type="button"
+                                                onclick="deletePricingTierRow(this)"
+                                                style="background: #dc2626; color: #fff; border: 0; padding: 6px 12px; border-radius: 4px; font-weight: 700; cursor: pointer;"><i
+                                                    class="fa-solid fa-trash"></i></button></td>
+                                    </tr>
+
+                                    <tr class="tier-row" style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><input type="number" class="tier-min" value="1000"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-max" value="5000"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-fixed" value="0"
+                                                step="0.01" oninput="updateAdminPricePreview()"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-mult" value="0.65"
+                                                step="0.0001"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-discount" value="0"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><button type="button"
+                                                onclick="deletePricingTierRow(this)"
+                                                style="background: #dc2626; color: #fff; border: 0; padding: 6px 12px; border-radius: 4px; font-weight: 700; cursor: pointer;"><i
+                                                    class="fa-solid fa-trash"></i></button></td>
+                                    </tr>
+
+                                    <tr class="tier-row" style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><input type="number" class="tier-min" value="5000"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-max" value="10000"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-fixed" value="0"
+                                                step="0.01" oninput="updateAdminPricePreview()"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-mult" value="0.62"
+                                                step="0.0001"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-discount" value="0"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><button type="button"
+                                                onclick="deletePricingTierRow(this)"
+                                                style="background: #dc2626; color: #fff; border: 0; padding: 6px 12px; border-radius: 4px; font-weight: 700; cursor: pointer;"><i
+                                                    class="fa-solid fa-trash"></i></button></td>
+                                    </tr>
+
+                                    <tr class="tier-row" style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><input type="number" class="tier-min" value="10000"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-max" value="15000"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-fixed" value="0"
+                                                step="0.01" oninput="updateAdminPricePreview()"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-mult" value="0.58"
+                                                step="0.0001"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-discount" value="0"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><button type="button"
+                                                onclick="deletePricingTierRow(this)"
+                                                style="background: #dc2626; color: #fff; border: 0; padding: 6px 12px; border-radius: 4px; font-weight: 700; cursor: pointer;"><i
+                                                    class="fa-solid fa-trash"></i></button></td>
+                                    </tr>
+
+                                    <tr class="tier-row" style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><input type="number" class="tier-min" value="15000"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-max" value="20000"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-fixed" value="0"
+                                                step="0.01" oninput="updateAdminPricePreview()"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-mult" value="0.54"
+                                                step="0.0001"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-discount" value="0"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><button type="button"
+                                                onclick="deletePricingTierRow(this)"
+                                                style="background: #dc2626; color: #fff; border: 0; padding: 6px 12px; border-radius: 4px; font-weight: 700; cursor: pointer;"><i
+                                                    class="fa-solid fa-trash"></i></button></td>
+                                    </tr>
+
+                                    <tr class="tier-row" style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><input type="number" class="tier-min" value="20000"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-max" value="25000"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-fixed" value="0"
+                                                step="0.01" oninput="updateAdminPricePreview()"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-mult" value="0.50"
+                                                step="0.0001"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-discount" value="0"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><button type="button"
+                                                onclick="deletePricingTierRow(this)"
+                                                style="background: #dc2626; color: #fff; border: 0; padding: 6px 12px; border-radius: 4px; font-weight: 700; cursor: pointer;"><i
+                                                    class="fa-solid fa-trash"></i></button></td>
+                                    </tr>
+
+                                    <tr class="tier-row" style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 8px;"><input type="number" class="tier-min" value="25000"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-max" value="30000"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-fixed" value="0"
+                                                step="0.01" oninput="updateAdminPricePreview()"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-mult" value="0.45"
+                                                step="0.0001"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><input type="number" class="tier-discount" value="0"
+                                                step="0.01"
+                                                style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px;">
+                                        </td>
+                                        <td style="padding: 8px;"><button type="button"
+                                                onclick="deletePricingTierRow(this)"
+                                                style="background: #dc2626; color: #fff; border: 0; padding: 6px 12px; border-radius: 4px; font-weight: 700; cursor: pointer;"><i
+                                                    class="fa-solid fa-trash"></i></button></td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <div style="margin-top: 14px; display: flex; justify-content: flex-end;">
+                            <button type="button" class="save-btn" onclick="saveAdminPricingSettings()"
+                                style="padding: 10px 20px; font-size: 13px; font-weight: 700; box-shadow: 0 4px 12px rgba(23,109,112,0.25);">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Save Pricing Tiers & Rules
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RIGHT COLUMN: PRICE SUMMARY CONTROLS & LIVE PREVIEW (MIRRORING QUOTE.HTML) -->
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+
+                    <!-- ADMIN PRICING CONTROLS -->
+                    <div
+                        style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+
+                        <div
+                            style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px; color: var(--teal-dark); border-bottom: 1px solid #f0f4f3; padding-bottom: 10px;">
+                            <i class="fa-solid fa-sliders" style="font-size: 16px; color: var(--teal);"></i>
+                            <h3 style="font-size: 15px; margin: 0; font-weight: 700;">Price Summary Settings</h3>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 14px;">
+
+                            <input type="hidden" id="adminSetupCost" value="700">
+
+                            <div class="form-group">
+                                <label
+                                    style="font-weight: 700; font-size: 10px; color: var(--muted); text-transform: uppercase;">
+                                    Default Base Rate (₹ / cm²)
+                                </label>
+                                <input type="number" id="adminBaseRate" min="0" step="0.01" value="0.60"
+                                    oninput="updateAdminPricePreview()"
+                                    style="padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; font-weight: 600;">
+                            </div>
+
+                            <div class="form-group">
+                                <label
+                                    style="font-weight: 700; font-size: 10px; color: var(--muted); text-transform: uppercase;">
+                                    GST Rate (%)
+                                </label>
+                                <input type="number" id="adminGSTRate" min="0" max="100" step="0.01" value="18"
+                                    oninput="updateAdminPricePreview()"
+                                    style="padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; font-weight: 600;">
+                            </div>
+
+                            <div class="form-group">
+                                <label
+                                    style="font-weight: 700; font-size: 10px; color: var(--muted); text-transform: uppercase;">
+                                    Base FPT Cost (₹)
+                                </label>
+                                <input type="number" id="adminFptCost" min="0" step="0.01" value="0"
+                                    oninput="updateAdminPricePreview()"
+                                    style="padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; font-weight: 600;">
+                            </div>
+
+                            <button type="button" class="save-btn" onclick="saveAdminPricingSettings()"
+                                style="width: 100%; padding: 12px; margin-top: 6px; font-size: 13px; font-weight: 700; box-shadow: 0 4px 12px rgba(23,109,112,0.25);">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Save Quote Page Changes
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- LIVE PRICE SUMMARY PREVIEW (EXACT QUOTE.HTML CARD) -->
+                    <div
+                        style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+
+                        <div
+                            style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; border-bottom: 1px solid #f0f4f3; padding-bottom: 10px;">
+                            <h3 style="font-size: 16px; margin: 0; font-weight: 700; color: #155d60;">Price Summary</h3>
+                            <span
+                                style="font-size: 10px; font-weight: 700; background: #eaf7f5; color: var(--teal); padding: 3px 8px; border-radius: 12px;">Customer
+                                Preview</span>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12px; color: #617475;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span>Basic Price:</span>
+                                <strong id="previewBasicPrice" style="color: #294b4e;">₹0.00</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span>Setup Cost:</span>
+                                <strong id="previewSetupCost" style="color: #294b4e;">₹800.00</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span>Shipping:</span>
+                                <strong style="color: #19966a;">Free</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span id="previewGstLabel">GST (18%):</span>
+                                <strong id="previewGST" style="color: #294b4e;">₹0.00</strong>
+                            </div>
+
+                            <div style="height: 1px; background: #e0e8e6; margin: 6px 0;"></div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span>Dispatch Unit:</span>
+                                <strong style="color: #294b4e;">PCB</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span>PCB Size:</span>
+                                <strong style="color: #294b4e;">20 × 20</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span>Quantity:</span>
+                                <strong style="color: #294b4e;">3 PCB</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span>Delivery:</span>
+                                <strong style="color: #294b4e;">Calculated</strong>
+                            </div>
+
+                            <div style="height: 1px; background: #e0e8e6; margin: 6px 0;"></div>
+
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 700; color: #155d60;">
+                                <span>Final Total:</span>
+                                <strong id="previewFinalTotal" style="font-size: 18px; color: #155d60;">₹944.00</strong>
+                            </div>
+                        </div>
+
+                        <div
+                            style="padding: 10px; background: #fbfdfd; border-radius: 6px; border: 1px solid #edf2f1; margin-top: 14px;">
+                            <small style="color: var(--muted); font-size: 10px; line-height: 1.4; display: block;">
+                                <i class="fa-solid fa-circle-check" style="color: var(--teal); margin-right: 4px;"></i>
+                                Live calculation preview based on 20x20mm, 3 Quantity, and admin-defined setup cost &
+                                GST rate.
+                            </small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+     FULL QUOTE EDIT MODAL
+===================================================== -->
+
+    <div class="modal-overlay" id="editModal">
+
+        <div class="edit-modal">
+
+
+            <!-- MODAL HEADER -->
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2>Edit PCB Quote</h2>
+
+                    <p>
+                        Admin can manage complete quotation
+                    </p>
+
+                </div>
+
+
+                <button type="button" class="close-modal" onclick="closeEditModal()">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+
+            <form id="editForm">
+
+
+                <input type="hidden" id="editId">
+
+
+
+                <!-- =================================================
+                 CUSTOMER INFORMATION
+            ================================================== -->
+
+                <div class="modal-section">
+
+                    <div class="modal-section-heading">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <div>
+
+                            <h3>Customer Information</h3>
+
+                            <p>
+                                Customer details linked with this quote
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Customer Name
+                            </label>
+
+                            <input type="text" id="editCustomerName" required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Email
+                            </label>
+
+                            <input type="email" id="editEmail" required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Phone
+                            </label>
+
+                            <input type="text" id="editPhone" maxlength="10" required>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                 PCB INFORMATION
+            ================================================== -->
+
+                <div class="modal-section">
+
+                    <div class="modal-section-heading">
+
+                        <i class="fa-solid fa-microchip"></i>
+
+                        <div>
+
+                            <h3>PCB Information</h3>
+
+                            <p>
+                                Complete PCB quotation specifications
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                PCB Name
+                            </label>
+
+                            <input type="text" id="editPcbName" required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Dispatch Unit
+                            </label>
+
+                            <select id="editDispatch">
+
+                                <option value="PCB">
+                                    PCB
+                                </option>
+
+                                <option value="Panel">
+                                    Panel
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Width (mm)
+                            </label>
+
+                            <input type="number" id="editWidth" min="1" step="0.01" required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Height (mm)
+                            </label>
+
+                            <input type="number" id="editHeight" min="1" step="0.01" required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Quantity
+                            </label>
+
+                            <input type="number" id="editQuantity" min="1" max="500" required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Base Material
+                            </label>
+
+                            <input type="text" id="editBaseMaterial">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Layers
+                            </label>
+
+                            <input type="text" id="editLayers">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Thickness
+                            </label>
+
+                            <input type="text" id="editThickness">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Copper Finish
+                            </label>
+
+                            <input type="text" id="editCopperFinish">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Mask Color
+                            </label>
+
+                            <input type="text" id="editMaskColor">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Surface Finish
+                            </label>
+
+                            <input type="text" id="editSurfaceFinish">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Silk Screen
+                            </label>
+
+                            <input type="text" id="editSilkScreen">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                 GERBER FILE
+            ================================================== -->
+
+                <div class="modal-section">
+
+                    <div class="modal-section-heading">
+
+                        <i class="fa-solid fa-file-zipper"></i>
+
+                        <div>
+
+                            <h3>Gerber File</h3>
+
+                            <p>
+                                Existing uploaded file will remain unchanged
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="gerber-admin-box">
+
+                        <div>
+
+                            <i class="fa-solid fa-file-zipper"></i>
+
+                            <span id="gerberFileName">
+                                No file
+                            </span>
+
+                        </div>
+
+
+                        <a href="#" id="editGerberView" target="_blank" class="gerber-admin-btn">
+
+                            <i class="fa-solid fa-eye"></i>
+
+                            View File
+
+                        </a>
+
+                    </div>
+
+
+                    <input type="hidden" id="editGerberFile">
+
+                </div>
+
+
+
+                <!-- =================================================
+                 CALENDAR / DELIVERY
+            ================================================== -->
+
+                <div class="modal-section">
+
+                    <div class="modal-section-heading">
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                        <div>
+
+                            <h3>Delivery Calendar</h3>
+
+                            <p>
+                                Admin selects the available delivery dates
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="date-admin-grid">
+
+
+                        <div class="date-admin-card">
+
+                            <span>
+                                <i class="fa-solid fa-calendar-day"></i>
+                                Date 1
+                            </span>
+
+                            <input type="date" id="editDate1">
+
+                        </div>
+
+
+                        <div class="date-admin-card">
+
+                            <span>
+                                <i class="fa-solid fa-calendar-day"></i>
+                                Date 2
+                            </span>
+
+                            <input type="date" id="editDate2">
+
+                        </div>
+
+
+                        <div class="date-admin-card">
+
+                            <span>
+                                <i class="fa-solid fa-calendar-day"></i>
+                                Date 3
+                            </span>
+
+                            <input type="date" id="editDate3">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="selected-delivery-box">
+
+                        <label>
+                            Selected Customer Delivery Date
+                        </label>
+
+                        <input type="date" id="editDeliveryDate">
+
+                        <small>
+                            This is the delivery date selected for this quotation.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                 PRICE SUMMARY
+            ================================================== -->
+
+                <div class="modal-section">
+
+                    <div class="modal-section-heading">
+
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                        <div>
+
+                            <h3>Price Summary</h3>
+
+                            <p>
+                                Admin controls the complete price summary
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="price-admin-box">
+
+
+                        <div class="price-row">
+
+                            <label>
+                                Basic Price
+                            </label>
+
+                            <div class="price-input">
+
+                                <span>₹</span>
+
+                                <input type="number" id="editBasicPrice" min="0" step="0.01">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="price-row">
+
+                            <label>
+                                Setup Cost
+                            </label>
+
+                            <div class="price-input">
+
+                                <span>₹</span>
+
+                                <input type="number" id="editSetupCost" min="0" step="0.01">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="price-row">
+
+                            <label>
+                                FPT Cost
+                            </label>
+
+                            <div class="price-input">
+
+                                <span>₹</span>
+
+                                <input type="number" id="editFptCost" min="0" step="0.01">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="price-row">
+
+                            <label>
+                                GST
+                            </label>
+
+                            <div class="price-input">
+
+                                <span>₹</span>
+
+                                <input type="number" id="editGST" min="0" step="0.01">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="price-divider"></div>
+
+
+                        <div class="price-row final-price-row">
+
+                            <label>
+                                Final Total
+                            </label>
+
+                            <div class="price-input">
+
+                                <span>₹</span>
+
+                                <input type="number" id="editFinalTotal" min="0" step="0.01">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                 STATUS
+            ================================================== -->
+
+                <div class="modal-section">
+
+                    <div class="modal-section-heading">
+
+                        <i class="fa-solid fa-list-check"></i>
+
+                        <div>
+
+                            <h3>Order Management</h3>
+
+                            <p>
+                                Status and admin communication
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Order Status
+                            </label>
+
+                            <select id="editStatus">
+
+                                <option value="Pending">
+                                    Pending
+                                </option>
+
+                                <option value="Processing">
+                                    Processing
+                                </option>
+
+                                <option value="Completed">
+                                    Completed
+                                </option>
+
+                                <option value="Cancelled">
+                                    Cancelled
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Admin ID
+                            </label>
+
+                            <input type="text" id="editAdminId" placeholder="e.g. ss53647383ss">
+
+                        </div>
+
+
+                        <div class="form-group form-group-full">
+
+                            <label>
+                                Admin Note
+                            </label>
+
+                            <textarea id="editAdminNote" rows="4"
+                                placeholder="Write a note for this quotation..."></textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                 MODAL ACTIONS
+            ================================================== -->
+
+                <div class="modal-actions">
+
+                    <button type="button" class="cancel-btn" onclick="closeEditModal()">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button type="submit" class="save-btn">
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Save All Changes
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
 
     </div>
 
-</div>
 
 
-
-<script src="admin.js"></script>
+    <script src="admin.js"></script>
 
 </body>
+
 </html>

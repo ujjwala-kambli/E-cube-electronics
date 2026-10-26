@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Orders - E-CUBE ELECTROSOLUTIONS</title>
+
+    <link rel="stylesheet" href="customer-dashboard.css">
+</head>
+
+<body>
+
+    <header class="dashboard-header">
+
+        <div class="brand">
+            <img src="logo.jpg" alt="E-CUBE ELECTROSOLUTIONS">
+            <div>
+                <h2>E-CUBE</h2>
+                <span>ELECTROSOLUTIONS</span>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button
+                type="button"
+                class="new-order-btn"
+                onclick="createNewOrder()"
+            >
+                New Order
+            </button>
+
+            <button
+                type="button"
+                class="back-home-btn"
+                onclick="goHome()"
+            >
+                ← Back to Home
+            </button>
+        </div>
+
+    </header>
+
+
+    <main class="dashboard-container">
+
+        <section class="welcome-card">
+
+            <div>
+                <p class="small-title">CUSTOMER DASHBOARD</p>
+
+                <h1>My Orders</h1>
+
+                <p>
+                    View your PCB quotation and order details.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- CUSTOMER DETAILS -->
+
+        <section class="customer-card">
+
+            <h2>Customer Information</h2>
+
+            <div class="customer-grid">
+
+                <div class="info-box">
+                    <span>Email</span>
+                    <strong id="customerEmail">
+                        Loading...
+                    </strong>
+                </div>
+
+                <div class="info-box">
+                    <span>Phone</span>
+                    <strong id="customerPhone">
+                        Loading...
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ORDERS -->
+
+        <section class="orders-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="small-title">ORDER HISTORY</p>
+                    <h2>Your Quotes</h2>
+                </div>
+
+                <button
+                    type="button"
+                    class="refresh-btn"
+                    onclick="loadOrders()"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+
+            <div id="loadingMessage" class="message-box">
+                Loading your orders...
+            </div>
+
+
+            <div
+                id="errorMessage"
+                class="message-box error"
+                style="display:none;"
+            ></div>
+
+
+            <div
+                id="emptyMessage"
+                class="message-box"
+                style="display:none;"
+            >
+                No orders found.
+            </div>
+
+
+            <div
+                id="ordersContainer"
+                class="orders-container"
+            ></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ORDER DETAILS MODAL -->
+
+    <div
+        id="orderModal"
+        class="modal"
+    >
+
+        <div class="modal-content">
+
+            <button
+                class="close-modal"
+                onclick="closeOrderModal()"
+            >
+                ×
+            </button>
+
+            <h2>Order Details</h2>
+
+            <div id="orderDetails"></div>
+
+        </div>
+
+    </div>
+
+
+<script>
+
+const API_URL = "http://localhost:5000";
+
+
+// =====================================================
+// GET CUSTOMER ID
+// =====================================================
+
+const urlParams =
+    new URLSearchParams(window.location.search);
+
+const customerId =
+    urlParams.get("customer_id") ||
+    urlParams.get("id") ||
+    localStorage.getItem("customerId") ||
+    localStorage.getItem("customer_id");
+
+if (customerId) {
+    localStorage.setItem("customerId", String(customerId));
+    localStorage.setItem("customer_id", String(customerId));
+}
+
+
+// =====================================================
+// PAGE CHECK
+// =====================================================
+
+if (!customerId) {
+
+    alert(
+        "Customer information not found. Please register or login again."
+    );
+
+    window.location.href = "quote.html";
+
+}
+
+
+// =====================================================
+// LOAD CUSTOMER ORDERS
+// =====================================================
+
+async function loadOrders() {
+
+    const loading =
+        document.getElementById("loadingMessage");
+
+    const error =
+        document.getElementById("errorMessage");
+
+    const empty =
+        document.getElementById("emptyMessage");
+
+    const container =
+        document.getElementById("ordersContainer");
+
+
+    loading.style.display = "block";
+    error.style.display = "none";
+    empty.style.display = "none";
+
+    container.innerHTML = "";
+
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/api/customers/${customerId}/orders`
+        );
+
+
+        const data = await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Unable to load orders."
+            );
+
+        }
+
+
+        // CUSTOMER DETAILS
+
+        if (data.customer) {
+
+            document.getElementById(
+                "customerEmail"
+            ).textContent =
+                data.customer.email || "-";
+
+
+            document.getElementById(
+                "customerPhone"
+            ).textContent =
+                data.customer.phone || "-";
+
+            localStorage.setItem("customerId", String(data.customer.id || customerId));
+            localStorage.setItem("customer_id", String(data.customer.id || customerId));
+            localStorage.setItem("customerEmail", data.customer.email || "");
+            localStorage.setItem("customerPhone", data.customer.phone || "");
+            localStorage.setItem("customerName", data.customer.name || "");
+            localStorage.setItem("pcbRegistration", JSON.stringify({
+                id: String(data.customer.id || customerId),
+                customer_id: String(data.customer.id || customerId),
+                email: String(data.customer.email || ""),
+                phone: String(data.customer.phone || ""),
+                name: String(data.customer.name || "")
+            }));
+
+        }
+
+
+        const orders = data.orders || [];
+
+
+        loading.style.display = "none";
+
+
+        if (orders.length === 0) {
+
+            empty.style.display = "block";
+
+            return;
+
+        }
+
+
+        orders.forEach(
+            (order, index) => {
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "order-card";
+
+
+                const status =
+                    order.status || "Pending";
+
+
+                const statusClass =
+                    status
+                        .toLowerCase()
+                        .replace(/\s+/g, "-");
+
+
+                card.innerHTML = `
+
+                    <div class="order-top">
+
+                        <div>
+
+                            <span class="order-number">
+                                Order #${index + 1}
+                            </span>
+
+                            <h3>
+                                ${escapeHTML(
+                                    order.pcb_name || "PCB Quote"
+                                )}
+                            </h3>
+
+                        </div>
+
+                        <span class="status ${statusClass}">
+                            ${escapeHTML(status)}
+                        </span>
+
+                    </div>
+
+
+                    <div class="order-grid">
+
+                        <div>
+                            <span>PCB Size</span>
+                            <strong>
+                                ${order.width || "-"}
+                                ×
+                                ${order.height || "-"} mm
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <span>Quantity</span>
+                            <strong>
+                                ${order.quantity || "-"} PCB
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <span>Dispatch</span>
+                            <strong>
+                                ${escapeHTML(
+                                    order.dispatch_unit || "-"
+                                )}
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <span>Delivery</span>
+                            <strong>
+                                ${order.delivery_date || "-"}
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <span>Total</span>
+                            <strong class="total">
+                                ₹${Number(
+                                    order.final_total || 0
+                                ).toFixed(2)}
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="order-bottom">
+
+                        <span>
+                            ${order.created_at
+                                ? new Date(
+                                    order.created_at
+                                  ).toLocaleString("en-IN")
+                                : ""
+                            }
+                        </span>
+
+
+                        <div class="card-actions">
+                            <button
+                                type="button"
+                                class="view-btn"
+                                onclick='viewOrder(${JSON.stringify(order)})'
+                            >
+                                View Order
+                            </button>
+
+                            <button
+                                type="button"
+                                class="repeat-btn"
+                                onclick="repeatOrder(${order.id})"
+                            >
+                                Repeat Order
+                            </button>
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                container.appendChild(card);
+
+            }
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Orders Error:",
+            error
+        );
+
+        loading.style.display = "none";
+
+        error.textContent =
+            error.message ||
+            "Unable to load orders.";
+
+        error.style.display = "block";
+
+    }
+
+}
+
+
+// =====================================================
+// VIEW ORDER
+// =====================================================
+
+function viewOrder(order) {
+
+    const modal =
+        document.getElementById("orderModal");
+
+    const details =
+        document.getElementById("orderDetails");
+
+
+    details.innerHTML = `
+
+        <div class="details-grid">
+
+            <div>
+                <span>PCB Name</span>
+                <strong>
+                    ${escapeHTML(order.pcb_name || "-")}
+                </strong>
+            </div>
+
+
+            <div>
+                <span>Dispatch Unit</span>
+                <strong>
+                    ${escapeHTML(order.dispatch_unit || "-")}
+                </strong>
+            </div>
+
+
+            <div>
+                <span>PCB Size</span>
+                <strong>
+                    ${order.width || "-"}
+                    ×
+                    ${order.height || "-"} mm
+                </strong>
+            </div>
+
+
+            <div>
+                <span>Quantity</span>
+                <strong>
+                    ${order.quantity || "-"}
+                </strong>
+            </div>
+
+
+            <div>
+                <span>Base Material</span>
+                <strong>
+                    ${escapeHTML(order.base_material || "-")}
+                </strong>
+            </div>
+
+
+            <div>
+                <span>Layers</span>
+                <strong>
+                    ${escapeHTML(order.layers || "-")}
+                </strong>
+            </div>
+
+
+            <div>
+                <span>Thickness</span>
+                <strong>
+                    ${escapeHTML(order.thickness || "-")}
+                </strong>
+            </div>
+
+
+            <div>
+                <span>Copper Finish</span>
+                <strong>
+                    ${escapeHTML(order.copper_finish || "-")}
+                </strong>
+            </div>
+
+
+            <div>
+                <span>Mask Color</span>
+                <strong>
+                    ${escapeHTML(order.mask_color || "-")}
+                </strong>
+            </div>
+
+
+            <div>
+                <span>Surface Finish</span>
+                <strong>
+                    ${escapeHTML(order.surface_finish || "-")}
+                </strong>
+            </div>
+
+
+            <div>
+                <span>Delivery Date</span>
+                <strong>
+                    ${order.delivery_date || "-"}
+                </strong>
+            </div>
+
+
+            <div>
+                <span>Status</span>
+                <strong>
+                    ${escapeHTML(order.status || "Pending")}
+                </strong>
+            </div>
+
+
+            <div>
+                <span>Basic Price</span>
+                <strong>
+                    ₹${Number(order.basic_price || 0).toFixed(2)}
+                </strong>
+            </div>
+
+
+            <div>
+                <span>Setup Cost</span>
+                <strong>
+                    ₹${Number(order.setup_cost || 0).toFixed(2)}
+                </strong>
+            </div>
+
+
+            <div>
+                <span>GST</span>
+                <strong>
+                    ₹${Number(order.gst || 0).toFixed(2)}
+                </strong>
+            </div>
+
+
+            <div>
+                <span>Final Total</span>
+                <strong class="final-price">
+                    ₹${Number(order.final_total || 0).toFixed(2)}
+                </strong>
+            </div>
+
+        </div>
+
+    `;
+
+
+    modal.classList.add("show");
+
+}
+
+
+// =====================================================
+// CLOSE MODAL
+// =====================================================
+
+function closeOrderModal() {
+
+    document
+        .getElementById("orderModal")
+        .classList.remove("show");
+
+}
+
+
+// =====================================================
+// NEW ORDER & REPEAT ORDER NAVIGATION
+// =====================================================
+
+function createNewOrder() {
+
+    window.location.href = "quote.html?mode=new";
+
+}
+
+
+function repeatOrder(orderId) {
+
+    if (!orderId) return;
+
+    window.location.href =
+        "quote.html?mode=repeat&order_id=" +
+        encodeURIComponent(orderId);
+
+}
+
+
+// =====================================================
+// BACK HOME
+// =====================================================
+
+function goHome() {
+
+    window.location.href = "index.html";
+
+}
+
+
+// =====================================================
+// SECURITY / HTML ESCAPE
+// =====================================================
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+// =====================================================
+// INITIAL LOAD
+// =====================================================
+
+loadOrders();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,521 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Inter", Arial, sans-serif;
+    background: #f4f8f5;
+    color: #173b35;
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.dashboard-header {
+    width: 100%;
+    min-height: 76px;
+    background: #ffffff;
+    border-bottom: 1px solid #d8e6df;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 5%;
+}
+
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.brand h2 {
+    color: #176b5d;
+    font-size: 20px;
+}
+
+.brand span {
+    color: #6b7e79;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.new-order-btn {
+    border: 1px solid #176b5d;
+    background: #e8f5f1;
+    color: #176b5d;
+
+    padding: 10px 18px;
+    border-radius: 8px;
+
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.new-order-btn:hover {
+    background: #176b5d;
+    color: #ffffff;
+}
+
+.back-home-btn {
+    border: 1px solid #176b5d;
+    background: #176b5d;
+    color: #ffffff;
+
+    padding: 10px 18px;
+    border-radius: 8px;
+
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.back-home-btn:hover {
+    background: #125348;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.dashboard-container {
+    width: min(1180px, 92%);
+    margin: 24px auto 50px;
+}
+
+
+/* =====================================================
+   WELCOME
+===================================================== */
+
+.welcome-card {
+    background: #ffffff;
+    border: 1px solid #d6e5de;
+    border-radius: 14px;
+
+    padding: 24px 28px;
+    margin-bottom: 18px;
+
+    box-shadow: 0 4px 16px rgba(20, 75, 60, 0.05);
+}
+
+.small-title {
+    color: #258675;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 5px;
+}
+
+.welcome-card h1 {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.welcome-card p:not(.small-title) {
+    color: #71817d;
+}
+
+
+/* =====================================================
+   CUSTOMER
+===================================================== */
+
+.customer-card {
+    background: #ffffff;
+    border: 1px solid #d6e5de;
+    border-radius: 14px;
+
+    padding: 20px 24px;
+    margin-bottom: 20px;
+}
+
+.customer-card h2 {
+    font-size: 18px;
+    margin-bottom: 14px;
+}
+
+.customer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.info-box {
+    background: #f5faf7;
+    border: 1px solid #dbe9e2;
+    border-radius: 9px;
+    padding: 14px;
+}
+
+.info-box span,
+.order-grid span,
+.details-grid span {
+    display: block;
+    font-size: 12px;
+    color: #7b8985;
+    margin-bottom: 5px;
+}
+
+.info-box strong {
+    font-size: 14px;
+    color: #183e37;
+}
+
+
+/* =====================================================
+   ORDERS
+===================================================== */
+
+.orders-section {
+    background: #ffffff;
+    border: 1px solid #d6e5de;
+    border-radius: 14px;
+
+    padding: 22px 24px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.section-heading h2 {
+    font-size: 21px;
+}
+
+.refresh-btn {
+    border: 1px solid #176b5d;
+    background: #ffffff;
+    color: #176b5d;
+
+    padding: 9px 14px;
+    border-radius: 7px;
+
+    cursor: pointer;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+.message-box {
+    padding: 18px;
+    text-align: center;
+
+    border-radius: 9px;
+    background: #f4faf7;
+    color: #55706a;
+
+    border: 1px solid #d9e9e1;
+}
+
+.message-box.error {
+    background: #fff5f5;
+    color: #b23b3b;
+    border-color: #f0caca;
+}
+
+
+/* =====================================================
+   ORDER CARD
+===================================================== */
+
+.orders-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.order-card {
+    border: 1px solid #d8e6df;
+    border-radius: 11px;
+    padding: 18px;
+
+    background: #fbfdfc;
+}
+
+.order-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-bottom: 15px;
+}
+
+.order-number {
+    color: #258675;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.order-top h3 {
+    font-size: 18px;
+    margin-top: 4px;
+}
+
+.status {
+    padding: 6px 11px;
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    background: #fff3cd;
+    color: #8a6500;
+}
+
+.status.completed {
+    background: #e3f7ec;
+    color: #167548;
+}
+
+.status.cancelled {
+    background: #ffe7e7;
+    color: #b32626;
+}
+
+
+/* =====================================================
+   ORDER GRID
+===================================================== */
+
+.order-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+.order-grid > div {
+    background: #ffffff;
+    border: 1px solid #e4ece8;
+    border-radius: 7px;
+    padding: 10px;
+}
+
+.order-grid strong {
+    font-size: 13px;
+}
+
+.order-grid .total {
+    color: #176b5d;
+}
+
+
+/* =====================================================
+   ORDER BOTTOM
+===================================================== */
+
+.order-bottom {
+    border-top: 1px solid #e4ece8;
+
+    padding-top: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #89938f;
+    font-size: 12px;
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.view-btn {
+    border: none;
+    background: #176b5d;
+    color: white;
+
+    padding: 8px 14px;
+    border-radius: 7px;
+
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.view-btn:hover {
+    background: #125348;
+}
+
+.repeat-btn {
+    border: 1px solid #176b5d;
+    background: #ffffff;
+    color: #176b5d;
+
+    padding: 8px 14px;
+    border-radius: 7px;
+
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.repeat-btn:hover {
+    background: #176b5d;
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 1000;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    width: min(850px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+
+    background: white;
+    border-radius: 14px;
+
+    padding: 25px;
+
+    position: relative;
+}
+
+.modal-content h2 {
+    color: #176b5d;
+    margin-bottom: 20px;
+}
+
+.close-modal {
+    position: absolute;
+    right: 18px;
+    top: 14px;
+
+    border: none;
+    background: transparent;
+
+    font-size: 28px;
+    cursor: pointer;
+    color: #555;
+}
+
+
+/* =====================================================
+   DETAILS
+===================================================== */
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.details-grid > div {
+    border: 1px solid #dfeae5;
+    background: #f8fbf9;
+    border-radius: 8px;
+
+    padding: 12px;
+}
+
+.final-price {
+    color: #176b5d;
+    font-size: 17px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .order-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .details-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .dashboard-header {
+        padding: 10px 4%;
+    }
+
+    .dashboard-container {
+        width: 94%;
+    }
+
+    .customer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .order-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .order-top {
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .order-bottom {
+        gap: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

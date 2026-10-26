@@ -7,2048 +7,2201 @@
 
     <title>PCB Quote - E-CUBE ELECTROSOLUTIONS</title>
 
-    <link rel="stylesheet" href="quote.css">
+    <link rel="stylesheet" href="quote.css?v=2">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<!-- =====================================================
+    <!-- =====================================================
      REGISTER POPUP
 ===================================================== -->
 
-<div class="register-overlay" id="registerOverlay">
+    <div class="register-overlay show" id="registerOverlay">
 
-    <div class="register-box">
+        <div class="register-box">
 
-        <div class="register-icon">
-            📝
-        </div>
-
-        <h2>Register for PCB Quote</h2>
-
-        <p class="register-subtitle">
-            Please register to continue with PCB quotation
-        </p>
-
-        <form id="registerForm">
-
-            <div class="register-field">
-
-                <label for="registerEmail">
-                    Email Address
-                </label>
-
-                <input
-                    type="email"
-                    id="registerEmail"
-                    placeholder="Enter your email"
-                    required
-                >
-
-            </div>
-
-            <div class="register-field">
-
-                <label for="registerPhone">
-                    Phone Number
-                </label>
-
-                <input
-                    type="tel"
-                    id="registerPhone"
-                    placeholder="Enter 10 digit phone number"
-                    maxlength="10"
-                    inputmode="numeric"
-                    required
-                >
-
-            </div>
-
-            <button
-                type="submit"
-                class="register-btn"
-                id="registerSubmitBtn"
-            >
-                Register & Continue
+            <button type="button" class="register-close" id="registerClose" aria-label="Close">
+                ×
             </button>
 
-            <p
-                id="registerMessage"
-                class="register-message"
-            ></p>
+            <!-- REGISTER VIEW -->
+            <div id="registerView">
 
-        </form>
+                <div class="register-icon">📝</div>
+
+                <h2 id="registerTitle">Register for PCB Quote</h2>
+
+                <p class="register-subtitle" id="registerSubtitle">
+                    Register to continue with your PCB quotation
+                </p>
+
+                <form id="registerForm">
+
+                    <div class="register-field">
+
+                        <label for="registerEmail">
+                            Email Address
+                        </label>
+
+                        <input type="email" id="registerEmail" placeholder="Enter your email" autocomplete="email">
+
+                    </div>
+
+                    <div class="register-field">
+
+                        <label for="registerPhone">
+                            Phone Number
+                        </label>
+
+                        <input type="tel" id="registerPhone" placeholder="Enter 10 digit phone number" maxlength="10"
+                            inputmode="numeric" autocomplete="tel">
+
+                    </div>
+
+                    <button type="submit" class="register-btn" id="registerSubmitBtn">
+                        Register & Continue
+                    </button>
+
+                    <button type="button" class="skip-btn" id="skipRegister">
+                        Skip & Continue
+                    </button>
+
+                    <button type="button" class="orders-btn hidden" id="showOrdersBtn">
+                        Show My Orders
+                    </button>
+
+                    <div class="auth-toggle-box">
+                        <span>Already registered?</span>
+                        <button type="button" class="auth-link-btn" id="switchToLoginBtn">Login</button>
+                    </div>
+
+                    <p id="registerMessage" class="register-message"></p>
+
+                </form>
+
+            </div>
+
+            <!-- LOGIN VIEW -->
+            <div id="loginView" class="hidden">
+
+                <div class="register-icon">🔐</div>
+
+                <h2>Customer Login</h2>
+
+                <p class="register-subtitle">
+                    Enter your registered email and phone number
+                </p>
+
+                <form id="loginForm">
+
+                    <div class="register-field">
+
+                        <label for="loginEmail">
+                            Email Address
+                        </label>
+
+                        <input type="email" id="loginEmail" placeholder="Enter registered email" autocomplete="email">
+
+                    </div>
+
+                    <div class="register-field">
+
+                        <label for="loginPhone">
+                            Phone Number
+                        </label>
+
+                        <input type="tel" id="loginPhone" placeholder="Enter 10 digit phone number" maxlength="10"
+                            inputmode="numeric" autocomplete="tel">
+
+                    </div>
+
+                    <button type="submit" class="register-btn" id="loginSubmitBtn">
+                        Login
+                    </button>
+
+
+
+                    <div class="auth-toggle-box">
+                        <span>New customer?</span>
+                        <button type="button" class="auth-link-btn" id="switchToRegisterBtn">Register</button>
+                    </div>
+
+                    <p id="loginMessage" class="register-message"></p>
+
+                </form>
+
+            </div>
+
+        </div>
 
     </div>
 
-</div>
+
+    <!-- =====================================================
+     SUCCESS POPUP
+===================================================== -->
+
+    <div class="success-overlay hidden" id="successOverlay" aria-hidden="true">
+
+        <div class="success-popup">
+
+            <button type="button" class="success-close" id="successClose">
+                ×
+            </button>
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>
+                Your Quote Submitted Successfully!
+            </h2>
+
+            <p class="success-main-text">
+                Thank you for submitting your PCB quotation.
+                Our company team will contact you regarding the
+                next steps.
+            </p>
+
+            <div class="company-contact-box">
+
+                <div class="company-contact-item">
+
+                    <span class="contact-label">
+                        Company Email 1
+                    </span>
+
+                    <strong>
+                        <a href="mailto:ecube.electrosolutions@gmail.com"
+                            style="color: inherit; text-decoration: none;">ecube.electrosolutions@gmail.com</a>
+                    </strong>
+
+                </div>
+
+                <div class="company-contact-item">
+
+                    <span class="contact-label">
+                        Company Email 2
+                    </span>
+
+                    <strong>
+                        <a href="mailto:ecubepcbdesign@gmail.com"
+                            style="color: inherit; text-decoration: none;">ecubepcbdesign@gmail.com</a>
+                    </strong>
+
+                </div>
+
+                <div class="company-contact-item">
+
+                    <span class="contact-label">
+                        Company Contact
+                    </span>
+
+                    <strong>
+                        <a href="tel:9112485873" style="color: inherit; text-decoration: none;">+91 9112485873</a> / <a
+                            href="tel:9579267363" style="color: inherit; text-decoration: none;">+91 9579267363</a>
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <button type="button" class="success-home-btn" id="successHomeBtn">
+                Back to Home
+            </button>
+
+        </div>
+
+    </div>
 
 
-<!-- =====================================================
+    <!-- =====================================================
      MAIN PAGE
 ===================================================== -->
 
-<div class="page-container">
+    <div class="page-container">
 
-    <!-- =================================================
-         LEFT
-    ================================================== -->
+        <main class="left-section">
+            <section class="quote-card">
 
-    <main class="left-section">
+                <div class="pcb-name-row">
+                    <label for="pcbName">PCB Name <span>*</span></label>
+                    <input type="text" id="pcbName" placeholder="ENTER PCB NAME" autocomplete="off">
+                </div>
 
-        <!-- PCB FORM -->
+                <div class="top-spec-grid">
+                    <div class="form-group size-group">
+                        <label>PCB Size</label>
 
-        <section class="quote-card">
+                        <div class="size-inputs">
+                            <input type="number" id="pcbWidth" min="20" max="370" step="1" value="20" placeholder="20"
+                                inputmode="numeric">
 
-            <div class="pcb-name-row">
+                            <span>×</span>
 
-                <label>
-                    PCB Name <span>*</span>
-                </label>
+                            <input type="number" id="pcbHeight" min="20" max="370" step="1" value="20" placeholder="20"
+                                inputmode="numeric">
+                        </div>
 
-                <input
-                    type="text"
-                    id="pcbName"
-                    placeholder="ENTER PCB NAME"
-                    required
-                >
+                        <div class="size-limits">
+                            <span>Min 20 mm</span>
+                            <span>Max 370 mm</span>
+                        </div>
+                    </div>
 
-            </div>
+                    <div class="form-group quantity-group">
 
+                        <label>Quantity</label>
 
-            <div class="options-grid">
+                        <select id="quantity" aria-hidden="true" tabindex="-1">
+                            <option value="3" selected>3</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                            <option value="35">35</option>
+                            <option value="40">40</option>
+                            <option value="45">45</option>
+                            <option value="50">50</option>
+                            <option value="60">60</option>
+                            <option value="70">70</option>
+                            <option value="80">80</option>
+                            <option value="90">90</option>
+                            <option value="100">100</option>
+                            <option value="125">125</option>
+                            <option value="150">150</option>
+                            <option value="175">175</option>
+                            <option value="200">200</option>
+                            <option value="225">225</option>
+                            <option value="250">250</option>
+                            <option value="300">300</option>
+                            <option value="350">350</option>
+                            <option value="400">400</option>
+                            <option value="450">450</option>
+                            <option value="500">500</option>
+                        </select>
 
-                <!-- DISPATCH -->
+                        <div class="quantity-picker" id="quantityPicker">
+                            <button type="button" class="quantity-trigger" id="quantityTrigger" aria-expanded="false">
+                                <span id="quantityValue">3</span>
+                                <span class="quantity-arrow">⌄</span>
+                            </button>
 
-                <div class="form-group">
+                            <div class="quantity-menu" id="quantityMenu">
+                                <div class="quantity-menu-title">
+                                    Select Quantity
+                                </div>
 
-                    <label>Dispatch Unit</label>
+                                <div class="quantity-grid" id="quantityGrid"></div>
+                            </div>
+                        </div>
 
-                    <div class="button-group">
+                    </div>
+                </div>
 
-                        <button
-                            type="button"
-                            class="option-btn active"
-                            data-group="dispatch"
-                        >
-                            PCB
+                <div class="dispatch-row">
+
+                    <div class="form-group dispatch-group">
+
+                        <label>Dispatch Unit</label>
+
+                        <div class="button-group dispatch-buttons">
+
+                            <button type="button" class="option-btn active" data-group="dispatch" data-value="PCB">
+                                PCB
+                            </button>
+
+                            <button type="button" class="option-btn" data-group="dispatch" data-value="Vcut">
+                                Vcut
+                            </button>
+
+                            <button type="button" class="option-btn" data-group="dispatch" data-value="Routing">
+                                Routing
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="panel-row" id="panelControls">
+
+                    <div class="compact-control">
+
+                        <label>Panel</label>
+
+                        <div class="panel-pair">
+
+                            <input id="panelRows" type="number" min="1" value="1" disabled aria-label="Panel rows"
+                                oninput="if(this.max && parseInt(this.value) > parseInt(this.max)) this.value = this.max;">
+
+                            <span>×</span>
+
+                            <input id="panelColumns" type="number" min="1" value="1" disabled aria-label="Panel columns"
+                                oninput="if(this.max && parseInt(this.value) > parseInt(this.max)) this.value = this.max;">
+
+                        </div>
+
+                    </div>
+
+                    <div class="compact-control spacing-control">
+
+                        <label>Spacing</label>
+
+                        <div class="spacing-box">
+
+                            <input id="panelSpacing" type="text" value="3/5" disabled aria-label="Panel spacing">
+
+                            <span>mm</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="spec-grid">
+
+                    <div class="form-group">
+
+                        <label>Base Material</label>
+
+                        <div class="button-group">
+
+                            <button type="button" class="option-btn active" data-group="material" data-value="FR-4">
+                                FR-4
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Layer</label>
+
+                        <div class="button-group">
+
+                            <button type="button" class="option-btn active" data-group="layers" data-value="1 Layer">
+                                1 Layer
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group thickness-copper-group">
+
+                        <label>Thickness</label>
+
+                        <div class="button-group">
+
+                            <button type="button" class="option-btn active combined-spec-btn" data-group="thickness"
+                                data-value="1.6 mm">
+                                1.6 mm / 35 µm
+                            </button>
+
+                            <button type="button" class="option-btn active hidden-spec-option" data-group="copper"
+                                hidden data-value="35 Micron" tabindex="-1" aria-hidden="true">
+                                35 Micron
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Mask Color</label>
+
+                        <div class="button-group">
+
+                            <button type="button" class="color-btn active" data-group="mask" data-value="Green">
+                                <span class="green-dot"></span>
+                                Green
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Surface Finish</label>
+
+                        <div class="button-group">
+
+                            <button type="button" class="option-btn active" data-group="surface"
+                                data-value="Roller Tin">
+                                Roller Tin
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Ident/Silk</label>
+
+                        <div class="button-group">
+
+                            <button type="button" class="option-btn active" data-group="silk" data-value="White">
+                                White
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="gerber-section">
+
+                    <div class="gerber-upload-row">
+
+                        <input type="file" id="gerberFile" accept=".zip,.rar" hidden>
+
+                        <button type="button" class="gerber-btn" id="gerberButton">
+                            ↑&nbsp; Add Gerber File
+                        </button>
+
+                        <div class="gerber-file-box" id="gerberName">
+                            Only .zip or .rar files
+                        </div>
+
+                    </div>
+
+                    <div class="gerber-info">
+                        <span>Max: 25MB</span>
+                        <span>🔒 Secure &amp; confidential</span>
+                    </div>
+
+                </div>
+
+                <section class="calendar-card">
+
+                    <div class="calendar-header">
+
+                        <button type="button" id="prevMonth">
+                            ‹
+                        </button>
+
+                        <h2 id="calendarMonth">
+                            Calendar
+                        </h2>
+
+                        <button type="button" id="nextMonth">
+                            ›
                         </button>
 
                     </div>
 
+                    <div class="delivery-note">
+                        ⚠️ Delivery requires minimum
+                        <b>6 working days</b>.<br>
+                        Tuesday is a weekly holiday
+                        and is <b>not counted</b>.
+                    </div>
+
+                    <div class="calendar-week">
+                        <span>S</span>
+                        <span>M</span>
+                        <span class="holiday-heading">T</span>
+                        <span>W</span>
+                        <span>T</span>
+                        <span>F</span>
+                        <span>S</span>
+                    </div>
+
+                    <div class="calendar-days" id="calendarDays"></div>
+
+                    <div class="delivery-options">
+
+                        <h3>
+                            Available Delivery Dates
+                        </h3>
+
+                        <p>
+                            Select one delivery date
+                        </p>
+
+                        <div id="deliveryOptionsList"></div>
+
+                    </div>
+
+                    <div class="selected-date">
+
+                        Selected Delivery Date:
+                        <strong id="selectedDate">
+                            Not Selected
+                        </strong>
+
+                    </div>
+
+                </section>
+
+            </section>
+        </main>
+
+
+        <aside class="right-section">
+
+            <section class="price-card">
+
+                <h2>Price Summary</h2>
+
+                <div class="price-row">
+                    <span>Basic Price:</span>
+                    <strong id="basicPrice">₹0.00</strong>
                 </div>
 
+                <div class="price-row">
+                    <span>Setup Cost:</span>
+                    <strong id="setupCost">₹800.00</strong>
+                </div>
 
-                <!-- MATERIAL -->
+                <div class="price-row">
+                    <span>Shipping:</span>
+                    <strong>Free</strong>
+                </div>
 
-                <div class="form-group">
+                <div class="price-row">
+                    <span>GST (18%):</span>
+                    <strong id="gst">₹0.00</strong>
+                </div>
 
-                    <label>Base Material</label>
+                <div class="summary-divider"></div>
 
-                    <div class="button-group">
+                <div class="price-row">
+                    <span>Dispatch Unit:</span>
+                    <strong id="summaryDispatch">PCB</strong>
+                </div>
 
-                        <button
-                            type="button"
-                            class="option-btn active"
-                            data-group="material"
-                        >
-                            FR-4
-                        </button>
+                <div class="price-row">
+                    <span>PCB Size:</span>
+                    <strong id="summarySize">— × —</strong>
+                </div>
+
+                <div class="price-row">
+                    <span>Quantity:</span>
+                    <strong id="summaryQuantity">—</strong>
+                </div>
+
+                <div class="price-row">
+                    <span>Delivery:</span>
+                    <strong id="summaryDelivery">
+                        Not Selected
+                    </strong>
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="final-row">
+                    <span>Final Total:</span>
+                    <strong id="finalTotal">₹0.00</strong>
+                </div>
+
+            </section>
+
+
+            <section class="process-card">
+
+                <h3>Customer Contact</h3>
+
+                <div class="process-contact-grid">
+
+                    <div class="contact-field">
+
+                        <label for="customerEmail">
+                            Email
+                        </label>
+
+                        <input type="email" id="customerEmail" placeholder="Enter email">
+
+                    </div>
+
+                    <div class="contact-field">
+
+                        <label for="customerPhone">
+                            Phone
+                        </label>
+
+                        <input type="tel" id="customerPhone" placeholder="10 digit phone" maxlength="10"
+                            inputmode="numeric">
 
                     </div>
 
                 </div>
 
-
-                <!-- SIZE -->
-
-                <div class="form-group size-group">
-
-                    <label>PCB Size (in mm)</label>
-
-                    <div class="size-inputs">
-
-                        <input
-                            type="number"
-                            id="pcbWidth"
-                            value="20"
-                            min="20"
-                            max="370"
-                            step="1"
-                        >
-
-                        <span>×</span>
-
-                        <input
-                            type="number"
-                            id="pcbHeight"
-                            value="20"
-                            min="20"
-                            max="370"
-                            step="1"
-                        >
-
-                    </div>
-
-                    <small>
-                        Min 20 × 20 mm |
-                        Max 370 × 370 mm
-                    </small>
-
-                </div>
-
-
-                <!-- LAYER -->
-
-                <div class="form-group">
-
-                    <label>Layer</label>
-
-                    <div class="button-group">
-
-                        <button
-                            type="button"
-                            class="option-btn active"
-                            data-group="layers"
-                        >
-                            1 Layer
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- QUANTITY -->
-
-                <div class="form-group">
-
-                    <label>Quantity</label>
-
-                    <select id="quantity">
-
-                        <option value="3">3</option>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                        <option value="25">25</option>
-                        <option value="30">30</option>
-                        <option value="35">35</option>
-                        <option value="40">40</option>
-                        <option value="45">45</option>
-                        <option value="50">50</option>
-                        <option value="60">60</option>
-                        <option value="70">70</option>
-                        <option value="80">80</option>
-                        <option value="90">90</option>
-                        <option value="100">100</option>
-                        <option value="125">125</option>
-                        <option value="150">150</option>
-                        <option value="175">175</option>
-                        <option value="200">200</option>
-                        <option value="225">225</option>
-                        <option value="250">250</option>
-                        <option value="275">275</option>
-                        <option value="300">300</option>
-                        <option value="325">325</option>
-                        <option value="350">350</option>
-                        <option value="375">375</option>
-                        <option value="400">400</option>
-                        <option value="425">425</option>
-                        <option value="450">450</option>
-                        <option value="475">475</option>
-                        <option value="500">500</option>
-
-                    </select>
-
-                </div>
-
-
-                <!-- THICKNESS -->
-
-                <div class="form-group">
-
-                    <label>Thickness</label>
-
-                    <div class="button-group">
-
-                        <button
-                            type="button"
-                            class="option-btn active"
-                            data-group="thickness"
-                        >
-                            1.6 mm
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- COPPER -->
-
-                <div class="form-group">
-
-                    <label>Copper Finish</label>
-
-                    <div class="button-group">
-
-                        <button
-                            type="button"
-                            class="option-btn active"
-                            data-group="copper"
-                        >
-                            35 Micron
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- MASK -->
-
-                <div class="form-group">
-
-                    <label>Mask Color</label>
-
-                    <div class="button-group">
-
-                        <button
-                            type="button"
-                            class="color-btn active"
-                            data-group="mask"
-                        >
-                            <span class="green-dot"></span>
-                            Green
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- SURFACE -->
-
-                <div class="form-group">
-
-                    <label>Surface Finish</label>
-
-                    <div class="button-group">
-
-                        <button
-                            type="button"
-                            class="option-btn active"
-                            data-group="surface"
-                        >
-                            HAL
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- SILK -->
-
-                <div class="form-group">
-
-                    <label>Silk Screen</label>
-
-                    <div class="button-group">
-
-                        <button
-                            type="button"
-                            class="option-btn active"
-                            data-group="silk"
-                        >
-                            White
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- GERBER -->
-
-            <div class="gerber-section">
-
-                <input
-                    type="file"
-                    id="gerberFile"
-                    accept=".zip,.rar"
-                    hidden
-                >
-
-                <button
-                    type="button"
-                    class="gerber-btn"
-                    id="gerberButton"
-                >
-                    ↑ &nbsp; Add Gerber File
+                <button type="button" class="submit-quote" id="submitQuote">
+                    Process Order
                 </button>
 
-                <div class="gerber-info">
-
-                    <span id="gerberName">
-                        Only .zip or .rar files
-                    </span>
-
-                    <span>
-                        Max size: 25MB
-                    </span>
-
-                    <span>
-                        🔒 Secure & confidential
-                    </span>
-
+                <div class="submit-help" id="submitHelp">
+                    Please complete all required fields before
+                    processing the order.
                 </div>
 
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             CALENDAR
-        ================================================== -->
-
-        <section class="calendar-card">
-
-            <div class="calendar-header">
-
-                <button
-                    type="button"
-                    id="prevMonth"
-                >
-                    ‹
-                </button>
-
-                <h2 id="calendarMonth">
-                    Calendar
-                </h2>
-
-                <button
-                    type="button"
-                    id="nextMonth"
-                >
-                    ›
-                </button>
-
-            </div>
-
-
-            <div class="delivery-note">
-
-                ⚠️ Delivery requires minimum
-                <b>6 working days</b>.
-
-                <br>
-
-                Tuesday is a weekly holiday and is
-                <b>not counted</b>.
-
-            </div>
-
-
-            <div class="calendar-week">
-
-                <span>S</span>
-                <span>M</span>
-                <span class="holiday-heading">T</span>
-                <span>W</span>
-                <span>T</span>
-                <span>F</span>
-                <span>S</span>
-
-            </div>
-
-
-            <div
-                class="calendar-days"
-                id="calendarDays"
-            ></div>
-
-
-            <div class="delivery-options">
-
-                <h3>Available Delivery Dates</h3>
-
-                <p>
-                    Select any one available date
-                </p>
-
-                <div id="deliveryOptionsList"></div>
-
-            </div>
-
-
-            <div class="selected-date">
-
-                Selected Delivery Date:
-
-                <strong id="selectedDate">
-                    Not Selected
-                </strong>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =================================================
-         RIGHT
-    ================================================== -->
-
-    <aside class="right-section">
-
-        <section class="price-card">
-
-            <h2>Price Summary</h2>
-
-            <div class="price-row">
-
-                <span>Basic Price:</span>
-
-                <strong id="basicPrice">
-                    ₹0.00
-                </strong>
-
-            </div>
-
-            <div class="price-row">
-
-                <span>Setup Cost:</span>
-
-                <strong id="setupCost">
-                    ₹800.00
-                </strong>
-
-            </div>
-
-            <div class="price-row">
-
-                <span>FPT Cost:</span>
-
-                <strong>Free</strong>
-
-            </div>
-
-            <div class="price-row">
-
-                <span>GST:</span>
-
-                <strong id="gst">
-                    ₹0.00
-                </strong>
-
-            </div>
-
-            <div class="summary-divider"></div>
-
-            <div class="price-row">
-
-                <span>PCB Size:</span>
-
-                <strong id="summarySize">
-                    20 × 20
-                </strong>
-
-            </div>
-
-            <div class="price-row">
-
-                <span>Quantity:</span>
-
-                <strong id="summaryQuantity">
-                    3 PCB
-                </strong>
-
-            </div>
-
-            <div class="price-row">
-
-                <span>Delivery:</span>
-
-                <strong id="summaryDelivery">
-                    Not Selected
-                </strong>
-
-            </div>
-
-            <div class="summary-divider"></div>
-
-            <div class="final-row">
-
-                <span>Final Total:</span>
-
-                <strong id="finalTotal">
-                    ₹0.00
-                </strong>
-
-            </div>
-
-        </section>
-
-
-        <button
-            type="button"
-            class="submit-quote"
-            id="submitQuote"
-        >
-            Request Quote
-        </button>
-
-    </aside>
-
-</div>
-
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    /* =====================================================
-       BACKEND
-    ===================================================== */
-
-    const API_URL = "http://localhost:5000";
-
-
-    /* =====================================================
-       REGISTER
-       IMPORTANT:
-       NO localStorage CHECK.
-       Popup ALWAYS opens.
-    ===================================================== */
-
-    const registerOverlay =
-        document.getElementById("registerOverlay");
-
-    const registerForm =
-        document.getElementById("registerForm");
-
-    const registerEmail =
-        document.getElementById("registerEmail");
-
-    const registerPhone =
-        document.getElementById("registerPhone");
-
-    const registerSubmitBtn =
-        document.getElementById("registerSubmitBtn");
-
-    const registerMessage =
-        document.getElementById("registerMessage");
-
-
-    let currentCustomerId = null;
-
-
-    // ALWAYS SHOW REGISTER POPUP
-    registerOverlay.classList.add("show");
-
-
-    /* =====================================================
-       GERBER
-    ===================================================== */
-
-    const gerberButton =
-        document.getElementById("gerberButton");
-
-    const gerberFile =
-        document.getElementById("gerberFile");
-
-    const gerberName =
-        document.getElementById("gerberName");
-
-    let selectedGerberFile = null;
-
-
-    gerberButton.addEventListener("click", function () {
-
-        gerberFile.click();
-
-    });
-
-
-    gerberFile.addEventListener("change", function () {
-
-        if (!this.files.length) {
-
-            selectedGerberFile = null;
-
-            return;
-
-        }
-
-
-        const file = this.files[0];
-
-        const extension =
-            file.name
-                .split(".")
-                .pop()
-                .toLowerCase();
-
-
-        if (
-            extension !== "zip" &&
-            extension !== "rar"
-        ) {
-
-            alert(
-                "Only .zip or .rar files are allowed."
-            );
-
-            this.value = "";
-
-            selectedGerberFile = null;
-
-            gerberName.textContent =
-                "Only .zip or .rar files";
-
-            return;
-
-        }
-
-
-        if (file.size > 25 * 1024 * 1024) {
-
-            alert(
-                "Maximum file size is 25MB."
-            );
-
-            this.value = "";
-
-            selectedGerberFile = null;
-
-            gerberName.textContent =
-                "Only .zip or .rar files";
-
-            return;
-
-        }
-
-
-        selectedGerberFile = file;
-
-        gerberName.textContent =
-            "Selected: " + file.name;
-
-    });
-
-
-    /* =====================================================
-       OPTION BUTTONS
-    ===================================================== */
-
-    document
-        .querySelectorAll(".button-group")
-        .forEach(group => {
-
-            group
-                .querySelectorAll(
-                    ".option-btn, .color-btn"
-                )
-                .forEach(button => {
-
-                    button.addEventListener(
-                        "click",
-                        function () {
-
-                            group
-                                .querySelectorAll(
-                                    ".option-btn, .color-btn"
-                                )
-                                .forEach(btn => {
-
-                                    btn.classList.remove(
-                                        "active"
-                                    );
-
-                                });
-
-                            this.classList.add("active");
-
-                            updatePrice();
-
-                        }
-                    );
-
-                });
-
-        });
-
-
-    /* =====================================================
-       QUANTITY
-    ===================================================== */
-
-    const quantity =
-        document.getElementById("quantity");
-
-
-    quantity.addEventListener(
-        "change",
-        updatePrice
-    );
-
-
-    /* =====================================================
-       SIZE
-    ===================================================== */
-
-    const pcbWidth =
-        document.getElementById("pcbWidth");
-
-    const pcbHeight =
-        document.getElementById("pcbHeight");
-
-
-    pcbWidth.addEventListener(
-        "input",
-        updatePrice
-    );
-
-
-    pcbHeight.addEventListener(
-        "input",
-        updatePrice
-    );
-
-
-    /* =====================================================
-       PRICE
-    ===================================================== */
-
-    function updatePrice() {
-
-        let qty =
-            parseInt(quantity.value) || 3;
-
-        let width =
-            parseFloat(pcbWidth.value) || 20;
-
-        let height =
-            parseFloat(pcbHeight.value) || 20;
-
-
-        const calculationWidth =
-            Math.min(
-                370,
-                Math.max(20, width)
-            );
-
-
-        const calculationHeight =
-            Math.min(
-                370,
-                Math.max(20, height)
-            );
-
-
-        const areaPerPCB =
-            (
-                calculationWidth *
-                calculationHeight
-            ) / 100;
-
-
-        const totalArea =
-            areaPerPCB * qty;
-
-
-        let rate = 0.60;
-
-
-        if (totalArea > 5000) {
-            rate = 0.58;
-        }
-
-
-        if (totalArea > 10000) {
-            rate = 0.55;
-        }
-
-
-        let basicPrice =
-            totalArea * rate;
-
-
-        let discount = 0;
-
-
-        if (qty >= 20) {
-
-            discount = 0.20;
-
-        }
-        else if (qty >= 15) {
-
-            discount = 0.15;
-
-        }
-        else if (qty >= 10) {
-
-            discount = 0.10;
-
-        }
-        else if (qty >= 6) {
-
-            discount = 0.05;
-
-        }
-
-
-        basicPrice =
-            basicPrice -
-            basicPrice * discount;
-
-
-        let deliveryPremium = 0;
-
-
-        if (selectedDeliveryOptionIndex === 1) {
-
-            deliveryPremium = 0.03;
-
-        }
-
-
-        if (selectedDeliveryOptionIndex === 2) {
-
-            deliveryPremium = 0.06;
-
-        }
-
-
-        basicPrice =
-            basicPrice +
-            basicPrice * deliveryPremium;
-
-
-        const setupCost = 800;
-
-        const subtotal =
-            basicPrice + setupCost;
-
-        const gst =
-            subtotal * 0.18;
-
-        const finalTotal =
-            subtotal + gst;
-
-
-        document.getElementById("basicPrice")
-            .textContent =
-            "₹" + basicPrice.toFixed(2);
-
-
-        document.getElementById("setupCost")
-            .textContent =
-            "₹" + setupCost.toFixed(2);
-
-
-        document.getElementById("gst")
-            .textContent =
-            "₹" + gst.toFixed(2);
-
-
-        document.getElementById("finalTotal")
-            .textContent =
-            "₹" + finalTotal.toFixed(2);
-
-
-        document.getElementById("summarySize")
-            .textContent =
-            width + " × " + height;
-
-
-        document.getElementById("summaryQuantity")
-            .textContent =
-            qty + " PCB";
-
-    }
-
-
-    /* =====================================================
-       CALENDAR
-    ===================================================== */
-
-    const calendarDays =
-        document.getElementById("calendarDays");
-
-    const calendarMonth =
-        document.getElementById("calendarMonth");
-
-    const selectedDate =
-        document.getElementById("selectedDate");
-
-    const summaryDelivery =
-        document.getElementById("summaryDelivery");
-
-    const deliveryOptionsList =
-        document.getElementById(
-            "deliveryOptionsList"
-        );
-
-    const prevMonth =
-        document.getElementById("prevMonth");
-
-    const nextMonth =
-        document.getElementById("nextMonth");
-
-
-    let selectedDeliveryDate = null;
-
-    let deliveryDates = [];
-
-    let selectedDeliveryOptionIndex = 0;
-
-
-    function isTuesday(date) {
-
-        return date.getDay() === 2;
-
-    }
-
-
-    function addWorkingDays(startDate, days) {
-
-        const date =
-            new Date(startDate);
-
-        date.setHours(0, 0, 0, 0);
-
-        let count = 0;
-
-
-        while (count < days) {
-
-            date.setDate(
-                date.getDate() + 1
-            );
-
-
-            if (isTuesday(date)) {
-
-                continue;
-
-            }
-
-
-            count++;
-
-        }
-
-
-        return date;
-
-    }
-
-
-    const minimumDate =
-        addWorkingDays(
-            new Date(),
-            6
-        );
-
-
-    let displayedMonth =
-        new Date(
-            minimumDate.getFullYear(),
-            minimumDate.getMonth(),
-            1
-        );
-
-
-    function generateDeliveryDates() {
-
-        deliveryDates = [];
-
-        let current =
-            new Date(minimumDate);
-
-
-        while (deliveryDates.length < 3) {
-
-            if (!isTuesday(current)) {
-
-                deliveryDates.push(
-                    new Date(current)
-                );
-
-            }
-
-            current.setDate(
-                current.getDate() + 1
-            );
-
-        }
-
-    }
-
-
-    function formatDate(date) {
-
-        return date.toLocaleDateString(
-            "en-IN",
-            {
-                weekday: "short",
-                day: "2-digit",
-                month: "short",
-                year: "numeric"
-            }
-        );
-
-    }
-
-
-    function renderDeliveryOptions() {
-
-        deliveryOptionsList.innerHTML = "";
-
-
-        deliveryDates.forEach(
-            (date, index) => {
-
-                const option =
-                    document.createElement(
-                        "button"
-                    );
-
-
-                option.type = "button";
-
-                option.className =
-                    "delivery-option";
-
-
-                if (
-                    index ===
-                    selectedDeliveryOptionIndex
-                ) {
-
-                    option.classList.add(
-                        "active"
-                    );
-
+            </section>
+
+        </aside>
+
+    </div>
+
+
+    <script>
+        /* =====================================================
+           E-CUBE PCB QUOTE - JAVASCRIPT
+        ===================================================== */
+        document.addEventListener("DOMContentLoaded", function () {
+
+            /* =====================================================
+               API CONFIG
+            ===================================================== */
+            const API_URL = "http://localhost:5000";
+
+            /* =====================================================
+               DOM ELEMENTS
+            ===================================================== */
+            // Auth / Register / Login Elements
+            const registerOverlay = document.getElementById("registerOverlay");
+            const registerView = document.getElementById("registerView");
+            const loginView = document.getElementById("loginView");
+            const registerForm = document.getElementById("registerForm");
+            const registerEmail = document.getElementById("registerEmail");
+            const registerPhone = document.getElementById("registerPhone");
+            const registerSubmitBtn = document.getElementById("registerSubmitBtn");
+            const registerMessage = document.getElementById("registerMessage");
+            const skipRegister = document.getElementById("skipRegister");
+            const loginForm = document.getElementById("loginForm");
+            const loginEmail = document.getElementById("loginEmail");
+            const loginPhone = document.getElementById("loginPhone");
+            const loginSubmitBtn = document.getElementById("loginSubmitBtn");
+            const loginMessage = document.getElementById("loginMessage");
+            const skipLogin = document.getElementById("skipLogin");
+            const switchToLoginBtn = document.getElementById("switchToLoginBtn");
+            const switchToRegisterBtn = document.getElementById("switchToRegisterBtn");
+            const showOrdersBtn = document.getElementById("showOrdersBtn");
+            const registerClose = document.getElementById("registerClose");
+            const customerEmail = document.getElementById("customerEmail");
+            const customerPhone = document.getElementById("customerPhone");
+
+            // Success Popup Elements
+            const successOverlay = document.getElementById("successOverlay");
+            const successClose = document.getElementById("successClose");
+            const successHomeBtn = document.getElementById("successHomeBtn");
+
+            // PCB Input Elements
+            const pcbName = document.getElementById("pcbName");
+            const pcbWidth = document.getElementById("pcbWidth");
+            const pcbHeight = document.getElementById("pcbHeight");
+            const quantity = document.getElementById("quantity");
+            const quantityPicker = document.getElementById("quantityPicker");
+            const quantityTrigger = document.getElementById("quantityTrigger");
+            const quantityMenu = document.getElementById("quantityMenu");
+            const quantityGrid = document.getElementById("quantityGrid");
+            const quantityValue = document.getElementById("quantityValue");
+
+            // Panel Elements
+            const panelRows = document.getElementById("panelRows");
+            const panelColumns = document.getElementById("panelColumns");
+            const panelSpacing = document.getElementById("panelSpacing");
+
+            // Gerber Elements
+            const gerberButton = document.getElementById("gerberButton");
+            const gerberFile = document.getElementById("gerberFile");
+            const gerberName = document.getElementById("gerberName");
+
+            // Calendar & Delivery Elements
+            const calendarDays = document.getElementById("calendarDays");
+            const calendarMonth = document.getElementById("calendarMonth");
+            const selectedDate = document.getElementById("selectedDate");
+            const summaryDelivery = document.getElementById("summaryDelivery");
+            const deliveryOptionsList = document.getElementById("deliveryOptionsList");
+            const prevMonth = document.getElementById("prevMonth");
+            const nextMonth = document.getElementById("nextMonth");
+
+            // Submission & Summary Elements
+            const submitQuote = document.getElementById("submitQuote");
+            const submitHelp = document.getElementById("submitHelp");
+            const basicPriceEl = document.getElementById("basicPrice");
+            const setupCostEl = document.getElementById("setupCost");
+            const gstEl = document.getElementById("gst");
+            const finalTotalEl = document.getElementById("finalTotal");
+            const subtotalEl = document.getElementById("subtotal");
+            const summaryDispatchEl = document.getElementById("summaryDispatch");
+            const summarySizeEl = document.getElementById("summarySize");
+            const summaryQuantityEl = document.getElementById("summaryQuantity");
+
+            /* =====================================================
+               STATE VARIABLES
+            ===================================================== */
+            let currentCustomerId = null;
+            let existingCustomerMode = false;
+            let selectedGerberFile = null;
+            let existingGerberFile = null;
+            let isRepeatMode = false;
+            let repeatAdminId = null;
+            let repeatOrderId = null;
+            let selectedDeliveryDate = null;
+            let selectedDeliveryOptionIndex = 0;
+            let deliveryDates = [];
+
+            let pricingConfig = {
+                tiers: [],
+                settings: {
+                    delivery_working_days: 6,
+                    tuesday_holiday: true
                 }
+            };
 
+            /* =====================================================
+               CALENDAR & DELIVERY DATE HELPERS
+            ===================================================== */
+            function isHoliday(date) {
+                const day = date.getDay();
+                const tuesdayHoliday = (pricingConfig.settings && pricingConfig.settings.tuesday_holiday !== undefined)
+                    ? pricingConfig.settings.tuesday_holiday
+                    : true;
+                return tuesdayHoliday && day === 2; // Tuesday is weekly holiday
+            }
 
-                const label =
-                    index === 0
-                        ? "Minimum Delivery"
+            function getMinimumWorkingDays() {
+                return (pricingConfig.settings && pricingConfig.settings.delivery_working_days) || 6;
+            }
+
+            function addWorkingDays(startDate, days) {
+                const date = new Date(startDate);
+                date.setHours(0, 0, 0, 0);
+                let count = 0;
+                while (count < days) {
+                    date.setDate(date.getDate() + 1);
+                    if (isHoliday(date)) {
+                        continue;
+                    }
+                    count++;
+                }
+                return date;
+            }
+
+            function formatDate(date) {
+                if (!date || isNaN(date.getTime())) return "Not Selected";
+                return date.toLocaleDateString("en-IN", {
+                    weekday: "short",
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                });
+            }
+
+            function dateKey(date) {
+                if (!date || isNaN(date.getTime())) return "";
+                return [
+                    date.getFullYear(),
+                    String(date.getMonth() + 1).padStart(2, "0"),
+                    String(date.getDate()).padStart(2, "0")
+                ].join("-");
+            }
+
+            let minimumDate = addWorkingDays(new Date(), getMinimumWorkingDays());
+            let displayedMonth = new Date(minimumDate.getFullYear(), minimumDate.getMonth(), 1);
+
+            function generateDeliveryDates() {
+                deliveryDates = [];
+                const s = (pricingConfig && pricingConfig.settings) ? pricingConfig.settings : {};
+
+                // 1. First delivery date MUST COMPULSORILY be 6 working days from today (skipping Tuesday holidays)
+                const firstDate = addWorkingDays(new Date(), 6);
+                deliveryDates.push(firstDate);
+
+                // 2. Second delivery date: 4 days after first date (or admin-selected days from today)
+                let secondDate = null;
+                if (s.delivery_days_2 && Number(s.delivery_days_2) > 0) {
+                    secondDate = addWorkingDays(new Date(), Number(s.delivery_days_2));
+                } else {
+                    secondDate = addWorkingDays(firstDate, 4);
+                }
+                if (!secondDate || secondDate.getTime() <= firstDate.getTime()) {
+                    secondDate = addWorkingDays(firstDate, 4);
+                }
+                deliveryDates.push(secondDate);
+
+                // 3. Third delivery date: 4 days after second date (or admin-selected days from today)
+                let thirdDate = null;
+                if (s.delivery_days_3 && Number(s.delivery_days_3) > 0) {
+                    thirdDate = addWorkingDays(new Date(), Number(s.delivery_days_3));
+                } else {
+                    thirdDate = addWorkingDays(secondDate, 4);
+                }
+                if (!thirdDate || thirdDate.getTime() <= secondDate.getTime()) {
+                    thirdDate = addWorkingDays(secondDate, 4);
+                }
+                deliveryDates.push(thirdDate);
+
+                // 4. Update active selected delivery date
+                if (deliveryDates.length > 0) {
+                    if (!selectedDeliveryDate || !deliveryDates.some(d => dateKey(d) === dateKey(selectedDeliveryDate))) {
+                        selectedDeliveryDate = new Date(deliveryDates[0]);
+                        selectedDeliveryOptionIndex = 0;
+                    }
+                    if (selectedDate) selectedDate.textContent = formatDate(selectedDeliveryDate);
+                    if (summaryDelivery) summaryDelivery.textContent = formatDate(selectedDeliveryDate);
+                    displayedMonth = new Date(selectedDeliveryDate.getFullYear(), selectedDeliveryDate.getMonth(), 1);
+                }
+            }
+
+            function renderDeliveryOptions() {
+                if (!deliveryOptionsList) return;
+                deliveryOptionsList.innerHTML = "";
+
+                const s = (pricingConfig && pricingConfig.settings) ? pricingConfig.settings : {};
+                const discount2 = (s.delivery_discount_2 !== undefined && !isNaN(Number(s.delivery_discount_2))) ? Number(s.delivery_discount_2) : 3;
+                const discount3 = (s.delivery_discount_3 !== undefined && !isNaN(Number(s.delivery_discount_3))) ? Number(s.delivery_discount_3) : 6;
+
+                deliveryDates.forEach(function (date, index) {
+                    const option = document.createElement("button");
+                    option.type = "button";
+                    option.className = "delivery-option";
+                    if (index === selectedDeliveryOptionIndex) {
+                        option.classList.add("active");
+                    }
+
+                    const label = index === 0
+                        ? "Earliest Delivery"
                         : index === 1
                             ? "Next Available"
                             : "Third Available";
 
-
-                const premium =
-                    index === 0
+                    const discountText = index === 0
                         ? "Standard Price"
                         : index === 1
-                            ? "+3% Delivery Premium"
-                            : "+6% Delivery Premium";
+                            ? `${discount2}% Lower`
+                            : `${discount3}% Lower`;
 
+                    option.innerHTML = `
+                        <span>
+                            <strong>${formatDate(date)}</strong>
+                            <small>${label}</small>
+                        </span>
+                        <b>${discountText}</b>
+                    `;
 
-                option.innerHTML = `
-
-                    <span>
-                        <strong>
-                            ${formatDate(date)}
-                        </strong>
-
-                        <small>
-                            ${label}
-                        </small>
-                    </span>
-
-                    <b>
-                        ${premium}
-                    </b>
-
-                `;
-
-
-                option.addEventListener(
-                    "click",
-                    function () {
-
-                        selectedDeliveryOptionIndex =
-                            index;
-
-                        selectedDeliveryDate =
-                            new Date(date);
-
-                        selectedDate.textContent =
-                            formatDate(date);
-
-                        summaryDelivery.textContent =
-                            formatDate(date);
+                    option.addEventListener("click", function () {
+                        selectedDeliveryOptionIndex = index;
+                        selectedDeliveryDate = new Date(date);
+                        if (selectedDate) selectedDate.textContent = formatDate(date);
+                        if (summaryDelivery) summaryDelivery.textContent = formatDate(date);
 
                         renderDeliveryOptions();
-
                         renderCalendar();
-
                         updatePrice();
+                    });
 
-                    }
-                );
-
-
-                deliveryOptionsList.appendChild(
-                    option
-                );
-
+                    deliveryOptionsList.appendChild(option);
+                });
             }
-        );
 
-    }
+            function renderCalendar() {
+                if (!calendarDays || !calendarMonth) return;
+                calendarDays.innerHTML = "";
 
+                const year = displayedMonth.getFullYear();
+                const month = displayedMonth.getMonth();
+                const firstDay = new Date(year, month, 1).getDay();
+                const totalDays = new Date(year, month + 1, 0).getDate();
 
-    function renderCalendar() {
-
-        calendarDays.innerHTML = "";
-
-
-        const year =
-            displayedMonth.getFullYear();
-
-        const month =
-            displayedMonth.getMonth();
-
-
-        const firstDay =
-            new Date(
-                year,
-                month,
-                1
-            ).getDay();
-
-
-        const totalDays =
-            new Date(
-                year,
-                month + 1,
-                0
-            ).getDate();
-
-
-        calendarMonth.textContent =
-            displayedMonth.toLocaleString(
-                "en-US",
-                {
+                calendarMonth.textContent = displayedMonth.toLocaleString("en-US", {
                     month: "long",
                     year: "numeric"
+                });
+
+                for (let i = 0; i < firstDay; i++) {
+                    const empty = document.createElement("div");
+                    empty.className = "calendar-empty";
+                    calendarDays.appendChild(empty);
                 }
-            );
 
+                for (let day = 1; day <= totalDays; day++) {
+                    const date = new Date(year, month, day);
+                    date.setHours(0, 0, 0, 0);
 
-        for (
-            let i = 0;
-            i < firstDay;
-            i++
-        ) {
+                    const dayButton = document.createElement("button");
+                    dayButton.type = "button";
+                    dayButton.className = "calendar-day";
+                    dayButton.textContent = day;
 
-            const empty =
-                document.createElement(
-                    "div"
-                );
+                    const isDeliveryDay = deliveryDates.some(d => dateKey(d) === dateKey(date));
+                    const isTuesday = (date.getDay() === 2);
 
-            empty.className =
-                "calendar-empty";
-
-            calendarDays.appendChild(
-                empty
-            );
-
-        }
-
-
-        for (
-            let day = 1;
-            day <= totalDays;
-            day++
-        ) {
-
-            const date =
-                new Date(
-                    year,
-                    month,
-                    day
-                );
-
-            date.setHours(0, 0, 0, 0);
-
-
-            const dayButton =
-                document.createElement(
-                    "button"
-                );
-
-
-            dayButton.type = "button";
-
-            dayButton.className =
-                "calendar-day";
-
-            dayButton.textContent =
-                day;
-
-
-            if (isTuesday(date)) {
-
-                dayButton.classList.add(
-                    "holiday"
-                );
-
-                dayButton.disabled = true;
-
-            }
-
-
-            if (date < minimumDate) {
-
-                dayButton.disabled = true;
-
-                dayButton.classList.add(
-                    "disabled"
-                );
-
-            }
-
-
-            deliveryDates.forEach(
-                (deliveryDate, index) => {
-
-                    if (
-                        date.getTime() ===
-                        deliveryDate.getTime()
-                    ) {
-
-                        dayButton.classList.add(
-                            "delivery-date"
-                        );
-
+                    if (isTuesday) {
+                        dayButton.classList.add("holiday");
+                        dayButton.disabled = true;
+                        dayButton.title = "Weekly Holiday (Tuesday)";
+                    } else if (isDeliveryDay) {
+                        dayButton.disabled = false;
+                        dayButton.classList.remove("disabled");
+                        dayButton.classList.add("delivery-date");
+                    } else {
+                        dayButton.disabled = true;
+                        dayButton.classList.add("disabled");
                     }
 
+                    if (selectedDeliveryDate && dateKey(date) === dateKey(selectedDeliveryDate)) {
+                        dayButton.classList.add("selected");
+                    }
+
+                    dayButton.addEventListener("click", function () {
+                        const index = deliveryDates.findIndex(function (deliveryDate) {
+                            return dateKey(deliveryDate) === dateKey(date);
+                        });
+
+                        if (index === -1) {
+                            alert("Please select one of the 3 available delivery dates.");
+                            return;
+                        }
+
+                        selectedDeliveryOptionIndex = index;
+                        selectedDeliveryDate = new Date(date);
+                        if (selectedDate) selectedDate.textContent = formatDate(date);
+                        if (summaryDelivery) summaryDelivery.textContent = formatDate(date);
+
+                        renderDeliveryOptions();
+                        renderCalendar();
+                        updatePrice();
+                    });
+
+                    calendarDays.appendChild(dayButton);
                 }
-            );
-
-
-            if (
-                selectedDeliveryDate &&
-                date.getTime() ===
-                selectedDeliveryDate.getTime()
-            ) {
-
-                dayButton.classList.add(
-                    "selected"
-                );
-
             }
 
-
-            dayButton.addEventListener(
-                "click",
-                function () {
-
-                    const index =
-                        deliveryDates.findIndex(
-                            deliveryDate =>
-                                deliveryDate.getTime() ===
-                                date.getTime()
-                        );
-
-
-                    if (index === -1) {
-
-                        alert(
-                            "Please select one of the available delivery dates."
-                        );
-
+            if (prevMonth) {
+                prevMonth.addEventListener("click", function () {
+                    const minimumMonth = new Date(minimumDate.getFullYear(), minimumDate.getMonth(), 1);
+                    if (displayedMonth <= minimumMonth) {
                         return;
+                    }
+                    displayedMonth.setMonth(displayedMonth.getMonth() - 1);
+                    renderCalendar();
+                });
+            }
 
+            if (nextMonth) {
+                nextMonth.addEventListener("click", function () {
+                    displayedMonth.setMonth(displayedMonth.getMonth() + 1);
+                    renderCalendar();
+                });
+            }
+
+            /* =====================================================
+               SPECIFICATION & ACTIVE OPTION HELPERS
+            ===================================================== */
+            function getActiveOption(groupName) {
+                const active = document.querySelector(`[data-group="${groupName}"].active`);
+                return active ? (active.dataset.value || active.textContent.trim()) : "";
+            }
+
+            function selectOptionGroupValue(groupName, val) {
+                if (!val) return;
+                const buttons = document.querySelectorAll(`[data-group="${groupName}"]`);
+                buttons.forEach(function (btn) {
+                    const btnVal = btn.dataset.value || btn.textContent.trim();
+                    if (btnVal.toLowerCase() === String(val).trim().toLowerCase()) {
+                        buttons.forEach(b => b.classList.remove("active"));
+                        btn.classList.add("active");
+                    }
+                });
+            }
+
+            function applyDefaultSpecifications() {
+                if (isRepeatMode) return;
+                if (!pricingConfig || !pricingConfig.settings) return;
+                const s = pricingConfig.settings;
+                if (s.default_material) selectOptionGroupValue("material", s.default_material);
+                if (s.default_layer) selectOptionGroupValue("layers", s.default_layer);
+                if (s.default_thickness) selectOptionGroupValue("thickness", s.default_thickness);
+                if (s.default_mask) selectOptionGroupValue("mask", s.default_mask);
+                if (s.default_surface) selectOptionGroupValue("surface", s.default_surface);
+                if (s.default_silk) selectOptionGroupValue("silk", s.default_silk);
+            }
+
+            /* Option button clicks */
+            const optionGroups = ["dispatch", "material", "layers", "thickness", "copper", "mask", "surface", "silk"];
+            optionGroups.forEach(group => {
+                document.querySelectorAll(`[data-group="${group}"]`).forEach(btn => {
+                    btn.addEventListener("click", function () {
+                        if (isRepeatMode) return; // Locked on repeat order
+                        document.querySelectorAll(`[data-group="${group}"]`).forEach(b => b.classList.remove("active"));
+                        this.classList.add("active");
+
+                        if (group === "dispatch") {
+                            updatePanelState();
+                        }
+                        updatePrice();
+                    });
+                });
+            });
+
+            /* Dispatch Panel Controls */
+            function updatePanelState() {
+                const active = document.querySelector('[data-group="dispatch"].active');
+                if (!active) return;
+                const dispatchVal = active.dataset.value || active.textContent.trim();
+                const editable = dispatchVal !== "PCB";
+
+                if (dispatchVal === "PCB") {
+                    if (panelRows) { panelRows.value = "1"; panelRows.disabled = true; panelRows.removeAttribute("max"); panelRows.classList.add("locked-field"); panelRows.classList.remove("editable"); }
+                    if (panelColumns) { panelColumns.value = "1"; panelColumns.disabled = true; panelColumns.removeAttribute("max"); panelColumns.classList.add("locked-field"); panelColumns.classList.remove("editable"); }
+                    if (panelSpacing) { panelSpacing.value = "0"; panelSpacing.disabled = true; panelSpacing.classList.add("locked-field"); }
+                } else if (dispatchVal === "Vcut") {
+                    if (panelRows) { panelRows.value = "5"; panelRows.disabled = isRepeatMode; panelRows.max = "5"; if (!isRepeatMode) { panelRows.classList.remove("locked-field"); panelRows.classList.add("editable"); } }
+                    if (panelColumns) { panelColumns.value = "5"; panelColumns.disabled = isRepeatMode; panelColumns.max = "5"; if (!isRepeatMode) { panelColumns.classList.remove("locked-field"); panelColumns.classList.add("editable"); } }
+                    if (panelSpacing) { panelSpacing.value = "0.8"; panelSpacing.disabled = true; panelSpacing.classList.add("locked-field"); }
+                } else if (dispatchVal === "Routing") {
+                    if (panelRows) { panelRows.value = "5"; panelRows.disabled = isRepeatMode; panelRows.max = "5"; if (!isRepeatMode) { panelRows.classList.remove("locked-field"); panelRows.classList.add("editable"); } }
+                    if (panelColumns) { panelColumns.value = "5"; panelColumns.disabled = isRepeatMode; panelColumns.max = "5"; if (!isRepeatMode) { panelColumns.classList.remove("locked-field"); panelColumns.classList.add("editable"); } }
+                    if (panelSpacing) { panelSpacing.value = "2"; panelSpacing.disabled = true; panelSpacing.classList.add("locked-field"); }
+                }
+                updatePrice();
+            }
+
+            [panelRows, panelColumns].forEach(inp => {
+                if (inp) {
+                    inp.addEventListener("input", function () {
+                        const mode = getActiveOption("dispatch");
+                        if (mode === "Vcut" || mode === "Routing") {
+                            let val = parseInt(this.value, 10) || 1;
+                            if (val > 5) this.value = "5";
+                            if (val < 1) this.value = "1";
+                        }
+                        updatePrice();
+                    });
+                }
+            });
+
+            if (pcbWidth) pcbWidth.addEventListener("input", updatePrice);
+            if (pcbHeight) pcbHeight.addEventListener("input", updatePrice);
+            if (pcbName) {
+                pcbName.addEventListener("input", function () {
+                    if (this.value.trim() && submitHelp) {
+                        submitHelp.textContent = "Please complete all required fields before processing the order.";
+                        submitHelp.style.color = "";
+                    }
+                });
+            }
+
+            /* =====================================================
+               QUANTITY PICKER
+            ===================================================== */
+            if (quantity && quantityPicker && quantityTrigger && quantityMenu && quantityGrid) {
+                quantityGrid.innerHTML = "";
+                Array.from(quantity.options).forEach(function (option) {
+                    if (!option.value) return;
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.className = "quantity-option";
+                    btn.textContent = option.value;
+                    btn.dataset.value = option.value;
+
+                    if (option.value == quantity.value) {
+                        btn.classList.add("active");
                     }
 
+                    btn.addEventListener("click", function () {
+                        quantity.value = this.dataset.value;
+                        if (quantityValue) quantityValue.textContent = this.dataset.value;
 
-                    selectedDeliveryOptionIndex =
-                        index;
+                        quantityGrid.querySelectorAll(".quantity-option").forEach(b => b.classList.remove("active"));
+                        this.classList.add("active");
 
-                    selectedDeliveryDate =
-                        new Date(date);
+                        quantity.dispatchEvent(new Event("change", { bubbles: true }));
+                        closeQuantityMenu();
+                        updatePrice();
+                    });
 
-                    selectedDate.textContent =
-                        formatDate(date);
+                    quantityGrid.appendChild(btn);
+                });
 
-                    summaryDelivery.textContent =
-                        formatDate(date);
-
-                    renderDeliveryOptions();
-
-                    renderCalendar();
-
-                    updatePrice();
-
+                function closeQuantityMenu() {
+                    quantityMenu.classList.remove("open");
+                    quantityTrigger.setAttribute("aria-expanded", "false");
+                    quantityPicker.classList.remove("open");
                 }
-            );
 
+                quantityTrigger.addEventListener("click", function (event) {
+                    event.stopPropagation();
+                    const willOpen = !quantityMenu.classList.contains("open");
+                    if (willOpen) {
+                        quantityMenu.classList.add("open");
+                        quantityPicker.classList.add("open");
+                        quantityTrigger.setAttribute("aria-expanded", "true");
+                    } else {
+                        closeQuantityMenu();
+                    }
+                });
 
-            calendarDays.appendChild(
-                dayButton
-            );
+                document.addEventListener("click", function (event) {
+                    if (!quantityPicker.contains(event.target)) {
+                        closeQuantityMenu();
+                    }
+                });
 
-        }
-
-    }
-
-
-    prevMonth.addEventListener(
-        "click",
-        function () {
-
-            const minimumMonth =
-                new Date(
-                    minimumDate.getFullYear(),
-                    minimumDate.getMonth(),
-                    1
-                );
-
-
-            if (
-                displayedMonth <=
-                minimumMonth
-            ) {
-
-                return;
-
+                quantity.addEventListener("change", updatePrice);
             }
 
+            /* =====================================================
+               GERBER FILE HANDLERS
+            ===================================================== */
+            if (gerberButton && gerberFile) {
+                gerberButton.addEventListener("click", function () {
+                    if (isRepeatMode) return;
+                    gerberFile.click();
+                });
 
-            displayedMonth.setMonth(
-                displayedMonth.getMonth() - 1
-            );
+                gerberFile.addEventListener("change", function () {
+                    if (!this.files.length) {
+                        selectedGerberFile = null;
+                        if (gerberName) gerberName.textContent = "Only .zip or .rar files";
+                        return;
+                    }
 
-            renderCalendar();
+                    const file = this.files[0];
+                    const extension = file.name.split(".").pop().toLowerCase();
 
-        }
-    );
+                    if (extension !== "zip" && extension !== "rar") {
+                        alert("Only .zip or .rar files are allowed.");
+                        this.value = "";
+                        selectedGerberFile = null;
+                        if (gerberName) gerberName.textContent = "Only .zip or .rar files";
+                        return;
+                    }
 
+                    if (file.size > 25 * 1024 * 1024) {
+                        alert("Maximum Gerber file size is 25 MB.");
+                        this.value = "";
+                        selectedGerberFile = null;
+                        if (gerberName) gerberName.textContent = "Only .zip or .rar files";
+                        return;
+                    }
 
-    nextMonth.addEventListener(
-        "click",
-        function () {
-
-            displayedMonth.setMonth(
-                displayedMonth.getMonth() + 1
-            );
-
-            renderCalendar();
-
-        }
-    );
-
-
-    /* =====================================================
-       GET ACTIVE OPTION
-    ===================================================== */
-
-    function getActiveOption(groupName) {
-
-        const active =
-            document.querySelector(
-                `[data-group="${groupName}"].active`
-            );
-
-
-        return active
-            ? active.textContent.trim()
-            : "";
-
-    }
-
-
-    /* =====================================================
-       REGISTER CUSTOMER
-    ===================================================== */
-
-    registerForm.addEventListener(
-        "submit",
-        async function (event) {
-
-            event.preventDefault();
-
-
-            const email =
-                registerEmail.value.trim();
-
-            const phone =
-                registerPhone.value.trim();
-
-
-            if (!email) {
-
-                alert(
-                    "Please enter email."
-                );
-
-                return;
-
+                    selectedGerberFile = file;
+                    if (gerberName) gerberName.textContent = file.name;
+                });
             }
 
+            /* =====================================================
+               PRICE CALCULATION
+            ===================================================== */
+            function updatePrice() {
+                const qty = parseInt(quantity ? quantity.value : 0, 10) || 0;
+                const width = parseFloat(pcbWidth ? pcbWidth.value : 0);
+                const height = parseFloat(pcbHeight ? pcbHeight.value : 0);
+                const dispatch = getActiveOption("dispatch") || "PCB";
 
-            if (
-                !/^[0-9]{10}$/.test(phone)
-            ) {
+                if (summaryDispatchEl) summaryDispatchEl.textContent = dispatch;
 
-                alert(
-                    "Please enter valid 10 digit phone number."
-                );
+                if (!qty || !Number.isFinite(width) || !Number.isFinite(height) || width < 20 || width > 370 || height < 20 || height > 370) {
+                    resetPriceDisplay();
+                    return;
+                }
 
-                return;
+                if (summaryQuantityEl) summaryQuantityEl.textContent = `${qty} PCB`;
 
+                let basicPrice = 0;
+                let requiresContactAdmin = false;
+
+                // Helper for tiered multiplier factor & fixed charge
+                function getTierParams(cost) {
+                    if (cost <= 1000) {
+                        return { multFactor: 0.70, fixedCharge: 700, contactAdmin: false };
+                    } else if (cost <= 5000) {
+                        return { multFactor: 0.65, fixedCharge: 0, contactAdmin: false };
+                    } else if (cost <= 10000) {
+                        return { multFactor: 0.62, fixedCharge: 0, contactAdmin: false };
+                    } else if (cost <= 15000) {
+                        return { multFactor: 0.58, fixedCharge: 0, contactAdmin: false };
+                    } else if (cost <= 20000) {
+                        return { multFactor: 0.54, fixedCharge: 0, contactAdmin: false };
+                    } else if (cost <= 25000) {
+                        return { multFactor: 0.50, fixedCharge: 0, contactAdmin: false };
+                    } else if (cost <= 30000) {
+                        return { multFactor: 0.45, fixedCharge: 0, contactAdmin: false };
+                    } else {
+                        return { multFactor: 0, fixedCharge: 0, contactAdmin: true };
+                    }
+                }
+
+                // =========================================================================
+                // 1. PCB CALCULATION (NO DISCOUNT APPLIED)
+                // =========================================================================
+                if (dispatch === "PCB") {
+                    if (summarySizeEl) summarySizeEl.textContent = `${width} × ${height}`;
+
+                    const areaPerPCB = (width * height) / 100; // cm² area per PCB
+                    const totalArea = areaPerPCB * qty;        // Total area in cm²
+
+                    let rate = (pricingConfig.settings && !isNaN(Number(pricingConfig.settings.base_rate)))
+                        ? Number(pricingConfig.settings.base_rate)
+                        : 0.60;
+
+                    // Standard calculation with NO discount:
+                    basicPrice = totalArea * rate;
+                }
+
+                // =========================================================================
+                // 2. VCUT CALCULATION
+                // =========================================================================
+                else if (dispatch === "Vcut") {
+                    const pRows = parseInt(panelRows ? panelRows.value : 5, 10) || 1;
+                    const pCols = parseInt(panelColumns ? panelColumns.value : 5, 10) || 1;
+                    const pSpacing = parseFloat(panelSpacing ? panelSpacing.value : 0.8) || 0.8;
+
+                    // Panel dimensions calculation for V-Cut (mm)
+                    const panelDim1 = (width * pRows) + (pSpacing * Math.max(0, pRows - 1));
+                    const panelDim2 = (height * pCols) + (pSpacing * Math.max(0, pCols - 1));
+
+                    if (summarySizeEl) {
+                        summarySizeEl.textContent = `${parseFloat(panelDim1.toFixed(2))} × ${parseFloat(panelDim2.toFixed(2))}`;
+                    }
+
+                    const panelArea = (panelDim1 * panelDim2) / 100; // cm² per panel
+                    const baseCost = panelArea * qty;
+
+                    const tier = getTierParams(baseCost);
+                    if (tier.contactAdmin) {
+                        requiresContactAdmin = true;
+                    } else {
+                        basicPrice = (baseCost * tier.multFactor) + tier.fixedCharge;
+                        if (basicPrice < 0) basicPrice = 0;
+                    }
+                }
+
+                // =========================================================================
+                // 3. ROUTING CALCULATION
+                // =========================================================================
+                else if (dispatch === "Routing") {
+                    const pRows = parseInt(panelRows ? panelRows.value : 5, 10) || 1;
+                    const pCols = parseInt(panelColumns ? panelColumns.value : 5, 10) || 1;
+                    const pSpacing = parseFloat(panelSpacing ? panelSpacing.value : 2.0) || 2.0;
+
+                    // Panel dimensions calculation for Routing (mm)
+                    const panelDim1 = (width * pRows) + (pSpacing * Math.max(0, pRows - 1));
+                    const panelDim2 = (height * pCols) + (pSpacing * Math.max(0, pCols - 1));
+
+                    if (summarySizeEl) {
+                        summarySizeEl.textContent = `${parseFloat(panelDim1.toFixed(2))} × ${parseFloat(panelDim2.toFixed(2))}`;
+                    }
+
+                    const panelArea = (panelDim1 * panelDim2) / 100; // cm² per panel
+                    const baseCost = panelArea * qty;
+
+                    const tier = getTierParams(baseCost);
+                    if (tier.contactAdmin) {
+                        requiresContactAdmin = true;
+                    } else {
+                        basicPrice = (baseCost * tier.multFactor) + tier.fixedCharge;
+                        if (basicPrice < 0) basicPrice = 0;
+                    }
+                }
+
+                if (requiresContactAdmin) {
+                    if (basicPriceEl) basicPriceEl.textContent = "Contact Admin";
+                    if (setupCostEl) setupCostEl.textContent = "—";
+                    if (subtotalEl) subtotalEl.textContent = "—";
+                    if (gstEl) gstEl.textContent = "—";
+                    if (finalTotalEl) finalTotalEl.textContent = "Contact Admin";
+                    if (submitHelp) {
+                        submitHelp.textContent = "Calculation exceeds ₹30,000. Please contact Admin directly.";
+                        submitHelp.style.color = "#ef4444";
+                        submitHelp.style.fontWeight = "600";
+                    }
+                    return;
+                } else {
+                    if (submitHelp && submitHelp.textContent.includes("Contact Admin")) {
+                        submitHelp.textContent = "Please complete all required fields before processing the order.";
+                        submitHelp.style.color = "";
+                        submitHelp.style.fontWeight = "";
+                    }
+                }
+
+                const s = (pricingConfig && pricingConfig.settings) ? pricingConfig.settings : {};
+                const discount2 = (s.delivery_discount_2 !== undefined && !isNaN(Number(s.delivery_discount_2))) ? Number(s.delivery_discount_2) : 3;
+                const discount3 = (s.delivery_discount_3 !== undefined && !isNaN(Number(s.delivery_discount_3))) ? Number(s.delivery_discount_3) : 6;
+
+                let deliveryDiscount = 0;
+                if (selectedDeliveryOptionIndex === 1) {
+                    deliveryDiscount = discount2 / 100;
+                } else if (selectedDeliveryOptionIndex === 2) {
+                    deliveryDiscount = discount3 / 100;
+                }
+
+                basicPrice = basicPrice - (basicPrice * deliveryDiscount);
+
+                const setupCost = (pricingConfig.settings && !isNaN(Number(pricingConfig.settings.setup_cost)))
+                    ? Number(pricingConfig.settings.setup_cost)
+                    : 800;
+                const subtotal = basicPrice + setupCost;
+                const rawGst = (pricingConfig.settings && pricingConfig.settings.gst_rate !== undefined)
+                    ? Number(pricingConfig.settings.gst_rate)
+                    : 0.18;
+                const gstRate = rawGst > 1 ? rawGst / 100 : rawGst;
+                const gst = subtotal * gstRate;
+                const finalTotal = subtotal + gst;
+
+                if (basicPriceEl) basicPriceEl.textContent = "₹" + basicPrice.toFixed(2);
+                if (setupCostEl) setupCostEl.textContent = "₹" + setupCost.toFixed(2);
+                if (subtotalEl) subtotalEl.textContent = "₹" + subtotal.toFixed(2);
+                if (gstEl) gstEl.textContent = "₹" + gst.toFixed(2);
+                if (finalTotalEl) finalTotalEl.textContent = "₹" + finalTotal.toFixed(2);
             }
 
+            function resetPriceDisplay() {
+                const setupCost = (pricingConfig && pricingConfig.settings && !isNaN(Number(pricingConfig.settings.setup_cost)))
+                    ? Number(pricingConfig.settings.setup_cost)
+                    : 800;
+                if (summarySizeEl) summarySizeEl.textContent = "— × —";
+                if (summaryQuantityEl) summaryQuantityEl.textContent = "—";
+                if (basicPriceEl) basicPriceEl.textContent = "₹0.00";
+                if (setupCostEl) setupCostEl.textContent = "₹" + setupCost.toFixed(2);
+                if (subtotalEl) subtotalEl.textContent = "₹0.00";
+                if (gstEl) gstEl.textContent = "₹0.00";
+                if (finalTotalEl) finalTotalEl.textContent = "₹0.00";
+            }
 
-            registerSubmitBtn.disabled = true;
-
-            registerSubmitBtn.textContent =
-                "Registering...";
-
-            registerMessage.textContent =
-                "";
-
+            /* =====================================================
+               FETCH PRICING CONFIG
+            ===================================================== */
+            async function fetchPricingConfig() {
+                try {
+                    const res = await fetch(`${API_URL}/api/pricing-config`, { cache: "no-store" });
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data.success) {
+                            pricingConfig = data;
+                            const sCost = (pricingConfig.settings && !isNaN(Number(pricingConfig.settings.setup_cost)))
+                                ? Number(pricingConfig.settings.setup_cost)
+                                : 800;
+                            if (setupCostEl) setupCostEl.textContent = "₹" + sCost.toFixed(2);
+                            applyDefaultSpecifications();
+                            generateDeliveryDates();
+                            renderDeliveryOptions();
+                            renderCalendar();
+                            updatePrice();
+                        }
+                    }
+                } catch (e) {
+                    console.warn("Pricing config fetch fallback:", e);
+                }
+            }
 
             try {
+                const pricingBroadcast = new BroadcastChannel("ecube_pricing_channel");
+                pricingBroadcast.onmessage = function (ev) {
+                    if (ev && ev.data && ev.data.type === "PRICING_UPDATED") {
+                        fetchPricingConfig();
+                    }
+                };
+            } catch (e) { }
 
-                const response =
-                    await fetch(
-                        `${API_URL}/api/customers`,
-                        {
-                            method: "POST",
+            window.addEventListener("storage", function (e) {
+                if (e.key === "ecube_pricing_updated_at") {
+                    fetchPricingConfig();
+                }
+            });
 
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
+            window.addEventListener("focus", function () {
+                fetchPricingConfig();
+            });
 
-                            body: JSON.stringify({
+            /* =====================================================
+               REPEAT ORDER & NEW ORDER MODES
+            ===================================================== */
+            function lockFieldsForRepeatOrder() {
+                isRepeatMode = true;
 
-                                email: email,
+                // Lock PCB Name & Dimensions
+                if (pcbName) { pcbName.readOnly = true; pcbName.classList.add("locked-field"); }
+                if (pcbWidth) { pcbWidth.readOnly = true; pcbWidth.classList.add("locked-field"); }
+                if (pcbHeight) { pcbHeight.readOnly = true; pcbHeight.classList.add("locked-field"); }
 
-                                phone: phone
+                // Lock Panels
+                if (panelRows) { panelRows.disabled = true; panelRows.classList.add("locked-field"); panelRows.classList.remove("editable"); }
+                if (panelColumns) { panelColumns.disabled = true; panelColumns.classList.add("locked-field"); panelColumns.classList.remove("editable"); }
+                if (panelSpacing) { panelSpacing.disabled = true; panelSpacing.classList.add("locked-field"); }
 
-                            })
+                // Lock All Specification Option Groups
+                optionGroups.forEach(function (group) {
+                    document.querySelectorAll(`[data-group="${group}"]`).forEach(function (btn) {
+                        btn.disabled = true;
+                        btn.style.pointerEvents = "none";
+                        btn.classList.add("locked-field");
+                    });
+                });
 
+                // Lock Gerber Button
+                if (gerberButton) {
+                    gerberButton.disabled = true;
+                    gerberButton.style.pointerEvents = "none";
+                    gerberButton.classList.add("locked-field");
+                }
+
+                // Lock Customer Email and Phone
+                if (customerEmail) { customerEmail.readOnly = true; customerEmail.classList.add("locked-field"); }
+                if (customerPhone) { customerPhone.readOnly = true; customerPhone.classList.add("locked-field"); }
+
+                // ENSURE QUANTITY IS FULLY EDITABLE & ACTIVE
+                if (quantity) { quantity.disabled = false; quantity.classList.remove("locked-field"); }
+                if (quantityTrigger) { quantityTrigger.disabled = false; quantityTrigger.style.pointerEvents = "auto"; quantityTrigger.classList.remove("locked-field"); }
+                document.querySelectorAll(".quantity-option").forEach(function (b) {
+                    b.disabled = false;
+                    b.style.pointerEvents = "auto";
+                    b.classList.remove("locked-field");
+                });
+
+                // ENSURE CALENDAR DATES ARE FULLY EDITABLE & ACTIVE
+                if (prevMonth) prevMonth.disabled = false;
+                if (nextMonth) nextMonth.disabled = false;
+                document.querySelectorAll(".delivery-option, .calendar-day.delivery-date").forEach(function (el) {
+                    el.style.pointerEvents = "auto";
+                });
+            }
+
+            function unlockFieldsForNewOrder() {
+                isRepeatMode = false;
+                repeatAdminId = null;
+                repeatOrderId = null;
+                existingGerberFile = null;
+
+                if (pcbName) { pcbName.readOnly = false; pcbName.classList.remove("locked-field"); }
+                if (pcbWidth) { pcbWidth.readOnly = false; pcbWidth.classList.remove("locked-field"); }
+                if (pcbHeight) { pcbHeight.readOnly = false; pcbHeight.classList.remove("locked-field"); }
+
+                optionGroups.forEach(function (group) {
+                    document.querySelectorAll(`[data-group="${group}"]`).forEach(function (btn) {
+                        btn.disabled = false;
+                        btn.style.pointerEvents = "auto";
+                        btn.classList.remove("locked-field");
+                    });
+                });
+
+                if (gerberButton) {
+                    gerberButton.disabled = false;
+                    gerberButton.style.pointerEvents = "auto";
+                    gerberButton.classList.remove("locked-field");
+                }
+
+                if (customerEmail) { customerEmail.readOnly = false; customerEmail.classList.remove("locked-field"); }
+                if (customerPhone) { customerPhone.readOnly = false; customerPhone.classList.remove("locked-field"); }
+
+                if (gerberName && !selectedGerberFile) {
+                    gerberName.textContent = "Only .zip or .rar files";
+                }
+            }
+
+            async function initPageModes() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const mode = urlParams.get("mode");
+                const orderId = urlParams.get("order_id") || urlParams.get("id");
+
+                const storedCid = localStorage.getItem("customerId") || localStorage.getItem("customer_id");
+
+                // Clear fields by default for clean fresh visitor state
+                if (customerEmail) customerEmail.value = "";
+                if (customerPhone) customerPhone.value = "";
+
+                // MODE 1: NEW ORDER FROM DASHBOARD
+                if (mode === "new") {
+                    if (storedCid) {
+                        currentCustomerId = storedCid;
+                        const regStr = localStorage.getItem("pcbRegistration");
+                        if (regStr) {
+                            try {
+                                const parsed = JSON.parse(regStr);
+                                if (parsed.email && customerEmail) customerEmail.value = parsed.email;
+                                if (parsed.phone && customerPhone) customerPhone.value = parsed.phone;
+                            } catch (e) { }
                         }
-                    );
-
-
-                const text =
-                    await response.text();
-
-
-                let data;
-
-
-                try {
-
-                    data =
-                        JSON.parse(text);
-
-                }
-                catch {
-
-                    throw new Error(
-                        "Backend returned invalid response. Check customer route/controller."
-                    );
-
-                }
-
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        data.message ||
-                        "Customer registration failed."
-                    );
-
-                }
-
-
-                currentCustomerId =
-                    data.customer?.id ||
-                    data.customer?.customer_id ||
-                    data.id ||
-                    data.customer_id;
-
-
-                if (!currentCustomerId) {
-
-                    throw new Error(
-                        "Customer ID was not returned by backend."
-                    );
-
-                }
-
-
-                registerMessage.textContent =
-                    "Registration successful!";
-
-                registerMessage.className =
-                    "register-message success";
-
-
-                setTimeout(
-                    function () {
-
-                        registerOverlay.classList.remove(
-                            "show"
-                        );
-
-                    },
-                    500
-                );
-
-            }
-            catch (error) {
-
-                console.error(
-                    "Registration Error:",
-                    error
-                );
-
-
-                registerMessage.textContent =
-                    error.message;
-
-                registerMessage.className =
-                    "register-message error";
-
-            }
-            finally {
-
-                registerSubmitBtn.disabled =
-                    false;
-
-                registerSubmitBtn.textContent =
-                    "Register & Continue";
-
-            }
-
-        }
-    );
-
-
-    /* =====================================================
-       REQUEST QUOTE
-    ===================================================== */
-
-    document
-        .getElementById("submitQuote")
-        .addEventListener(
-            "click",
-            async function () {
-
-
-                // Registration is compulsory
-                if (!currentCustomerId) {
-
-                    registerOverlay.classList.add(
-                        "show"
-                    );
-
+                        if (customerEmail && !customerEmail.value && localStorage.getItem("customerEmail")) {
+                            customerEmail.value = localStorage.getItem("customerEmail");
+                        }
+                        if (customerPhone && !customerPhone.value && localStorage.getItem("customerPhone")) {
+                            customerPhone.value = localStorage.getItem("customerPhone");
+                        }
+                    }
+                    hideRegisterPopup();
+                    unlockFieldsForNewOrder();
+                    applyDefaultSpecifications();
+                    updatePrice();
                     return;
-
                 }
 
-
-                const pcbName =
-                    document
-                        .getElementById("pcbName")
-                        .value
-                        .trim();
-
-
-                if (!pcbName) {
-
-                    alert(
-                        "Please enter PCB Name."
-                    );
-
-                    return;
-
-                }
-
-
-                const width =
-                    parseFloat(
-                        pcbWidth.value
-                    );
-
-
-                const height =
-                    parseFloat(
-                        pcbHeight.value
-                    );
-
-
-                if (
-                    isNaN(width) ||
-                    isNaN(height)
-                ) {
-
-                    alert(
-                        "Please enter PCB width and height."
-                    );
-
-                    return;
-
-                }
-
-
-                if (
-                    width < 20 ||
-                    width > 370 ||
-                    height < 20 ||
-                    height > 370
-                ) {
-
-                    alert(
-                        "PCB size must be between 20 mm and 370 mm."
-                    );
-
-                    return;
-
-                }
-
-
-                if (!selectedGerberFile) {
-
-                    alert(
-                        "Please upload Gerber file."
-                    );
-
-                    return;
-
-                }
-
-
-                if (!selectedDeliveryDate) {
-
-                    alert(
-                        "Please select delivery date."
-                    );
-
-                    return;
-
-                }
-
-
-                const basicPrice =
-                    parseFloat(
-                        document
-                            .getElementById("basicPrice")
-                            .textContent
-                            .replace("₹", "")
-                    );
-
-
-                const setupCost =
-                    parseFloat(
-                        document
-                            .getElementById("setupCost")
-                            .textContent
-                            .replace("₹", "")
-                    );
-
-
-                const gst =
-                    parseFloat(
-                        document
-                            .getElementById("gst")
-                            .textContent
-                            .replace("₹", "")
-                    );
-
-
-                const finalTotal =
-                    parseFloat(
-                        document
-                            .getElementById("finalTotal")
-                            .textContent
-                            .replace("₹", "")
-                    );
-
-
-                const year =
-                    selectedDeliveryDate
-                        .getFullYear();
-
-                const month =
-                    String(
-                        selectedDeliveryDate.getMonth() + 1
-                    ).padStart(2, "0");
-
-                const day =
-                    String(
-                        selectedDeliveryDate.getDate()
-                    ).padStart(2, "0");
-
-
-                const deliveryDate =
-                    `${year}-${month}-${day}`;
-
-
-                const formData =
-                    new FormData();
-
-
-                formData.append(
-                    "customer_id",
-                    currentCustomerId
-                );
-
-
-                formData.append(
-                    "pcb_name",
-                    pcbName
-                );
-
-
-                formData.append(
-                    "dispatch_unit",
-                    getActiveOption("dispatch")
-                );
-
-
-                formData.append(
-                    "base_material",
-                    getActiveOption("material")
-                );
-
-
-                formData.append(
-                    "width",
-                    width
-                );
-
-
-                formData.append(
-                    "height",
-                    height
-                );
-
-
-                formData.append(
-                    "quantity",
-                    quantity.value
-                );
-
-
-                formData.append(
-                    "layers",
-                    getActiveOption("layers")
-                );
-
-
-                formData.append(
-                    "thickness",
-                    getActiveOption("thickness")
-                );
-
-
-                formData.append(
-                    "copper_finish",
-                    getActiveOption("copper")
-                );
-
-
-                formData.append(
-                    "mask_color",
-                    getActiveOption("mask")
-                );
-
-
-                formData.append(
-                    "surface_finish",
-                    getActiveOption("surface")
-                );
-
-
-                formData.append(
-                    "silk_screen",
-                    getActiveOption("silk")
-                );
-
-
-                formData.append(
-                    "delivery_date",
-                    deliveryDate
-                );
-
-
-                formData.append(
-                    "basic_price",
-                    basicPrice
-                );
-
-
-                formData.append(
-                    "setup_cost",
-                    setupCost
-                );
-
-
-                formData.append(
-                    "gst",
-                    gst
-                );
-
-
-                formData.append(
-                    "final_total",
-                    finalTotal
-                );
-
-
-                formData.append(
-                    "status",
-                    "Pending"
-                );
-
-
-                formData.append(
-                    "gerber_file",
-                    selectedGerberFile
-                );
-
-
-                const submitButton =
-                    document.getElementById(
-                        "submitQuote"
-                    );
-
-
-                submitButton.disabled = true;
-
-                submitButton.textContent =
-                    "Submitting...";
-
-
-                try {
-
-                    const response =
-                        await fetch(
-                            `${API_URL}/api/quotes`,
-                            {
-                                method: "POST",
-
-                                body: formData
-                            }
-                        );
-
-
-                    const text =
-                        await response.text();
-
-
-                    let data;
-
+                // MODE 2: REPEAT ORDER FROM DASHBOARD OR LINK
+                if (mode === "repeat" && orderId) {
+                    hideRegisterPopup();
 
                     try {
+                        const response = await fetch(`${API_URL}/api/quotes/${orderId}`);
+                        const quote = await response.json();
 
-                        data =
-                            JSON.parse(text);
+                        if (!response.ok || !quote || !quote.id) {
+                            alert("Unable to load previous order for repeat.");
+                            return;
+                        }
 
+                        currentCustomerId = quote.customer_id || storedCid || "";
+                        if (currentCustomerId) {
+                            saveCustomerSession(currentCustomerId, quote.email, quote.phone);
+                            if (showOrdersBtn) {
+                                showOrdersBtn.dataset.customerId = String(currentCustomerId);
+                                showOrdersBtn.classList.remove("hidden");
+                            }
+                        }
+
+                        repeatAdminId = quote.internal_order_code || null;
+                        repeatOrderId = quote.id || null;
+
+                        // Pre-fill fields
+                        if (pcbName) pcbName.value = quote.pcb_name || "";
+                        if (pcbWidth) pcbWidth.value = quote.width || 20;
+                        if (pcbHeight) pcbHeight.value = quote.height || 20;
+
+                        selectOptionGroupValue("dispatch", quote.dispatch_unit);
+                        selectOptionGroupValue("material", quote.base_material);
+                        selectOptionGroupValue("layers", quote.layers);
+                        selectOptionGroupValue("thickness", quote.thickness);
+                        selectOptionGroupValue("copper", quote.copper_finish);
+                        selectOptionGroupValue("mask", quote.mask_color);
+                        selectOptionGroupValue("surface", quote.surface_finish);
+                        selectOptionGroupValue("silk", quote.silk_screen);
+
+                        if (quote.dispatch_unit && quote.dispatch_unit !== "PCB") {
+                            updatePanelState();
+                        }
+
+                        if (quote.gerber_file) {
+                            existingGerberFile = quote.gerber_file;
+                            if (gerberName) gerberName.textContent = quote.gerber_file;
+                        }
+
+                        if (customerEmail && quote.email) customerEmail.value = quote.email;
+                        if (customerPhone && quote.phone) customerPhone.value = quote.phone;
+
+                        if (quantity && quote.quantity) {
+                            quantity.value = quote.quantity;
+                            if (quantityValue) quantityValue.textContent = quote.quantity;
+                            document.querySelectorAll(".quantity-option").forEach(function (b) {
+                                b.classList.toggle("active", b.dataset.value == quote.quantity);
+                            });
+                        }
+
+                        hideRegisterPopup();
+                        lockFieldsForRepeatOrder();
+
+                        setTimeout(function () {
+                            updatePrice();
+                        }, 100);
+                    } catch (e) {
+                        console.error("Repeat order load error:", e);
                     }
-                    catch {
-
-                        throw new Error(
-                            "Backend returned HTML instead of JSON. Check quote route."
-                        );
-
-                    }
-
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            data.message ||
-                            "Quote submission failed."
-                        );
-
-                    }
-
-
-                    alert(
-                        "Quote request submitted successfully!"
-                    );
-
-
-                    console.log(
-                        "Quote Response:",
-                        data
-                    );
-
-                }
-                catch (error) {
-
-                    console.error(
-                        "Quote Error:",
-                        error
-                    );
-
-
-                    alert(
-                        error.message
-                    );
-
-                }
-                finally {
-
-                    submitButton.disabled =
-                        false;
-
-                    submitButton.textContent =
-                        "Request Quote";
-
+                    return;
                 }
 
+                // DEFAULT: DIRECT VISIT / NEW USER -> SHOW REGISTER POPUP
+                if (registerOverlay) {
+                    registerOverlay.style.display = "flex";
+                    registerOverlay.classList.remove("hidden");
+                    registerOverlay.classList.add("show");
+                    showRegisterView();
+                }
             }
-        );
 
+            /* =====================================================
+               AUTH / REGISTER / LOGIN LOGIC
+            ===================================================== */
+            function validateEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
 
-    /* =====================================================
-       INITIAL
-    ===================================================== */
+            function showRegisterMessage(message, type) {
+                if (!registerMessage) return;
+                registerMessage.textContent = message;
+                registerMessage.className = "register-message " + type;
+            }
 
-    generateDeliveryDates();
+            function showLoginMessage(message, type) {
+                if (!loginMessage) return;
+                loginMessage.textContent = message;
+                loginMessage.className = "register-message " + type;
+            }
 
-    renderDeliveryOptions();
+            function showLoginView() {
+                if (registerView) registerView.classList.add("hidden");
+                if (loginView) loginView.classList.remove("hidden");
+                if (loginMessage) loginMessage.textContent = "";
+            }
 
-    renderCalendar();
+            function showRegisterView() {
+                if (loginView) loginView.classList.add("hidden");
+                if (registerView) registerView.classList.remove("hidden");
+                if (registerMessage) registerMessage.textContent = "";
+            }
 
-    updatePrice();
+            function hideRegisterPopup() {
+                if (registerOverlay) {
+                    registerOverlay.classList.remove("show");
+                    registerOverlay.classList.add("hidden");
+                    registerOverlay.style.display = "none";
+                }
+            }
 
-});
+            if (switchToLoginBtn) switchToLoginBtn.addEventListener("click", function (e) { e.preventDefault(); showLoginView(); });
+            if (switchToRegisterBtn) switchToRegisterBtn.addEventListener("click", function (e) { e.preventDefault(); showRegisterView(); });
 
-</script>
+            function saveCustomerSession(customerId, email, phone) {
+                if (!customerId) return;
+                const registration = {
+                    id: String(customerId),
+                    customer_id: String(customerId),
+                    email: String(email || "").trim().toLowerCase(),
+                    phone: String(phone || "").trim()
+                };
+                localStorage.setItem("pcbRegistration", JSON.stringify(registration));
+                localStorage.setItem("customer_id", String(customerId));
+                localStorage.setItem("customerId", String(customerId));
+                localStorage.setItem("customerEmail", registration.email);
+                localStorage.setItem("customerPhone", registration.phone);
+            }
+
+            function openCustomerDashboard() {
+                const cid = (showOrdersBtn && showOrdersBtn.dataset.customerId) || currentCustomerId || localStorage.getItem("customerId");
+                if (!cid) {
+                    if (registerOverlay) {
+                        registerOverlay.style.display = "flex";
+                        registerOverlay.classList.add("show");
+                        registerOverlay.classList.remove("hidden");
+                    }
+                    showLoginView();
+                    showLoginMessage("Please login to view your orders.", "warning");
+                    return;
+                }
+                saveCustomerSession(cid, customerEmail ? customerEmail.value : "", customerPhone ? customerPhone.value : "");
+                window.location.href = "customer-dashboard.html?customer_id=" + encodeURIComponent(cid) + "&id=" + encodeURIComponent(cid);
+            }
+
+            if (showOrdersBtn) {
+                showOrdersBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openCustomerDashboard();
+                });
+            }
+
+            if (skipLogin) {
+                skipLogin.addEventListener("click", function (e) {
+                    if (e && e.preventDefault) e.preventDefault();
+                    hideRegisterPopup();
+                    if (customerEmail && !customerEmail.value) customerEmail.value = "";
+                    if (customerPhone && !customerPhone.value) customerPhone.value = "";
+                    if (customerEmail) customerEmail.focus();
+                });
+            }
+
+            if (skipRegister) {
+                skipRegister.addEventListener("click", function (e) {
+                    if (e && e.preventDefault) e.preventDefault();
+                    hideRegisterPopup();
+                    if (customerEmail && !customerEmail.value) customerEmail.value = "";
+                    if (customerPhone && !customerPhone.value) customerPhone.value = "";
+                    if (customerEmail) customerEmail.focus();
+                });
+            }
+
+            if (registerClose) {
+                registerClose.addEventListener("click", function (e) {
+                    if (e && e.preventDefault) e.preventDefault();
+                    hideRegisterPopup();
+                });
+            }
+
+            async function registerOrFindCustomer(email, phone) {
+                const normalizedEmail = String(email || "").trim().toLowerCase();
+                const normalizedPhone = String(phone || "").trim();
+
+                if (!validateEmail(normalizedEmail)) {
+                    throw new Error("Please enter a valid customer email address.");
+                }
+                if (!/^[0-9]{10}$/.test(normalizedPhone)) {
+                    throw new Error("Please enter a valid 10 digit phone number.");
+                }
+
+                const generatedName = normalizedEmail.split("@")[0].replace(/[^a-zA-Z0-9 _-]/g, "") || "PCB Customer";
+
+                const response = await fetch(`${API_URL}/api/customers`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name: generatedName, email: normalizedEmail, phone: normalizedPhone })
+                });
+
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.message || "Customer registration failed.");
+                }
+
+                const customer = data.customer || {};
+                const customerId = customer.id || customer.customer_id || data.customerId || data.customer_id || data.id || null;
+
+                if (!customerId) {
+                    throw new Error("Customer ID was not returned by backend.");
+                }
+
+                currentCustomerId = customerId;
+                if (customerEmail) customerEmail.value = customer.email || normalizedEmail;
+                if (customerPhone) customerPhone.value = customer.phone || normalizedPhone;
+
+                saveCustomerSession(customerId, customerEmail ? customerEmail.value : normalizedEmail, customerPhone ? customerPhone.value : normalizedPhone);
+
+                if (showOrdersBtn) {
+                    showOrdersBtn.dataset.customerId = String(customerId);
+                }
+
+                return {
+                    ...data,
+                    existing: data.existing === true,
+                    customer,
+                    customerId
+                };
+            }
+
+            if (loginForm) {
+                loginForm.addEventListener("submit", async function (event) {
+                    event.preventDefault();
+                    const email = loginEmail.value.trim().toLowerCase();
+                    const phone = loginPhone.value.trim();
+
+                    if (!validateEmail(email)) {
+                        showLoginMessage("Please enter a valid email address.", "error");
+                        return;
+                    }
+                    if (!/^[0-9]{10}$/.test(phone)) {
+                        showLoginMessage("Please enter a valid 10 digit phone number.", "error");
+                        return;
+                    }
+
+                    loginSubmitBtn.disabled = true;
+                    loginSubmitBtn.textContent = "Logging in...";
+
+                    try {
+                        const response = await fetch(`${API_URL}/api/customers/login`, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ email: email, phone: phone })
+                        });
+
+                        const data = await response.json();
+                        if (!response.ok) {
+                            throw new Error(data.message || "Customer not registered. Please register first.");
+                        }
+
+                        const cid = data.customerId || data.customer_id;
+                        currentCustomerId = cid;
+                        if (customerEmail) customerEmail.value = (data.customer && data.customer.email) || email;
+                        if (customerPhone) customerPhone.value = (data.customer && data.customer.phone) || phone;
+
+                        saveCustomerSession(cid, customerEmail ? customerEmail.value : email, customerPhone ? customerPhone.value : phone);
+
+                        showLoginMessage("Login successful! Opening dashboard...", "success");
+                        setTimeout(function () {
+                            openCustomerDashboard();
+                        }, 400);
+                    } catch (error) {
+                        console.error("Login Error:", error);
+                        showLoginMessage(error.message || "Unable to login.", "error");
+                    } finally {
+                        loginSubmitBtn.disabled = false;
+                        loginSubmitBtn.textContent = "Login";
+                    }
+                });
+            }
+
+            if (registerForm) {
+                registerForm.addEventListener("submit", async function (event) {
+                    event.preventDefault();
+
+                    const email = registerEmail.value.trim().toLowerCase();
+                    const phone = registerPhone.value.trim();
+
+                    if (existingCustomerMode) {
+                        existingCustomerMode = false;
+                        if (customerEmail) customerEmail.value = email;
+                        if (customerPhone) customerPhone.value = phone;
+                        hideRegisterPopup();
+                        if (registerMessage) registerMessage.textContent = "";
+                        registerSubmitBtn.textContent = "Register & Continue";
+                        return;
+                    }
+
+                    if (!validateEmail(email)) {
+                        showRegisterMessage("Please enter a valid email address.", "error");
+                        return;
+                    }
+                    if (!/^[0-9]{10}$/.test(phone)) {
+                        showRegisterMessage("Please enter a valid 10 digit phone number.", "error");
+                        return;
+                    }
+
+                    registerSubmitBtn.disabled = true;
+                    registerSubmitBtn.textContent = "Checking...";
+                    if (showOrdersBtn) showOrdersBtn.classList.add("hidden");
+
+                    try {
+                        const data = await registerOrFindCustomer(email, phone);
+
+                        if (data.existing === true) {
+                            existingCustomerMode = true;
+                            if (showOrdersBtn) {
+                                showOrdersBtn.dataset.customerId = String(data.customerId || currentCustomerId);
+                                showOrdersBtn.classList.remove("hidden");
+                            }
+                            if (customerEmail) customerEmail.value = email;
+                            if (customerPhone) customerPhone.value = phone;
+                            saveCustomerSession(data.customerId || currentCustomerId, email, phone);
+                            registerSubmitBtn.disabled = false;
+                            registerSubmitBtn.textContent = "Continue to Quote";
+                            showRegisterMessage("This email and phone number are already registered.", "warning");
+                            return;
+                        }
+
+                        if (data.blockedEmailConflict === true) {
+                            currentCustomerId = null;
+                            existingCustomerMode = false;
+                            if (showOrdersBtn) {
+                                showOrdersBtn.dataset.customerId = "";
+                                showOrdersBtn.classList.add("hidden");
+                            }
+                            showRegisterMessage("This email is already registered with another phone number. Use the same registered phone number to open My Orders.", "error");
+                            return;
+                        }
+
+                        // Successful registration: autofill and close popup
+                        if (customerEmail) customerEmail.value = email;
+                        if (customerPhone) customerPhone.value = phone;
+                        hideRegisterPopup();
+                    } catch (error) {
+                        console.error("Register Error:", error);
+                        showRegisterMessage(error.message || "Unable to register customer.", "error");
+                    } finally {
+                        registerSubmitBtn.disabled = false;
+                        if (registerSubmitBtn.textContent === "Checking...") {
+                            registerSubmitBtn.textContent = "Register & Continue";
+                        }
+                    }
+                });
+            }
+
+            /* =====================================================
+               FORM VALIDATION
+            ===================================================== */
+            function validateCompleteForm() {
+                const name = pcbName ? pcbName.value.trim() : "";
+                const email = customerEmail ? customerEmail.value.trim().toLowerCase() : "";
+                const phone = customerPhone ? customerPhone.value.trim() : "";
+                const width = parseFloat(pcbWidth ? pcbWidth.value : 0);
+                const height = parseFloat(pcbHeight ? pcbHeight.value : 0);
+                const qty = parseInt(quantity ? quantity.value : 0, 10);
+
+                function setSubmitError(msg, focusEl) {
+                    if (submitHelp) {
+                        submitHelp.textContent = msg;
+                        submitHelp.style.color = "#ef4444";
+                        submitHelp.style.fontWeight = "600";
+                    }
+                    alert(msg);
+                    if (focusEl) {
+                        focusEl.focus();
+                        focusEl.scrollIntoView({ behavior: "smooth", block: "center" });
+                    }
+                }
+
+                if (!name) {
+                    setSubmitError("Please enter PCB Name.", pcbName);
+                    return false;
+                }
+
+                if (!validateEmail(email)) {
+                    setSubmitError("Please enter a valid customer email address.", customerEmail);
+                    return false;
+                }
+
+                if (!/^[0-9]{10}$/.test(phone)) {
+                    setSubmitError("Please enter a valid 10 digit customer phone number.", customerPhone);
+                    return false;
+                }
+
+                if (!Number.isFinite(width) || width < 20 || width > 370) {
+                    setSubmitError("PCB width must be between 20 mm and 370 mm.", pcbWidth);
+                    return false;
+                }
+
+                if (!Number.isFinite(height) || height < 20 || height > 370) {
+                    setSubmitError("PCB height must be between 20 mm and 370 mm.", pcbHeight);
+                    return false;
+                }
+
+                if (!qty || qty <= 0) {
+                    setSubmitError("Please select quantity.", quantityTrigger || quantity);
+                    return false;
+                }
+
+                if (!selectedGerberFile && !existingGerberFile) {
+                    setSubmitError("Please upload Gerber file (.zip or .rar).", gerberButton);
+                    return false;
+                }
+
+                if (!selectedDeliveryDate) {
+                    setSubmitError("Please select one of the available delivery dates.", deliveryOptionsList);
+                    return false;
+                }
+
+                if (finalTotalEl && finalTotalEl.textContent.includes("Contact Admin")) {
+                    setSubmitError("Calculation exceeds ₹30,000. Please contact Admin directly for quotation.", null);
+                    return false;
+                }
+
+                const finalTotal = parseFloat(finalTotalEl ? finalTotalEl.textContent.replace("₹", "") : 0);
+                if (!Number.isFinite(finalTotal) || finalTotal <= 0) {
+                    setSubmitError("Please complete the quote details before processing.", null);
+                    return false;
+                }
+
+                if (submitHelp) {
+                    submitHelp.textContent = "Please complete all required fields before processing the order.";
+                    submitHelp.style.color = "";
+                    submitHelp.style.fontWeight = "";
+                }
+                return true;
+            }
+
+            /* =====================================================
+               SUCCESS POPUP
+            ===================================================== */
+            function showSuccessPopup() {
+                const overlay = document.getElementById("successOverlay") || successOverlay;
+                if (!overlay) return;
+
+                const regOverlay = document.getElementById("registerOverlay") || registerOverlay;
+                if (regOverlay) {
+                    regOverlay.classList.remove("show");
+                    regOverlay.classList.add("hidden");
+                    regOverlay.style.setProperty("display", "none", "important");
+                    regOverlay.style.setProperty("visibility", "hidden", "important");
+                    regOverlay.style.setProperty("opacity", "0", "important");
+                    regOverlay.style.setProperty("pointer-events", "none", "important");
+                }
+
+                overlay.classList.remove("hidden");
+                overlay.classList.add("show");
+                overlay.style.setProperty("display", "flex", "important");
+                overlay.style.setProperty("visibility", "visible", "important");
+                overlay.style.setProperty("opacity", "1", "important");
+                overlay.style.setProperty("pointer-events", "auto", "important");
+                overlay.style.setProperty("z-index", "99999999", "important");
+                overlay.style.setProperty("position", "fixed", "important");
+                overlay.style.setProperty("inset", "0", "important");
+                overlay.removeAttribute("aria-hidden");
+                document.body.style.overflow = "hidden";
+            }
+
+            function hideSuccessPopup() {
+                const overlay = document.getElementById("successOverlay") || successOverlay;
+                if (!overlay) return;
+                overlay.classList.add("hidden");
+                overlay.classList.remove("show");
+                overlay.style.setProperty("display", "none", "important");
+                overlay.style.setProperty("visibility", "hidden", "important");
+                overlay.style.setProperty("opacity", "0", "important");
+                overlay.style.setProperty("pointer-events", "none", "important");
+                overlay.setAttribute("aria-hidden", "true");
+                document.body.style.overflow = "";
+            }
+
+            function goHome() {
+                hideSuccessPopup();
+                window.location.href = "index.html";
+            }
+
+            if (successClose) successClose.addEventListener("click", goHome);
+            if (successHomeBtn) successHomeBtn.addEventListener("click", goHome);
+
+            /* =====================================================
+               PROCESS ORDER SUBMIT
+            ===================================================== */
+            if (submitQuote) {
+                submitQuote.addEventListener("click", async function (e) {
+                    if (e && e.preventDefault) e.preventDefault();
+
+                    const submitButton = this;
+
+                    if (!validateCompleteForm()) {
+                        return;
+                    }
+
+                    const email = customerEmail.value.trim().toLowerCase();
+                    const phone = customerPhone.value.trim();
+                    const pcbNameVal = pcbName.value.trim();
+                    const widthVal = parseFloat(pcbWidth.value);
+                    const heightVal = parseFloat(pcbHeight.value);
+                    const basicPriceVal = parseFloat(basicPriceEl.textContent.replace("₹", "")) || 0;
+                    const setupCostVal = parseFloat(setupCostEl.textContent.replace("₹", "")) || 0;
+                    const gstVal = parseFloat(gstEl.textContent.replace("₹", "")) || 0;
+                    const finalTotalVal = parseFloat(finalTotalEl.textContent.replace("₹", "")) || 0;
+                    const dispatchUnitVal = getActiveOption("dispatch") || "PCB";
+                    const deliveryDateVal = selectedDeliveryDate.toISOString().split("T")[0];
+
+                    let validCustomerId = currentCustomerId;
+                    const currentSessionReg = localStorage.getItem("pcbRegistration");
+                    let sessionMatches = false;
+                    if (currentSessionReg && validCustomerId) {
+                        try {
+                            const reg = JSON.parse(currentSessionReg);
+                            if (reg.email && reg.email.toLowerCase() === email && reg.phone === phone && (reg.id == validCustomerId || reg.customer_id == validCustomerId)) {
+                                sessionMatches = true;
+                            }
+                        } catch (e) { }
+                    }
+
+                    if (!validCustomerId || !sessionMatches) {
+                        try {
+                            const customerData = await registerOrFindCustomer(email, phone);
+                            if (customerData && customerData.customerId) {
+                                validCustomerId = customerData.customerId;
+                                currentCustomerId = validCustomerId;
+                            } else {
+                                throw new Error((customerData && customerData.message) || "Unable to register or verify customer account.");
+                            }
+                        } catch (err) {
+                            alert(err.message || "Customer verification failed.");
+                            return;
+                        }
+                    }
+
+                    const formData = new FormData();
+                    if (currentCustomerId) formData.append("customer_id", currentCustomerId);
+                    formData.append("customer_email", email);
+                    formData.append("customer_phone", phone);
+                    formData.append("pcb_name", pcbNameVal);
+                    formData.append("dispatch_unit", dispatchUnitVal);
+                    formData.append("base_material", getActiveOption("material"));
+                    formData.append("width", widthVal);
+                    formData.append("height", heightVal);
+                    formData.append("quantity", quantity.value);
+                    formData.append("layers", getActiveOption("layers"));
+                    formData.append("thickness", getActiveOption("thickness"));
+                    formData.append("copper_finish", getActiveOption("copper"));
+                    formData.append("mask_color", getActiveOption("mask"));
+                    formData.append("surface_finish", getActiveOption("surface"));
+                    formData.append("silk_screen", getActiveOption("silk"));
+                    formData.append("delivery_date", deliveryDateVal);
+                    formData.append("basic_price", basicPriceVal);
+                    formData.append("setup_cost", setupCostVal);
+                    formData.append("gst", gstVal);
+                    formData.append("final_total", finalTotalVal);
+                    formData.append("status", "Pending");
+
+                    if (isRepeatMode) {
+                        formData.append("order_type", "Repeat");
+                        if (repeatAdminId) formData.append("internal_order_code", repeatAdminId);
+                        if (repeatOrderId) formData.append("repeat_order_id", repeatOrderId);
+                    } else {
+                        formData.append("order_type", "New");
+                    }
+
+                    if (selectedGerberFile) {
+                        formData.append("gerber", selectedGerberFile);
+                    } else if (existingGerberFile) {
+                        formData.append("existing_gerber", existingGerberFile);
+                    }
+
+                    submitButton.disabled = true;
+                    submitButton.textContent = "Processing...";
+
+                    try {
+                        const response = await fetch(`${API_URL}/api/quotes`, {
+                            method: "POST",
+                            body: formData
+                        });
+
+                        let data = null;
+                        try {
+                            const text = await response.text();
+                            data = JSON.parse(text);
+                        } catch (parseErr) {
+                            console.warn("Notice parsing JSON response:", parseErr);
+                        }
+
+                        if (!response.ok) {
+                            throw new Error((data && data.message) || "Quote submission failed.");
+                        }
+
+                        try {
+                            localStorage.setItem("lastSubmittedQuote", JSON.stringify({
+                                customer_id: currentCustomerId,
+                                customer_email: email,
+                                customer_phone: phone,
+                                pcb_name: pcbNameVal,
+                                dispatch_unit: dispatchUnitVal,
+                                width: widthVal,
+                                height: heightVal,
+                                quantity: quantity.value,
+                                layers: getActiveOption("layers"),
+                                thickness: getActiveOption("thickness"),
+                                copper_finish: getActiveOption("copper"),
+                                mask_color: getActiveOption("mask"),
+                                surface_finish: getActiveOption("surface"),
+                                silk_screen: getActiveOption("silk"),
+                                delivery_date: deliveryDateVal,
+                                basic_price: basicPriceVal,
+                                setup_cost: setupCostVal,
+                                gst: gstVal,
+                                final_total: finalTotalVal,
+                                submitted_at: new Date().toISOString()
+                            }));
+                        } catch (storageErr) {
+                            console.warn("Storage save notice:", storageErr);
+                        }
+
+                        showSuccessPopup();
+                    } catch (error) {
+                        console.error("Quote Error:", error);
+                        alert(error.message || "Unable to submit quote.");
+                    } finally {
+                        submitButton.disabled = false;
+                        submitButton.textContent = "Process Order";
+                    }
+                });
+            }
+
+            /* =====================================================
+               INITIALIZE CALENDAR, PRICING & MODES IMMEDIATELY
+            ===================================================== */
+            generateDeliveryDates();
+            renderDeliveryOptions();
+            renderCalendar();
+            updatePrice();
+
+            fetchPricingConfig();
+            initPageModes();
+
+        });
+    </script>
 
 </body>
+
 </html>
