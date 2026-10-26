@@ -10,6 +10,7 @@
     <title>E-CUBE | PCB Admin Dashboard</title>
 
     <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="navbar.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -17,6 +18,30 @@
 
 
 <body>
+
+    <header class="header">
+        <a href="index.html" class="brand">
+            <div class="logo">
+                <img src="logo.jpg" alt="E-CUBE ELECTROSOLUTIONS Logo">
+            </div>
+            <div class="brand-name">E-CUBE ELECTROSOLUTIONS</div>
+        </a>
+
+        <button id="menu-toggle" class="menu-toggle" aria-label="Toggle Navigation Menu">☰</button>
+
+        <div class="opt">
+            <nav id="options" class="options">
+                <a href="index.html#home">Home</a>
+                <a href="index.html#why-us">Why Us</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#about-us">About Us</a>
+                <a href="quote.html">Request Quote</a>
+                <a href="customer-dashboard.html">My Orders</a>
+                <a href="admin.html" class="active">Admin Panel</a>
+                <a href="index.html#contact-us">Contact Us</a>
+            </nav>
+        </div>
+    </header>
 
     <!-- =====================================================
          ADMIN AUTHENTICATION / LOGIN OVERLAY
@@ -1738,6 +1763,29 @@
 
 
     <script src="admin.js"></script>
+
+    <script>
+        (function () {
+            const toggle = document.getElementById('menu-toggle');
+            const opts = document.getElementById('options');
+            if (toggle && opts) {
+                toggle.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    opts.classList.toggle('active');
+                });
+                document.querySelectorAll('#options a').forEach(function (link) {
+                    link.addEventListener('click', function () {
+                        opts.classList.remove('active');
+                    });
+                });
+                document.addEventListener('click', function (e) {
+                    if (!e.target.closest('.header')) {
+                        opts.classList.remove('active');
+                    }
+                });
+            }
+        })();
+    </script>
 
 </body>
 

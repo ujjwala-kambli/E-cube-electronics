@@ -471,13 +471,18 @@ body {
 
 
 /* =====================================================
-   MOBILE
+   MOBILE & TABLET RESPONSIVE STYLES
 ===================================================== */
 
 @media (max-width: 850px) {
+    .dashboard-container {
+        width: 95%;
+        padding-top: 14px;
+    }
 
     .order-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
     }
 
     .details-grid {
@@ -485,37 +490,130 @@ body {
     }
 }
 
-
 @media (max-width: 600px) {
-
-    .dashboard-header {
-        padding: 10px 4%;
+    .dashboard-container {
+        width: 95%;
+        padding-top: 10px;
     }
 
-    .dashboard-container {
-        width: 94%;
+    .welcome-card {
+        padding: 14px 16px;
+        margin-bottom: 12px;
+    }
+
+    .welcome-card h1 {
+        font-size: 20px;
+    }
+
+    .customer-card {
+        padding: 12px 14px;
+        margin-bottom: 12px;
     }
 
     .customer-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
     }
 
-    .order-grid {
-        grid-template-columns: 1fr;
+    .info-box {
+        padding: 8px 10px;
     }
 
-    .details-grid {
-        grid-template-columns: 1fr;
+    .info-box strong {
+        font-size: 12px;
+        word-break: break-all;
+    }
+
+    .order-card {
+        padding: 14px;
+        margin-bottom: 10px;
     }
 
     .order-top {
-        gap: 10px;
-        flex-direction: column;
+        margin-bottom: 10px;
+        gap: 8px;
+    }
+
+    .order-top h3 {
+        font-size: 16px;
+    }
+
+    /* ELIMINATE UNNECESSARY HEAVY BOXES */
+    .order-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px 12px !important;
+        background: #f7faf8 !important;
+        border: 1px solid #e1ece6 !important;
+        border-radius: 8px !important;
+        padding: 10px 12px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .order-grid > div {
+        background: transparent !important;
+        border: none !important;
+        padding: 2px 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .order-grid > div:last-child {
+        grid-column: span 2 !important;
+        border-top: 1px dashed #d1e2da !important;
+        padding-top: 8px !important;
+        margin-top: 4px !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    .order-grid span {
+        font-size: 11px !important;
+        color: #617b75 !important;
+        margin-bottom: 2px;
+    }
+
+    .order-grid strong {
+        font-size: 13px !important;
+        color: #173b35 !important;
+    }
+
+    .order-grid .total {
+        font-size: 16px !important;
+        color: #176b5d !important;
+    }
+
+    .details-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .details-grid > div {
+        padding: 8px 10px;
+    }
+
+    .modal-box {
+        width: 94%;
+        max-width: 440px;
+        padding: 16px;
     }
 
     .order-bottom {
-        gap: 10px;
+        gap: 8px;
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .card-actions {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+    }
+
+    .view-btn,
+    .repeat-btn {
+        flex: 1;
+        text-align: center;
+        padding: 9px 12px;
     }
 }
