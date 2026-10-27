@@ -4,7 +4,7 @@
    Backend: PUT /api/quotes/:id
 ===================================================== */
 
-const API_URL = "http://localhost:5000/api/quotes";
+const API_URL = "https://e-cube-backend.onrender.com/api/quotes";
 
 /* =====================================================
    ADMIN CREDENTIALS & SECURITY CONFIG
@@ -2631,7 +2631,7 @@ function getGerberURL(
 
 
     return (
-        "http://localhost:5000/uploads/" +
+        "https://e-cube-backend.onrender.com/uploads/" +
         encodeURIComponent(
             value
         )
@@ -2938,7 +2938,7 @@ async function loadAdminPricingSettings() {
 
         const response =
             await fetch(
-                "http://localhost:5000/api/pricing-config"
+                "https://e-cube-backend.onrender.com/api/pricing-config"
             );
 
         if (!response.ok) {
@@ -3571,7 +3571,7 @@ async function saveAdminPricingSettings() {
 
         const res =
             await fetch(
-                "http://localhost:5000/api/pricing-config",
+                "https://e-cube-backend.onrender.com/api/pricing-config",
                 {
 
                     method:
