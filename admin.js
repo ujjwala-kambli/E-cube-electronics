@@ -19,7 +19,24 @@ const ADMIN_CREDENTIALS = {
     password: "admin12345" // <-- येथे तुम्ही तुमचा पासवर्ड बदलू शकता
 };
 
+// =====================================================
+// ATTACH ADMIN SECURITY HEADER TO ALL API REQUESTS
+// =====================================================
+const _nativeFetch = window.fetch;
+window.fetch = function (url, options = {}) {
+    options = options || {};
+    options.headers = options.headers || {};
+    const key = ADMIN_CREDENTIALS.password;
+    if (options.headers instanceof Headers) {
+        options.headers.set("x-admin-key", key);
+    } else {
+        options.headers["x-admin-key"] = key;
+    }
+    return _nativeFetch(url, options);
+};
+
 let allQuotes = [];
+
 let editingQuote = null;
 
 
