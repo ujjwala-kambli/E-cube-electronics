@@ -262,12 +262,12 @@
                         <label>PCB Size</label>
 
                         <div class="size-inputs">
-                            <input type="number" id="pcbWidth" min="20" max="370" step="1" value="20" placeholder="20"
+                            <input type="number" id="pcbWidth" min="20" max="370" step="1" placeholder="20"
                                 inputmode="numeric">
 
                             <span>×</span>
 
-                            <input type="number" id="pcbHeight" min="20" max="370" step="1" value="20" placeholder="20"
+                            <input type="number" id="pcbHeight" min="20" max="370" step="1" placeholder="20"
                                 inputmode="numeric">
                         </div>
 
@@ -690,7 +690,9 @@
             /* =====================================================
                API CONFIG
             ===================================================== */
-            const API_URL = "https://e-cube-backend.onrender.com";
+            const API_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:")
+                ? "http://localhost:5000"
+                : "https://e-cube-backend.onrender.com";
 
             /* =====================================================
                DOM ELEMENTS
@@ -1231,7 +1233,7 @@
 
                 if (summaryDispatchEl) summaryDispatchEl.textContent = dispatch;
 
-                if (!qty || !Number.isFinite(width) || !Number.isFinite(height) || width < 20 || width > 370 || height < 20 || height > 370) {
+                if (!qty || !pcbWidth || !pcbHeight || !pcbWidth.value || !pcbHeight.value || !Number.isFinite(width) || !Number.isFinite(height) || width < 20 || width > 370 || height < 20 || height > 370) {
                     resetPriceDisplay();
                     return;
                 }
@@ -1387,13 +1389,10 @@
             }
 
             function resetPriceDisplay() {
-                const setupCost = (pricingConfig && pricingConfig.settings && !isNaN(Number(pricingConfig.settings.setup_cost)))
-                    ? Number(pricingConfig.settings.setup_cost)
-                    : 800;
                 if (summarySizeEl) summarySizeEl.textContent = "— × —";
                 if (summaryQuantityEl) summaryQuantityEl.textContent = "—";
                 if (basicPriceEl) basicPriceEl.textContent = "₹0.00";
-                if (setupCostEl) setupCostEl.textContent = "₹" + setupCost.toFixed(2);
+                if (setupCostEl) setupCostEl.textContent = "₹0.00";
                 if (subtotalEl) subtotalEl.textContent = "₹0.00";
                 if (gstEl) gstEl.textContent = "₹0.00";
                 if (finalTotalEl) finalTotalEl.textContent = "₹0.00";

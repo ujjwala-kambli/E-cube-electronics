@@ -225,7 +225,10 @@
 
     async function fetchHomePricingConfig() {
       try {
-        const res = await fetch("https://e-cube-backend.onrender.com/api/pricing-config", { cache: "no-store" });
+        const BASE_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:")
+          ? "http://localhost:5000"
+          : "https://e-cube-backend.onrender.com";
+        const res = await fetch(`${BASE_URL}/api/pricing-config`, { cache: "no-store" });
         if (res.ok) {
           const data = await res.json();
           if (data && data.success && data.settings) {
